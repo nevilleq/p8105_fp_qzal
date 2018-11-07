@@ -23,7 +23,7 @@ output:
 
 **Motivation** Pit bulls have a historically poor reputation as an aggressive breed. But in recent years, there's been a push to change this stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
-**Data** Dog bite data (https://data.cityofnewyork.us/Health/DOHMH-Dog-Bite-Data/rsgh-akpg) and dog licensing data (https://data.cityofnewyork.us/Health/NYC-Dog-Licensing-Dataset/nu7n-tubp).
+**Data** [Dog bite data](https://data.cityofnewyork.us/Health/DOHMH-Dog-Bite-Data/rsgh-akpg) and [dog licensing data](https://data.cityofnewyork.us/Health/NYC-Dog-Licensing-Dataset/nu7n-tubp) available on NYC Open Data. Google Drive containing datasets available [here](https://drive.google.com/drive/folders/1wZfIbv9UWAoI-YO1mwRgoXmU-ucr0inX).
 
 
 ####3. Planned Analyses and Final Product
