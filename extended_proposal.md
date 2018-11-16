@@ -10,7 +10,7 @@ November 15, 2018
 -   Lyuou Zhang, *lz2586*
 -   Zelos Zhu, *zdz2101*
 
-#### Anticipated Title, Motivation, and Data
+#### Title, Motivation, and Data
 
 **Title** *I thought you said your dog did not bite!*
 
@@ -55,15 +55,22 @@ Standardize breed name: To begin, construct a binary variable for pitbull vs. ot
 
 Nothing to be done.
 
-**Analysis** See visualizations.
+**Analysis**
+
+See visualizations.
 
 #### Visualizations
 
+-   Heat map of number of dog bites by zip code. Use library (find it) to find map of NYC area.
+-   Bar plot of number of pitbulls by borough (include stacked bar for number of pitbull bites/number of pitbulls). Two y-axes: (1) counts and (2) percent of all registered dogs. Alternatively, a point plot of the number of pitbulls and number of pitbull bites, where the size of points is determined by the proportion of pitbulls to total number of licensed dogs; grouped by borough.
+-   Line plot of number of bites over time (group by pitbull/not, borough)
+-   Bar plot of number of dog bites by gender, spay/neuter
+
 #### Timeline
 
--   Week of 11/9 - 11/15: Familiarize more with the data; expand on research questions and ideas for visualizations. Come up with a single and more detailed report that summarizes the above.
+-   Week of 11/9 - 11/15: Familiarize more with the data; expand on research questions and ideas for visualizations. Come up with a single and more detailed report that summarizes the above. Agree on how to split up work and organize collaboration.
 
--   Week of 11/16 - 11/22: Agree on how to split up work and organize collaboration; clean data; get preliminary versions of visualizations. Discuss website skeleton.
+-   Week of 11/16 - 11/22: Clean data; get preliminary versions of visualizations. Discuss website skeleton.
 
 -   Week of 11/23 - 11/29: Build first draft of website (skeleton and populate). Layout of screencast. Finalize visualizations.
 
