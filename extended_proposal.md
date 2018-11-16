@@ -10,7 +10,7 @@ November 15, 2018
 -   Lyuou Zhang, *lz2586*
 -   Zelos Zhu, *zdz2101*
 
-#### Title, Motivation, and Data
+### Title, Motivation, and Data
 
 **Title** *I thought you said your dog did not bite!*
 
@@ -18,7 +18,7 @@ November 15, 2018
 
 **Data** [Dog bite data](https://data.cityofnewyork.us/Health/DOHMH-Dog-Bite-Data/rsgh-akpg) and [dog licensing data](https://data.cityofnewyork.us/Health/NYC-Dog-Licensing-Dataset/nu7n-tubp) available on NYC Open Data. Google Drive containing datasets available [here](https://drive.google.com/drive/folders/1wZfIbv9UWAoI-YO1mwRgoXmU-ucr0inX).
 
-#### Research Questions
+### Research Questions
 
 -   Are there more bites given by pit bulls than other breeds?
 -   Does this number change by borough? Over time?
@@ -27,7 +27,7 @@ November 15, 2018
 -   How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
 -   Does season / weather affect the number of dog bites?
 
-#### Detailed data description
+### Detailed data description
 
 **Dog Licensing data**: Active Dog Licenses during 2016.
 
@@ -41,7 +41,7 @@ Information reported assists the Health Department to determine if the biting do
 
 Variables provided: UniqueID, DateOfBite, Species, Breed, Age, Gender, SpayNeuter, Borough, ZipCode
 
-#### Data plan
+### Data plan
 
 **Cleaning**
 
@@ -59,14 +59,24 @@ Nothing to be done.
 
 See visualizations.
 
-#### Visualizations
+### Visualizations
 
--   Heat map of number of dog bites by zip code. Use library (find it) to find map of NYC area.
+-   Heat map of number of dog bites by zip code. Use library ("leaflet") to find map of NYC area.
 -   Bar plot of number of pitbulls by borough (include stacked bar for number of pitbull bites/number of pitbulls). Two y-axes: (1) counts and (2) percent of all registered dogs. Alternatively, a point plot of the number of pitbulls and number of pitbull bites, where the size of points is determined by the proportion of pitbulls to total number of licensed dogs; grouped by borough.
 -   Line plot of number of bites over time (group by pitbull/not, borough)
 -   Bar plot of number of dog bites by gender, spay/neuter
 
-#### Timeline
+### Work assignments
+
+Quinton: Impute zipcodes. Line plot.
+
+Alyssa: Standardize breed name. Bar plot of number of pit bulls by borough.
+
+Lyuou: Check relation between gender (missing) and spay/neuter. Heat map?
+
+Zelos: Get denominators from licensing data. Bar plot of dog bites by gender, spay/neuter (if valid).
+
+### Timeline
 
 -   Week of 11/9 - 11/15: Familiarize more with the data; expand on research questions and ideas for visualizations. Come up with a single and more detailed report that summarizes the above. Agree on how to split up work and organize collaboration.
 
