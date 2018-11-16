@@ -26,9 +26,8 @@ output:
 **Data** [Dog bite data](https://data.cityofnewyork.us/Health/DOHMH-Dog-Bite-Data/rsgh-akpg) and [dog licensing data](https://data.cityofnewyork.us/Health/NYC-Dog-Licensing-Dataset/nu7n-tubp) available on NYC Open Data. Google Drive containing datasets available [here](https://drive.google.com/drive/folders/1wZfIbv9UWAoI-YO1mwRgoXmU-ucr0inX).
 
 
-#### Planned Analyses and Final Product
+#### Research Questions
 
-**Research questions:**
 - Are there more bites given by pit bulls than other breeds?
   - Does this number change by borough? Over time? 
 - Are there more pitbulls in certain neighborhoods?
@@ -39,10 +38,42 @@ output:
 
 #### Detailed data description
 
-```{r}
+**Dog Licensing data**: Active Dog Licenses during 2016.
 
-```
+All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the [DOHMH Dog Licensing System](https://a816-healthpsi.nyc.gov/DogLicense), where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.
 
+Variables provided:
+RowNumber,	AnimalName,	AnimalGender,	AnimalBirthMonth,	BreedName,	Borough,	ZipCode,	CommunityDistrict,	CensusTract2010,	NTA,	CityCouncilDistrict,	CongressionalDistrict,	StateSenatorialDistrict,	LicenseIssuedDate,	LicenseExpiredDate
+
+**Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
+
+Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
+
+Variables provided:
+UniqueID,	DateOfBite,	Species,	Breed,	Age,	Gender,	SpayNeuter,	Borough,	ZipCode
+
+
+#### Data plan
+
+**Cleaning**
+
+*Dog Bite data*
+
+Impute missing zip code by the following algorithm:
+(a) For each borough in the dataset, pull unique zip codes. 
+(b) Assign equal probability to each zip code per borough
+(c) Match borough to missing entries
+(d) Randomly assign zip code based on probabilities
+
+Standardize breed name:
+To begin, construct a binary variable for pitbull vs. other. Grep for "pit bull". Verify that there are no other permutations of pit bull breed name.
+
+*Dog Licensing data*
+
+Nothing to be done.
+
+**Analysis**
+See visualizations.
 
 #### Visualizations
 
