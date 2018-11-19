@@ -87,8 +87,8 @@ See visualizations.
 
 - Heat map of number of dog bites by zip code. Use library ("leaflet") to find map of NYC area.
 - Bar plot of number of pitbulls by borough (include stacked bar for number of pitbull bites/number of pitbulls). Two y-axes: (1) counts and (2) percent of all registered dogs. Alternatively, a point plot of the number of pitbulls and number of pitbull bites, where the size of points is determined by the proportion of pitbulls to total number of licensed dogs; grouped by borough.
-- Line plot of number of bites over time (group by pitbull/not, borough)
-- Bar plot of number of dog bites by gender, spay/neuter
+- Line plot of number of bites over time (group by pitbull/not, borough).
+- Bar plot of number of dog bites by gender, spay/neuter.
 
 
 
