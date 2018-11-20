@@ -1,0 +1,45 @@
+---
+title: "Lyuou"
+author: "Lyuou Zhang"
+date: "11/19/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+```
+
+ggplot
+
+```{r}
+dog_bite %>% 
+  ggplot(aes(x = gender, fill = spay_neuter)) + geom_bar() +
+  labs(
+    title = 'Number of dogs spayed/neutered by gender',
+    x = 'Gender',
+    y = 'Count'
+  ) +
+  scale_x_discrete(
+    labels = c('Female', 'Male', 'Unidentified')
+  )
+
+```
+
+plotly
+
+```{r}
+dog_bite %>% 
+  group_by(gender, spay_neuter) %>% 
+  summarize(n = n()) %>% 
+  mutate(text_label = str_c('Gender: ', gender, '\nnumber: ', n)) %>% 
+  plot_ly(x = ~gender, y = ~n, color = ~spay_neuter, type = 'bar', text = ~text_label) %>% 
+  layout(
+     xaxis = list(text = c('Female', 'Male', 'Unidentified')),
+     yaxis = list(title = "count"), barmode = "stack")
+  
+
+
+
+```
+
