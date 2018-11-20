@@ -1,54 +1,12 @@
----
-title: "Zip Code Cleaning and Imputation"
-author: "Quinton Neville"
-date: "November 20, 2018"
-header-includes: 
-  \usepackage{graphicx}
-  \usepackage{float}
-  \usepackage{amsmath}
-output:
-   github_document
----
+Zip Code Cleaning and Imputation
+================
+Quinton Neville
+November 20, 2018
 
-```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
-#Load necessary packages
-library(tidyverse)
-library(readxl)
-library(readr)
-library(p8105.datasets)
-library(patchwork)
-library(ggridges)
-library(gridExtra)
-library(shiny)
-library(plotly)
-library(broom)
-library(scales)
-library(purrr)
-library(koRpus)
+Imputing Zip Codes
+==================
 
-#Controlling figure output in markdown
-knitr::opts_chunk$set(
-#  fig.height =   
-  fig.width = 6,
-#  fig.asp = .5,
-  out.width = "90%",
-#  out.height = 
- fig.align = "center",
-  cache = FALSE
-)
-
-#Set Theme for ggplot2
-theme_set(theme_bw() + theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
-
-#Set Scientific notation output for knitr
-options(scipen = 999)
-
-```
-
-
-
-#Imputing Zip Codes
-```{r warning = FALSE, message = FALSE}
+``` r
 dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
   janitor::clean_names() %>%
   mutate(
@@ -67,16 +25,33 @@ dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
 
 #Missing Zips
 dog.bite.df %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+```
 
+    ## # A tibble: 1 x 1
+    ##   missing_zip
+    ##         <dbl>
+    ## 1       0.222
+
+``` r
 #Missing Zips by borough
 dog.bite.df %>% group_by(borough) %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+```
 
+    ## # A tibble: 6 x 2
+    ##   borough       missing_zip
+    ##   <chr>               <dbl>
+    ## 1 Bronx               0.227
+    ## 2 Brooklyn            0.114
+    ## 3 Manhattan           0.308
+    ## 4 Other               0.649
+    ## 5 Queens              0.174
+    ## 6 Staten Island       0.231
+
+``` r
 #Imputing Zip Code
 dog.bite.df <- dog.bite.df %>%
   mutate(
     zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
     zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
   ) 
-
 ```
-
