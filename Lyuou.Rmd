@@ -43,3 +43,7 @@ dog_bite %>%
 
 ```
 
+* We found that there are more Male and Unidentified dogs than female.  
+* Among Male and Female dogs, the number of dogs that were spayed/neutered or unneutered are similar.  
+* Among dogs whose gender are unidentified, most dogs were not spayed/neutered.
+
