@@ -53,5 +53,23 @@ dog.bite.df <- dog.bite.df %>%
   mutate(
     zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
     zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
-  ) 
+  ) %>% select(-c(zip_nest, zip_sample))
+
+#View Data
+dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
 ```
+
+    ## # A tibble: 8,707 x 3
+    ##    borough       zip_code zip_code_imputed
+    ##    <chr>         <chr>    <chr>           
+    ##  1 Staten Island <NA>     10302           
+    ##  2 Brooklyn      11217    11217           
+    ##  3 Brooklyn      <NA>     11230           
+    ##  4 Brooklyn      11236    11236           
+    ##  5 Brooklyn      11204    11204           
+    ##  6 Brooklyn      <NA>     11233           
+    ##  7 Brooklyn      <NA>     11237           
+    ##  8 Brooklyn      11220    11220           
+    ##  9 Brooklyn      11229    11229           
+    ## 10 Brooklyn      11216    11216           
+    ## # ... with 8,697 more rows

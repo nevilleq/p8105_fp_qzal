@@ -76,7 +76,10 @@ dog.bite.df <- dog.bite.df %>%
   mutate(
     zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
     zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
-  ) 
+  ) %>% select(-c(zip_nest, zip_sample))
+
+#View Data
+dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
 
 ```
 
