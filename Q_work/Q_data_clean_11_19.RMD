@@ -25,6 +25,8 @@ library(broom)
 library(scales)
 library(purrr)
 library(koRpus)
+library(rvest)
+library(httr)
 
 #Controlling figure output in markdown
 knitr::opts_chunk$set(
@@ -45,6 +47,19 @@ options(scipen = 999)
 
 ```
 
+#Pulling Exhaustive list of NYC Zips
+```{r message = FALSE}
+nyc.official.zip <- read_csv("./data/Demographic_Statistics_By_Zip_Code.csv") %>%
+  janitor::clean_names() %>% 
+  rename(official_zip = jurisdiction_name) %>%
+  select(official_zip)
+
+
+official.zip <- paste0(nyc.official.zip$official_zip, collapse = "|")
+  
+#https://data.cityofnewyork.us/City-Government/Demographic-Statistics-By-Zip-Code/kku6-nxdu
+```
+
 
 
 #Imputing Zip Codes
@@ -55,7 +70,9 @@ dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
     zip_code = zip_code %>% 
                ifelse(str_length(.) != 5, NA, .) %>% 
                str_replace(., "O", "0") %>% 
-               ifelse(str_detect(., "^[02-9]"), NA, .)
+               ifelse(str_detect(., "^[02-9]"), NA, .),
+    zip_match = str_detect(zip_code, official.zip),
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
   ) %>%
   left_join(.,
             na.omit(.) %>% 
@@ -71,6 +88,9 @@ dog.bite.df %>% summarize(missing_zip = sum(is.na(zip_code))/n())
 #Missing Zips by borough
 dog.bite.df %>% group_by(borough) %>% summarize(missing_zip = sum(is.na(zip_code))/n())
 
+#Set Seed
+set.seed(4)
+
 #Imputing Zip Code
 dog.bite.df <- dog.bite.df %>%
   mutate(
@@ -81,5 +101,7 @@ dog.bite.df <- dog.bite.df %>%
 #View Data
 dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
 
+#Num Distinct Zips
+dog.bite.df %>% distinct(., zip_code_imputed) %>% nrow()
 ```
 
