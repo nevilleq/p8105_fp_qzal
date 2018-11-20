@@ -2,7 +2,7 @@
 title: "Lyuou"
 author: "Lyuou Zhang"
 date: "11/19/2018"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +10,25 @@ library(tidyverse)
 library(plotly)
 ```
 
-ggplot
+
+```{r include = FALSE}
+
+dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
+                    col_type = cols(UniqueID = col_integer(),
+                        DateOfBite = col_date(format = '%B %d %Y'), 
+                        Species = col_character(),
+                        Breed = col_character(),
+                        Age = col_number(),
+                        Gender = col_character(),
+                        SpayNeuter = col_logical(),
+                        Borough = col_character(),
+                        ZipCode = col_character()
+                      )) %>% 
+  janitor::clean_names() %>%
+  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) 
+```
+
+### ggplot
 
 ```{r}
 dog_bite %>% 
@@ -26,7 +44,7 @@ dog_bite %>%
 
 ```
 
-plotly
+### or plotly?
 
 ```{r}
 dog_bite %>% 
