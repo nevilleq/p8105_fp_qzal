@@ -21,6 +21,10 @@ library(zipcode)
 data(zipcode) 
 zipcode = zipcode %>%
   filter(city %in% c('New York', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island'))
+
+zip_list = zipcode %>%
+  select(city, zip) %>%
+  nest(-city)
 ```
 
 
@@ -33,6 +37,8 @@ nyc.official.zip <- read_csv("./data/Demographic_Statistics_By_Zip_Code.csv") %>
   unlist %>%
   unname %>%
   paste(., collapse = '|')
+
+official.zip = paste(zipcode$zip, collapse = '|')
 
 # dog bite data
 dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
@@ -53,7 +59,7 @@ dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
                ifelse(str_length(.) != 5, NA, .) %>%  # set zip codes without length 5 equal to NA
                str_replace(., "O", "0") %>% # replace O's with zeros
                ifelse(str_detect(., "^[02-9]"), NA, .), # ?
-    zip_match = str_detect(zip_code, nyc.official.zip), # is the given zip code valid?
+    zip_match = str_detect(zip_code, official.zip), # is the given zip code valid?
     zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
   ) %>%
   left_join(.,
