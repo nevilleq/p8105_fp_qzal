@@ -1,0 +1,63 @@
+---
+title: "Data cleaning/prep"
+author: "Alyssa Vanderbeek"
+date: "11/27/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+## Dog Bite data
+
+```{r}
+nyc.official.zip <- read_csv("~/Desktop/Demographic_Statistics_By_Zip_Code.csv") %>%
+  janitor::clean_names() %>% 
+  rename(official_zip = jurisdiction_name) %>%
+  select(official_zip) 
+
+
+official.zip <- paste0(nyc.official.zip$official_zip, collapse = "|")
+```
+
+```{r}
+dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
+                    col_type = cols(UniqueID = col_integer(),
+                        DateOfBite = col_date(format = '%B %d %Y'), # set as date variable
+                        Species = col_character(),
+                        Breed = col_character(),
+                        Age = col_number(),
+                        Gender = col_character(),
+                        SpayNeuter = col_logical(),
+                        Borough = col_character(),
+                        ZipCode = col_character()
+                      )) %>% # read data
+  janitor::clean_names() %>%
+  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) %>% # logical column for whether dog was a pitbull breed or not
+  mutate(
+    zip_code = zip_code %>% 
+               ifelse(str_length(.) != 5, NA, .) %>%  # set zip codes without length 5 equal to NA
+               str_replace(., "O", "0") %>% # replace O's with zeros
+               ifelse(str_detect(., "^[02-9]"), NA, .), # ?
+    zip_match = str_detect(zip_code, official.zip), # is the given zip code valid?
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
+  ) %>%
+  left_join(.,
+            na.omit(.) %>% 
+            left_join(., count(., borough), by = "borough") %>% 
+            group_by(borough, zip_code) %>%
+            summarize(proportion = n()/unique(n)) %>% 
+            rename(zip_list = zip_code) %>%
+            nest(zip_list, proportion) %>% rename(zip_nest = data)) %>% 
+  mutate(
+    zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
+    zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
+  ) %>% 
+  select(-c(zip_nest, zip_sample))
+```
+
+
+## Licensing data
