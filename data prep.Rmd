@@ -9,13 +9,24 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(lubridate)
+library(zipcode)
+
 ```
 
 ## Dog Bite data
 
+
+```{r}
+data(zipcode) 
+zipcode = zipcode %>%
+  filter(city %in% c('New York', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island'))
+```
+
+
 ```{r}
 # list of official NYC zip codes 
-nyc.official.zip <- read_csv("~/Desktop/Demographic_Statistics_By_Zip_Code.csv") %>%
+nyc.official.zip <- read_csv("./data/Demographic_Statistics_By_Zip_Code.csv") %>%
   janitor::clean_names() %>% 
   rename(official_zip = jurisdiction_name) %>%
   select(official_zip) %>%
@@ -24,7 +35,7 @@ nyc.official.zip <- read_csv("~/Desktop/Demographic_Statistics_By_Zip_Code.csv")
   paste(., collapse = '|')
 
 # dog bite data
-dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
+dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
                     col_type = cols(UniqueID = col_integer(),
                         DateOfBite = col_date(format = '%B %d %Y'), # set as date variable
                         Species = col_character(),
@@ -57,7 +68,59 @@ dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
     zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
   ) %>% 
   select(-c(zip_nest, zip_sample))
+
+write.csv(dog_bite, './data/dog_bite.csv', row.names = F)
 ```
 
 
 ## Licensing data
+
+```{r}
+license_df <- read_csv("./data/NYC_Dog_Licensing_Dataset.csv") %>%
+  mutate(Borough = tolower(Borough),
+         LicenseIssuedDate = as.Date(LicenseIssuedDate, "%m/%d/%Y"),
+         LicenseExpiredDate = as.Date(LicenseExpiredDate, "%m/%d/%Y"),
+         issued_year = year(LicenseIssuedDate),
+         expired_year = year(LicenseExpiredDate),
+         cleaned_borough = Borough)
+
+misassigned_queens <- c("astoria", "elmhurst", "flushing", "jackson heights", "kew gardens", "woodside", "briarwood", "corona", "forest hills", "ozone park", "richmond hill", "rockaway park", "arverne", "bayside", "belle harbor", "cambria heights", "college point", "east elmhurst", "glen oaks", "glendale", "jackson hgts", "long island city", "maspeth", "middle vilg", "middle village", "oakland gardens", "quens", "ridgewood", "so richmond", "south richmond hil", "woodside ny.", "fresh meadows")
+
+misassigned_nyc <- c("jersey city", "albany", "bronxville", "floral park", "hoboken", "kissimmee florida", "lynbrook", "middletown", "san francisco", "santa monica", "wappingers falls, ny", "west palm beach", "the villages")
+
+recode_staten_island <- c("staten is", "staten island, ny", "staten island")
+
+unknown_borough <- c("new york", "new york city", "nyc", "ny", "b", "potomac", NA)
+
+unknown_borough_df <- license_df %>%
+  filter(cleaned_borough == "unknown") %>%
+  select(RowNumber, ZipCode, cleaned_borough)
+
+zip_code_borough <- read_csv("zip_codes_borough.csv") # change this to use the data that Quinton downloaded from OpenSource
+
+license_df <- license_df %>%
+  mutate(cleaned_borough = ifelse(cleaned_borough %in% misassigned_queens, "queens", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% misassigned_nyc, "not nyc", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% recode_staten_island, "staten", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% unknown_borough, "unknown", cleaned_borough))
+
+license_df <- left_join(license_df, zip_code_borough)
+
+counts_df <- license_df %>%
+  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, supposed_borough, issued_year, expired_year)
+
+#what to do with these odd cases ~ 140 of them
+counts_df %>%
+  group_by(ZipCode, Borough, cleaned_borough, supposed_borough) %>%
+  View()
+
+agree_ids <- counts_df$RowNumber[which(counts_df$cleaned_borough == counts_df$supposed_borough)]
+
+agreed_df <- counts_df %>%
+  filter(RowNumber %in% agree_ids) %>%
+  mutate(BreedName = tolower(BreedName))
+
+problematic_df <- counts_df %>%
+  filter(!RowNumber %in% agree_ids)
+```
+
