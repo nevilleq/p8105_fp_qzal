@@ -14,16 +14,16 @@ library(tidyverse)
 ## Dog Bite data
 
 ```{r}
+# list of official NYC zip codes 
 nyc.official.zip <- read_csv("~/Desktop/Demographic_Statistics_By_Zip_Code.csv") %>%
   janitor::clean_names() %>% 
   rename(official_zip = jurisdiction_name) %>%
-  select(official_zip) 
+  select(official_zip) %>%
+  unlist %>%
+  unname %>%
+  paste(., collapse = '|')
 
-
-official.zip <- paste0(nyc.official.zip$official_zip, collapse = "|")
-```
-
-```{r}
+# dog bite data
 dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
                     col_type = cols(UniqueID = col_integer(),
                         DateOfBite = col_date(format = '%B %d %Y'), # set as date variable
@@ -42,7 +42,7 @@ dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
                ifelse(str_length(.) != 5, NA, .) %>%  # set zip codes without length 5 equal to NA
                str_replace(., "O", "0") %>% # replace O's with zeros
                ifelse(str_detect(., "^[02-9]"), NA, .), # ?
-    zip_match = str_detect(zip_code, official.zip), # is the given zip code valid?
+    zip_match = str_detect(zip_code, nyc.official.zip), # is the given zip code valid?
     zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
   ) %>%
   left_join(.,
