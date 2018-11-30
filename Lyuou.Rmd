@@ -18,6 +18,7 @@ library(devtools)
 
 library(choroplethrZip)
 library(leaflet)
+library(leafletR)
 
 Sys.setenv('MAPBOX_TOKEN' = 'pk.eyJ1IjoibHl1b3V6IiwiYSI6ImNqcDA3Y2g1azA1bTQza3BkN2tjODd6dWMifQ.gSasGb6Ou-MmyHoSf82mQQ')
 ```
@@ -233,9 +234,21 @@ leaflet(data = zip_map) %>%
 Need GeoJSON to use leaflet for zip codes
 
 ```{r}
+# export the json file
+writeOGR(zip_map, 'zip_map_geojson', layer = 'zip_map', driver = 'GeoJSON')
 
+cuts <- c(-0.7, -0.001, 0.0001, 0.25, 0.5, 0.75, 1.0, 1.25)
 
+sty <- styleGrad(prop="trend",
+ breaks = cuts, # from the "cuts" creation, above
+ right=FALSE,
+ style.par="col",
+ style.val=c("blue", "white",rev(heat.colors(5))),
+ leg="Addresses Added / Day", lwd=1)
 
+map <- leaflet(data = 'zip_map_geojson',
+               dest = '',
+               style = )
 
 
 
