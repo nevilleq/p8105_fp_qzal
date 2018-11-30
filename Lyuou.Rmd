@@ -226,8 +226,22 @@ leaflet(data = zip_map) %>%
               weight = 1,
               popup = label_popup)
 
+# http://www.kimberlycoffey.com/blog/2015/9/19/interactive-choropleth-map-for-the-web
 
 ```
+
+Need GeoJSON to use leaflet for zip codes
+
+```{r}
+
+
+
+
+
+
+
+```
+
 
 
 
