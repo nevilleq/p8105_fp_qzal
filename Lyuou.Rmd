@@ -8,11 +8,23 @@ output: html_document
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(plotly)
+library(rgdal)
+library(tmap)
+library(plotly)
+library(maps)
+
+
+library(devtools)
+
+library(choroplethrZip)
+library(leaflet)
+
+Sys.setenv('MAPBOX_TOKEN' = 'pk.eyJ1IjoibHl1b3V6IiwiYSI6ImNqcDA3Y2g1azA1bTQza3BkN2tjODd6dWMifQ.gSasGb6Ou-MmyHoSf82mQQ')
 ```
 
 
 ```{r include = FALSE}
-
+# data import
 dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
                     col_type = cols(UniqueID = col_integer(),
                         DateOfBite = col_date(format = '%B %d %Y'), 
@@ -26,6 +38,11 @@ dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
                       )) %>% 
   janitor::clean_names() %>%
   mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) 
+
+dog_license <- read_csv('~/Desktop/NYC_Dog_Licensing_Dataset.csv') %>%
+  janitor::clean_names()
+  
+  
 ```
 
 ### ggplot
@@ -55,8 +72,6 @@ dog_bite %>%
   layout(
      xaxis = list(text = c('Female', 'Male', 'Unidentified')),
      yaxis = list(title = "count"), barmode = "stack")
-  
-
 
 
 ```
@@ -64,4 +79,155 @@ dog_bite %>%
 * We found that there are more Male and Unidentified dogs than female.  
 * Among Male and Female dogs, the number of dogs that were spayed/neutered or unneutered are similar.  
 * Among dogs whose gender are unidentified, most dogs were not spayed/neutered.
+
+# Copied from Q_work
+# Imputing Zip Codes
+```{r warning = FALSE, message = FALSE}
+dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
+  janitor::clean_names() %>%
+  mutate(
+    zip_code = zip_code %>% 
+               ifelse(str_length(.) != 5, NA, .) %>% 
+               str_replace(., "O", "0") %>% 
+               ifelse(str_detect(., "^[02-9]"), NA, .),
+    zip_match = str_detect(zip_code, official.zip),
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
+  ) %>%
+  left_join(.,
+            na.omit(.) %>% 
+            left_join(., count(., borough), by = "borough") %>% 
+            group_by(borough, zip_code) %>%
+            summarize(proportion = n()/unique(n)) %>% 
+            rename(zip_list = zip_code) %>%
+            nest(zip_list, proportion) %>% rename(zip_nest = data))
+
+#Missing Zips
+dog.bite.df %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+
+#Missing Zips by borough
+dog.bite.df %>% group_by(borough) %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+
+#Set Seed
+set.seed(4)
+
+#Imputing Zip Code
+dog.bite.df <- dog.bite.df %>%
+  mutate(
+    zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
+    zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
+  ) %>% select(-c(zip_nest, zip_sample))
+
+#View Data
+dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
+
+#Num Distinct Zips
+dog.bite.df %>% distinct(., zip_code_imputed) %>% nrow()
+```
+
+
+
+# Number of dog bites by zip code tabulation areas?
+
+
+```{r}
+# count the number of dog bite incidence by zip code
+
+bite_count <- dog.bite.df %>% 
+  group_by(zip_code_imputed) %>% 
+  summarize(n_bite = n())
+
+# count the number of pit bull bites by zip code
+n_pit_bite <- dog.bite.df %>% 
+  filter()
+
+```
+
+## Import spatial data/map
+
+```{r}
+# zip code tabulation area
+# https://data.cityofnewyork.us/Business/Zip-Code-Boundaries/i8iw-xf4u/data
+# import the shape file
+# https://plotly-book.cpsievert.me/maps.html
+
+zip_map <- readOGR(dsn = './data/ZIP_CODE_040114/ZIP_CODE_040114.shp')
+
+# attribute table
+map_attr <- as.tibble(zip_map@data) %>% 
+  janitor::clean_names() %>% 
+  select(-(url:shape_len))
+
+# plot
+plot(zip_map)
+
+bite_count$zip_code_imputed %in% map_attr$zipcode
+
+zip_map@data <- left_join(zip_map@data, bite_count, by = c('ZIPCODE' = 'zip_code_imputed'))
+
+# plot of dog bite counts by zip code
+# change classifications?
+qtm(zip_map, 'n_bite')
+
+# choropleth?
+# https://www.r-graph-gallery.com/chloropleth-map/
+
+
+```
+
+plotly?
+
+```{r}
+plot_ly(type="choropleth", locations=dog.bite.df$zip_code_imputed, locationmode="New York City", z = bite_count$n_bite)
+
+
+county_df <- map_data('county')
+
+data(df_pop_zip)
+
+ec_states = c("maine", "new hampshire", "massachusetts", "rhode island", "connecticut", 
+              "new york", "new jersey", "delaware", "maryland", 
+              "virginia", "north carolina", "south carolina", "georgia", "florida",
+              "pennsylvania", "district of columbia", "vermont", "west virginia")
+
+zip_choropleth(df_pop_zip, 
+               state_zoom = ec_states, 
+               title      = "2012 ZCTA Population Estimates",
+               legend     = "Population") + coord_map() 
+
+
+
+zip_choropleth(df_pop_zip, 
+               state_zoom = 'new york', 
+               title      = "zip code tabulation area",
+               legend     = "Population") + coord_map()
+
+
+```
+
+leaflet?
+
+```{r}
+# quantile map style
+pal <- colorQuantile('YlGn', NULL, n = 5)
+  
+# format of the label that pops up for each polygon
+label_popup <- paste0(
+  "<strong>Zip code: </strong>",
+  zip_map$ZIPCODE,
+  "<br><strong>Number of bites, 2008: </strong>",
+  zip_map$n_bite
+)
+
+leaflet(data = zip_map) %>% 
+  addProviderTiles('CartoDB.Positron') %>% 
+  addPolygons(fillColor = ~pal(n_bite),
+              fillOpacity = 0.8,
+              color = '#BDBDC3',
+              weight = 1,
+              popup = label_popup)
+
+
+```
+
+
 
