@@ -1,0 +1,67 @@
+---
+title: "Lyuou"
+author: "Lyuou Zhang"
+date: "11/19/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+```
+
+
+```{r include = FALSE}
+
+dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
+                    col_type = cols(UniqueID = col_integer(),
+                        DateOfBite = col_date(format = '%B %d %Y'), 
+                        Species = col_character(),
+                        Breed = col_character(),
+                        Age = col_number(),
+                        Gender = col_character(),
+                        SpayNeuter = col_logical(),
+                        Borough = col_character(),
+                        ZipCode = col_character()
+                      )) %>% 
+  janitor::clean_names() %>%
+  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) 
+```
+
+### ggplot
+
+```{r}
+dog_bite %>% 
+  ggplot(aes(x = gender, fill = spay_neuter)) + geom_bar() +
+  labs(
+    title = 'Number of dogs spayed/neutered by gender',
+    x = 'Gender',
+    y = 'Count'
+  ) +
+  scale_x_discrete(
+    labels = c('Female', 'Male', 'Unidentified')
+  )
+
+```
+
+### or plotly?
+
+```{r}
+dog_bite %>% 
+  group_by(gender, spay_neuter) %>% 
+  summarize(n = n()) %>% 
+  mutate(text_label = str_c('Gender: ', gender, '\nnumber: ', n)) %>% 
+  plot_ly(x = ~gender, y = ~n, color = ~spay_neuter, type = 'bar', text = ~text_label) %>% 
+  layout(
+     xaxis = list(text = c('Female', 'Male', 'Unidentified')),
+     yaxis = list(title = "count"), barmode = "stack")
+  
+
+
+
+```
+
+* We found that there are more Male and Unidentified dogs than female.  
+* Among Male and Female dogs, the number of dogs that were spayed/neutered or unneutered are similar.  
+* Among dogs whose gender are unidentified, most dogs were not spayed/neutered.
+

@@ -1,0 +1,107 @@
+---
+title: "Zip Code Cleaning and Imputation"
+author: "Quinton Neville"
+date: "November 20, 2018"
+header-includes: 
+  \usepackage{graphicx}
+  \usepackage{float}
+  \usepackage{amsmath}
+output:
+   github_document
+---
+
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
+#Load necessary packages
+library(tidyverse)
+library(readxl)
+library(readr)
+library(p8105.datasets)
+library(patchwork)
+library(ggridges)
+library(gridExtra)
+library(shiny)
+library(plotly)
+library(broom)
+library(scales)
+library(purrr)
+library(koRpus)
+library(rvest)
+library(httr)
+
+#Controlling figure output in markdown
+knitr::opts_chunk$set(
+#  fig.height =   
+  fig.width = 6,
+#  fig.asp = .5,
+  out.width = "90%",
+#  out.height = 
+ fig.align = "center",
+  cache = FALSE
+)
+
+#Set Theme for ggplot2
+theme_set(theme_bw() + theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
+
+#Set Scientific notation output for knitr
+options(scipen = 999)
+
+```
+
+#Pulling Exhaustive list of NYC Zips
+```{r message = FALSE}
+nyc.official.zip <- read_csv("./data/Demographic_Statistics_By_Zip_Code.csv") %>%
+  janitor::clean_names() %>% 
+  rename(official_zip = jurisdiction_name) %>%
+  select(official_zip)
+
+
+official.zip <- paste0(nyc.official.zip$official_zip, collapse = "|")
+  
+#https://data.cityofnewyork.us/City-Government/Demographic-Statistics-By-Zip-Code/kku6-nxdu
+```
+
+
+
+#Imputing Zip Codes
+```{r warning = FALSE, message = FALSE}
+dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
+  janitor::clean_names() %>%
+  mutate(
+    zip_code = zip_code %>% 
+               ifelse(str_length(.) != 5, NA, .) %>% 
+               str_replace(., "O", "0") %>% 
+               ifelse(str_detect(., "^[02-9]"), NA, .),
+    zip_match = str_detect(zip_code, official.zip),
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
+  ) %>%
+  left_join(.,
+            na.omit(.) %>% 
+            left_join(., count(., borough), by = "borough") %>% 
+            group_by(borough, zip_code) %>%
+            summarize(proportion = n()/unique(n)) %>% 
+            rename(zip_list = zip_code) %>%
+            nest(zip_list, proportion) %>% rename(zip_nest = data))
+
+#Missing Zips
+dog.bite.df %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+
+#Missing Zips by borough
+dog.bite.df %>% group_by(borough) %>% summarize(missing_zip = sum(is.na(zip_code))/n())
+
+#Set Seed
+set.seed(4)
+
+#Imputing Zip Code
+dog.bite.df <- dog.bite.df %>%
+  mutate(
+    zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
+    zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
+  ) %>% select(-c(zip_nest, zip_sample))
+
+#View Data
+dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
+
+#Num Distinct Zips
+dog.bite.df %>% distinct(., zip_code_imputed) %>% nrow()
+```
+
