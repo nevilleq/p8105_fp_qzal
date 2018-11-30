@@ -9,8 +9,9 @@ output: github_document
 library(tidyverse)
 library(readxl)
 library(lubridate)
-library(rJava)
-license_df <- read_csv("NYC_Dog_Licensing_Dataset.csv")
+library(zipcode)
+
+license_df <- read_csv("./data/NYC_Dog_Licensing_Dataset.csv")
 
 license_df <- license_df %>%
   mutate(Borough = tolower(Borough),
@@ -20,7 +21,7 @@ license_df <- license_df %>%
          expired_year = year(LicenseExpiredDate),
          cleaned_borough = Borough)
 
-misassigned_queens <- c("astoria", "elmhurst", "flushing", "jackson heights", "kew gardens", "woodside", "briarwood", "corona", "forest hills", "ozone park", "richmond hill", "rockaway park", "arverne", "bayside", "belle harbor", "cambria heights", "college point", "east elmhurst", "glen oaks", "glendale", "jackson hgts", "long island city", "maspeth", "middle vilg", "middle village", "oakland gardens", "quens", "ridgewood", "so richmond", "south richmond hil", "woodside ny.", "fresh meadows")
+misassigned_queens <- c("astoria", "elmhurst", "flushing", "jackson heights", "kew gardens", "woodside", "briarwood", "corona", "forest hills", "ozone park", "richmond hill", "rockaway park", "arverne", "bayside", "belle harbor", "cambria heights", "college point", "east elmhurst", "glen oaks", "glendale", "jackson hgts", "long island city", "maspeth", "middle vilg", "middle village", "oakland gardens", "quens", "ridgewood", "so richmond", "south richmond hil", "woodside ny.", "fresh meadows", "sunnyside", "whitestone", "little neck", "rego park", "saint albans", "springfield gardens", "howard beach", "south richmond hill", "south ozone park", "woodhaven","rosedale", "hollis", "bellerose", "queens village", "jamaica", "far rockaway", "breezy point")
 
 misassigned_nyc <- c("jersey city", "albany", "bronxville", "floral park", "hoboken", "kissimmee florida", "lynbrook", "middletown", "san francisco", "santa monica", "wappingers falls, ny", "west palm beach", "the villages")
 
@@ -28,35 +29,48 @@ recode_staten_island <- c("staten is", "staten island, ny", "staten island")
 
 unknown_borough <-c("new york", "new york city", "nyc", "ny", "b", "potomac", NA)
 
-unknown_borough_df <- license_df %>%
-  filter(cleaned_borough == "unknown") %>%
-  select(RowNumber, ZipCode, cleaned_borough)
-
-zip_code_borough <- read_csv("zip_codes_borough.csv")
-
 license_df <- license_df %>%
   mutate(cleaned_borough = ifelse(cleaned_borough %in% misassigned_queens, "queens", cleaned_borough),
          cleaned_borough = ifelse(cleaned_borough %in% misassigned_nyc, "not nyc", cleaned_borough),
          cleaned_borough = ifelse(cleaned_borough %in% recode_staten_island, "staten", cleaned_borough),
          cleaned_borough = ifelse(cleaned_borough %in% unknown_borough, "unknown", cleaned_borough))
 
-license_df <- left_join(license_df, zip_code_borough)
+
+unknown_borough_df <- license_df %>%
+  filter(cleaned_borough == "unknown") %>%
+  select(RowNumber, ZipCode, cleaned_borough)
+
+data("zipcode")
+zip_code_borough <- zipcode  %>%
+  rename(ZipCode = zip,
+         supposed_borough = city) %>%
+  select(ZipCode, supposed_borough) %>%
+  mutate(ZipCode = as.numeric(ZipCode),
+         supposed_borough = tolower(supposed_borough),
+         supposed_borough = ifelse(supposed_borough %in% misassigned_queens, "queens", supposed_borough),
+         supposed_borough = ifelse(supposed_borough %in% misassigned_nyc, "not nyc", supposed_borough),
+         supposed_borough = ifelse(supposed_borough %in% recode_staten_island, "staten", supposed_borough)) %>%
+  filter(ZipCode %in% license_df$ZipCode)
+
+license_df <- left_join(license_df, zip_code_borough, by = "ZipCode")
 
 counts_df <- license_df %>%
-  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, supposed_borough, issued_year, expired_year)
+  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, supposed_borough, LicenseIssuedDate, LicenseExpiredDate, issued_year, expired_year)
 
 #what to do with these odd cases ~ 140 of them
 counts_df %>%
   group_by(ZipCode, Borough, cleaned_borough, supposed_borough) %>%
   View()
 
-agree_ids <- counts_df$RowNumber[which(counts_df$cleaned_borough == counts_df$supposed_borough)]
+agree_ids <- counts_df$RowNumber[which((counts_df$cleaned_borough  == counts_df$supposed_borough)|
+                                       (counts_df$cleaned_borough == "manhattan" & counts_df$supposed_borough == "new york"))]
 agreed_df <- counts_df %>%
-  filter(RowNumber %in% agree_ids) %>%
+  filter(RowNumber %in% agree_ids,
+         cleaned_borough != "not nyc") %>%
   mutate(BreedName = tolower(BreedName))
 
 problematic_df <- counts_df %>%
-  filter(!RowNumber %in% agree_ids)
+  filter(!RowNumber %in% agree_ids | cleaned_borough == "not nyc")
 
 View(problematic_df)
 write.csv(problematic_df, "problematic_ids.csv", row.names = FALSE)
@@ -69,7 +83,7 @@ a <- agreed_df %>%
 #All Dogs -- Based on Issued Year Borough
 b <- agreed_df %>%
   group_by(issued_year) %>%
-  count(supposed_borough)
+  count(cleaned_borough)
 
 #PitBulls -- Based on Issued Year Zip Code
 c <- agreed_df %>%
@@ -81,11 +95,12 @@ c <- agreed_df %>%
 d <- agreed_df %>%
   filter(grepl("pit bull", BreedName)) %>%
   group_by(issued_year) %>%
-  count(supposed_borough)
+  count(cleaned_borough)
 
 write.csv(a, file = "all_dogs_zip.csv", row.names = FALSE)
 write.csv(b, file = "all_dogs_borough.csv", row.names = FALSE)
 write.csv(c, file = "pitbulls_zip.csv", row.names = FALSE)
 write.csv(d, file = "pitbulls_borough.csv", row.names = FALSE)
+write.csv(agreed_df, file = "agreed_boroughs_license_df.csv", row.names = FALSE)
 ```
 

@@ -1,0 +1,649 @@
+"RowNumber","BreedName","ZipCode","Borough","cleaned_borough","supposed_borough","LicenseIssuedDate","LicenseExpiredDate","issued_year","expired_year"
+662,"Italian Greyhound",7030,"manhattan","manhattan","not nyc",2014-11-01,2016-09-08,2014,2016
+1040,"Beagle",28677,"staten island","staten","statesville",2014-12-11,2016-12-14,2014,2016
+1598,"West High White Terrier",11040,"queens","queens","new hyde park",2014-12-26,2016-01-30,2014,2016
+1988,"Australian Shepherd",10468,"manhattan","manhattan","bronx",2015-01-02,2016-01-02,2015,2016
+2031,"American Pit Bull Terrier/Pit Bull",10463,"manhattan","manhattan","bronx",2015-01-02,2016-01-02,2015,2016
+2126,"Shih Tzu",11239,"bronx","bronx","brooklyn",2015-01-03,2016-01-03,2015,2016
+2295,"Unknown",10009,"new york","unknown","new york",2015-01-05,2016-01-21,2015,2016
+2615,"Poodle",11001,"queens","queens","not nyc",2015-01-09,2016-01-09,2015,2016
+2684,"Yorkshire Terrier",10028,"new york","unknown","new york",2015-01-11,2016-01-06,2015,2016
+2718,"Maltese",11212,"manhattan","manhattan","brooklyn",2015-01-12,2016-01-12,2015,2016
+2723,"Maltese",11223,"manhattan","manhattan","brooklyn",2015-01-12,2016-01-12,2015,2016
+2803,"Dachshund",12051,"queens","queens","coxsackie",2015-01-13,2016-01-13,2015,2016
+2808,"American Staffordshire Terrier",11001,"queens","queens","not nyc",2015-01-13,2016-01-13,2015,2016
+2895,"American Pit Bull Terrier/Pit Bull",11692,"brooklyn","brooklyn","queens",2015-01-14,2016-01-14,2015,2016
+2930,"Yorkshire Terrier",11469,"bronx","bronx",NA,2015-01-14,2016-01-14,2015,2016
+3054,"American Pit Bull Terrier/Pit Bull",11001,"queens","queens","not nyc",2015-01-15,2016-01-27,2015,2016
+3093,"American Staffordshire Terrier",11001,"queens","queens","not nyc",2015-01-15,2016-01-27,2015,2016
+3447,"Shih Tzu",53494,"bronx","bronx",NA,2015-01-18,2016-01-18,2015,2016
+3579,"Unknown",11003,"queens","queens","elmont",2015-01-20,2016-01-20,2015,2016
+3631,"Havanese",11040,"queens","queens","new hyde park",2015-01-20,2016-01-20,2015,2016
+3801,"Bernese Mountain Dog",11746,"manhattan","manhattan","huntington station",2015-01-22,2016-01-22,2015,2016
+3806,"Shih Tzu",11746,"manhattan","manhattan","huntington station",2015-01-22,2016-01-22,2015,2016
+3883,"Bull Terrier",10024,"new york","unknown","new york",2015-01-23,2016-01-23,2015,2016
+4032,"Yorkshire Terrier",53494,"bronx","bronx",NA,2015-01-25,2016-01-25,2015,2016
+4057,"Poodle",11693,"brooklyn","brooklyn","queens",2015-01-26,2016-01-26,2015,2016
+4240,"Unknown",11590,"queens","queens","westbury",2015-01-28,2016-01-28,2015,2016
+4332,"Boxer",10022,"new york","unknown","new york",2015-01-29,2016-01-29,2015,2016
+4341,"Unknown",11001,"queens","queens","not nyc",2015-01-29,2016-01-29,2015,2016
+4519,"Unknown",11933,"manhattan","manhattan","calverton",2015-01-30,2016-01-25,2015,2016
+4522,"Schnauzer, Miniature",121,"manhattan","manhattan",NA,2015-01-30,2016-02-13,2015,2016
+4596,"Rhodesian Ridgeback",12143,"staten island","staten","ravena",2015-01-31,2016-01-31,2015,2016
+4670,"Chihuahua",11364,"brooklyn","brooklyn","queens",2015-02-01,2016-02-01,2015,2016
+4876,"Labrador Retriever Crossbreed",10032,"new york","unknown","new york",2015-02-03,2016-02-03,2015,2016
+5125,"American Pit Bull Terrier/Pit Bull",10460,"manhattan","manhattan","bronx",2015-02-05,2016-03-02,2015,2016
+5230,"Chihuahua",11209,"bronx","bronx","brooklyn",2015-02-06,2016-02-06,2015,2016
+5286,"American Pit Bull Mix / Pit Bull Mix",8527,"brooklyn","brooklyn","jackson",2015-02-07,2016-02-07,2015,2016
+5652,"American Pit Bull Mix / Pit Bull Mix",11210,"manhattan","manhattan","brooklyn",2015-02-11,2016-02-11,2015,2016
+5816,"Boxer",10025,"new york","unknown","new york",2015-02-13,2017-02-13,2015,2017
+6242,"Yorkshire Terrier",10262,"manhattan","manhattan",NA,2015-02-17,2016-02-17,2015,2016
+6474,"American Pit Bull Mix / Pit Bull Mix",11238,"manhattan","manhattan","brooklyn",2015-02-19,2016-02-19,2015,2016
+6948,"French Bulldog",10019,"queens","queens","new york",2015-02-24,2016-02-24,2015,2016
+6979,"Unknown",10026,"new york city","unknown","new york",2015-02-24,2016-03-23,2015,2016
+7027,"Yorkshire Terrier",11208,"queens","queens","brooklyn",2015-02-24,2016-02-24,2015,2016
+7066,"Poodle, Miniature",10151,"new york","unknown","new york",2015-02-25,2016-02-25,2015,2016
+7088,"Yorkshire Terrier",10021,"new york","unknown","new york",2015-02-25,2016-01-31,2015,2016
+7124,"Lhasa Apso",11003,"queens","queens","elmont",2015-02-25,2016-02-25,2015,2016
+7840,"Unknown",10708,"manhattan","manhattan","not nyc",2015-03-03,2017-08-20,2015,2017
+8074,"Basenji",11001,"queens","queens","not nyc",2015-03-05,2016-03-08,2015,2016
+8120,"Unknown",11212,"bronx","bronx","brooklyn",2015-03-05,2016-03-05,2015,2016
+8311,"American Pit Bull Mix / Pit Bull Mix",11249,"manhattan","manhattan","brooklyn",2015-03-06,2016-03-06,2015,2016
+8341,"American Pit Bull Mix / Pit Bull Mix",10927,"manhattan","manhattan","haverstraw",2015-03-07,2016-03-07,2015,2016
+8480,"Chihuahua",11385,"brooklyn","brooklyn","queens",2015-03-09,2016-03-09,2015,2016
+8568,"American Pit Bull Terrier/Pit Bull",10034,"new york","unknown","new york",2015-03-10,2016-03-10,2015,2016
+8747,"Unknown",10309,"brooklyn","brooklyn","staten",2015-03-11,2020-03-12,2015,2020
+8913,"Labrador Retriever",10314,"brooklyn","brooklyn","staten",2015-03-13,2016-03-10,2015,2016
+8970,"Poodle",10247,"manhattan","manhattan",NA,2015-03-13,2016-03-13,2015,2016
+8971,"Beagle",10314,"brooklyn","brooklyn","staten",2015-03-13,2016-03-10,2015,2016
+9282,"Bull Dog, English",10013,"queens","queens","new york",2015-03-17,2016-03-17,2015,2016
+10058,"Unknown",10014,"new york","unknown","new york",2015-03-25,2016-04-29,2015,2016
+10286,"American Pit Bull Terrier/Pit Bull",11545,"queens","queens","glen head",2015-03-26,2016-03-26,2015,2016
+10344,"Maltese",10025,"new york","unknown","new york",2015-03-26,2017-03-26,2015,2017
+10376,"German Shepherd Crossbreed",10025,"new york","unknown","new york",2015-03-26,2016-03-26,2015,2016
+10389,"Schnauzer, Standard",11354,"brooklyn","brooklyn","queens",2015-03-26,2016-03-20,2015,2016
+10490,"Unknown",11001,"queens","queens","not nyc",2015-03-27,2016-05-09,2015,2016
+10770,"West High White Terrier",10036,"new york","unknown","new york",2015-03-29,2016-04-30,2015,2016
+10934,"Wheaton Terrier",11109,"manhattan","manhattan","queens",2015-03-30,2016-03-30,2015,2016
+11037,"American Pit Bull Terrier/Pit Bull",10465,"manhattan","manhattan","bronx",2015-03-31,2016-03-31,2015,2016
+11333,"Australian Shepherd",11109,"manhattan","manhattan","queens",2015-04-03,2016-04-03,2015,2016
+11385,"Unknown",10463,"new york","unknown","bronx",2015-04-03,2016-04-13,2015,2016
+11391,"Unknown",11375,"manhattan","manhattan","queens",2015-04-03,2016-04-18,2015,2016
+12102,"American Staffordshire Terrier",11415,"brooklyn","brooklyn","queens",2015-04-09,2016-04-09,2015,2016
+12414,"Rottweiler",10463,"manhattan","manhattan","bronx",2015-04-11,2016-04-11,2015,2016
+12681,"Labrador Retriever",11040,"queens","queens","new hyde park",2015-04-13,2016-04-13,2015,2016
+12863,"Pomeranian",11001,"queens","queens","not nyc",2015-04-15,2016-05-02,2015,2016
+13207,"Shih Tzu",10463,"manhattan","manhattan","bronx",2015-04-16,2016-04-16,2015,2016
+13219,"Australian Shepherd",11694,"brooklyn","brooklyn","queens",2015-04-17,2016-04-17,2015,2016
+13339,"American Pit Bull Terrier/Pit Bull",10704,"bronx","bronx","yonkers",2015-04-17,2016-04-17,2015,2016
+13727,"Shiba Inu",11249,"manhattan","manhattan","brooklyn",2015-04-20,2016-04-30,2015,2016
+13778,"Poodle, Standard",11003,"queens","queens","elmont",2015-04-21,2016-04-22,2015,2016
+13812,"West Highland White Terrier",11691,"manhattan","manhattan","queens",2015-04-21,2016-04-21,2015,2016
+13936,"Maltese",11001,"queens","queens","not nyc",2015-04-22,2016-04-22,2015,2016
+14409,"Golden Retriever",11509,"queens","queens","atlantic beach",2015-04-24,2016-04-24,2015,2016
+14551,"Papillon",11010,"queens","queens","franklin square",2015-04-25,2016-04-25,2015,2016
+14567,"Australian Shepherd",10707,"manhattan","manhattan","tuckahoe",2015-04-25,2016-04-25,2015,2016
+14599,"Golden Retriever",10028,"queens","queens","new york",2015-04-25,2020-04-16,2015,2020
+14898,"Unknown",11356,"bronx","bronx","queens",2015-04-27,2016-04-27,2015,2016
+15077,"Yorkshire Terrier",10009,"queens","queens","new york",2015-04-29,2016-05-28,2015,2016
+15264,"Cairn Terrier",11210,"manhattan","manhattan","brooklyn",2015-04-29,2016-04-29,2015,2016
+15410,"American Pit Bull Mix / Pit Bull Mix",11518,"queens","queens","east rockaway",2015-04-30,2016-04-30,2015,2016
+15521,"Bichon Frise",11373,"staten island","staten","queens",2015-05-01,2016-06-02,2015,2016
+15555,"Unknown",10068,"manhattan","manhattan",NA,2015-05-01,2016-05-27,2015,2016
+15801,"Staffordshire Bull Terrier",10031,"bronx","bronx","new york",2015-05-03,2016-05-03,2015,2016
+15871,"Schnauzer, Miniature",11023,"queens","queens","great neck",2015-05-04,2016-05-25,2015,2016
+16087,"Poodle, Toy",10128,"new york","unknown","new york",2015-05-05,2016-05-21,2015,2016
+16411,"Pomeranian",11234,"manhattan","manhattan","brooklyn",2015-05-07,2016-05-07,2015,2016
+16749,"Unknown",10308,"brooklyn","brooklyn","staten",2015-05-11,2016-04-02,2015,2016
+16921,"Unknown",12237,"brooklyn","brooklyn","not nyc",2015-05-12,2016-05-30,2015,2016
+17389,"American Staffordshire Terrier",11040,"queens","queens","new hyde park",2015-05-14,2018-05-14,2015,2018
+17397,"Shih Tzu",10458,"manhattan","manhattan","bronx",2015-05-14,2016-05-14,2015,2016
+17435,"Pomeranian",8901,"manhattan","manhattan","new brunswick",2015-05-14,2016-06-21,2015,2016
+17477,"Poodle, Toy",32163,"the villages","not nyc","not nyc",2015-05-15,2017-06-12,2015,2017
+17796,"Pekingese",10705,"bronx","bronx","yonkers",2015-05-18,2017-05-18,2015,2017
+17869,"Labrador Retriever",10901,"manhattan","manhattan","suffern",2015-05-18,2016-05-18,2015,2016
+17996,"Havanese",11023,"queens","queens","great neck",2015-05-19,2016-05-19,2015,2016
+18000,"Chihuahua",11757,"queens","queens","lindenhurst",2015-05-19,2016-05-19,2015,2016
+18122,"Siberian Husky",22223,"brooklyn","brooklyn","arlington",2015-05-20,2016-05-11,2015,2016
+18145,"American Pit Bull Mix / Pit Bull Mix",10463,"manhattan","manhattan","bronx",2015-05-20,2016-05-20,2015,2016
+18206,"Havanese",11023,"queens","queens","great neck",2015-05-21,2016-05-21,2015,2016
+18276,"Jack Russell Terrier",11003,"queens","queens","elmont",2015-05-21,2016-06-14,2015,2016
+18428,"Unknown",10009,"new york","unknown","new york",2015-05-23,2016-04-17,2015,2016
+18550,"Labrador Retriever Crossbreed",11040,"queens","queens","new hyde park",2015-05-25,2016-04-13,2015,2016
+18634,"Maltese",10036,"new york","unknown","new york",2015-05-26,2016-02-28,2015,2016
+19465,"Maltese",11223,"staten island","staten","brooklyn",2015-06-01,2016-06-01,2015,2016
+20014,"Poodle, Miniature",11377,"brooklyn","brooklyn","queens",2015-06-05,2016-06-05,2015,2016
+20605,"Yorkshire Terrier",11001,"queens","queens","not nyc",2015-06-10,2016-07-06,2015,2016
+20701,"American Pit Bull Terrier/Pit Bull",53494,"bronx","bronx",NA,2015-06-11,2016-06-15,2015,2016
+21568,"Yorkshire Terrier",14432,"bronx","bronx","clifton springs",2015-06-17,2016-06-17,2015,2016
+21663,"Yorkshire Terrier",14432,"bronx","bronx","clifton springs",2015-06-17,2016-06-17,2015,2016
+22250,"Pomeranian",11229,"bronx","bronx","brooklyn",2015-06-22,2016-06-22,2015,2016
+22374,"Bull Dog, English",11783,"manhattan","manhattan","seaford",2015-06-23,2018-07-10,2015,2018
+22621,"Pekingese",11784,"staten island","staten","selden",2015-06-24,2016-06-24,2015,2016
+23074,"German Shepherd Dog",10533,"bronx","bronx","irvington",2015-06-28,2016-07-12,2015,2016
+23247,"Unknown",10009,"brooklyn","brooklyn","new york",2015-06-29,2017-07-13,2015,2017
+23354,"Unknown",10023,"brooklyn","brooklyn","new york",2015-06-30,2016-07-13,2015,2016
+23523,"Shiba Inu",11385,"brooklyn","brooklyn","queens",2015-07-01,2016-07-01,2015,2016
+23817,"Rat Terrier",10457,"manhattan","manhattan","bronx",2015-07-03,2016-07-03,2015,2016
+23912,"Shih Tzu",10463,"manhattan","manhattan","bronx",2015-07-05,2016-07-05,2015,2016
+23921,"Shih Tzu",10463,"manhattan","manhattan","bronx",2015-07-05,2016-07-05,2015,2016
+24020,"Unknown",11379,"brooklyn","brooklyn","queens",2015-07-06,2016-08-18,2015,2016
+24202,"Labrador Retriever Crossbreed",11694,"brooklyn","brooklyn","queens",2015-07-07,2016-07-07,2015,2016
+24340,"Morkie",10002,"brooklyn","brooklyn","new york",2015-07-07,2016-07-07,2015,2016
+24563,"Yorkshire Terrier Crossbreed",11520,"queens","queens","freeport",2015-07-09,2016-07-09,2015,2016
+24583,"American Pit Bull Mix / Pit Bull Mix",11694,"brooklyn","brooklyn","queens",2015-07-09,2016-07-09,2015,2016
+24722,"Unknown",10502,"manhattan","manhattan","ardsley",2015-07-10,2016-08-14,2015,2016
+24739,"American Pit Bull Terrier/Pit Bull",90802,"queens","queens","long beach",2015-07-10,2016-07-10,2015,2016
+25100,"Chihuahua",10454,"manhattan","manhattan","bronx",2015-07-14,2016-07-14,2015,2016
+25213,"Catahoula Leopard Dog",10950,"manhattan","manhattan","monroe",2015-07-15,2016-07-15,2015,2016
+25351,"Miniature Pinscher",11001,"queens","queens","not nyc",2015-07-16,2016-08-03,2015,2016
+25790,"Poodle, Toy",10151,"new york","unknown","new york",2015-07-20,2016-07-16,2015,2016
+25979,"Shiba Inu",10016,"brooklyn","brooklyn","new york",2015-07-22,2016-08-13,2015,2016
+26059,"Unknown",10021,"new york","unknown","new york",2015-07-22,2016-06-18,2015,2016
+26164,"Labrador Retriever",10314,"brooklyn","brooklyn","staten",2015-07-23,2016-07-03,2015,2016
+26571,"Dalmatian",11001,"queens","queens","not nyc",2015-07-26,2016-08-30,2015,2016
+26577,"Labrador Retriever",11377,"manhattan","manhattan","queens",2015-07-26,2016-07-26,2015,2016
+26656,"Chihuahua",11375,"brooklyn","brooklyn","queens",2015-07-27,2016-07-27,2015,2016
+27063,"Maltese",11040,"queens","queens","new hyde park",2015-07-30,2020-09-06,2015,2020
+27105,"Shih Tzu",11040,"queens","queens","new hyde park",2015-07-30,2016-07-30,2015,2016
+27123,"Unknown",11050,"manhattan","manhattan","port washington",2015-07-30,2016-08-31,2015,2016
+27216,"Maltese",10705,"bronx","bronx","yonkers",2015-07-31,2016-07-31,2015,2016
+27283,"Chihuahua",10156,"brooklyn","brooklyn","new york",2015-07-31,2016-05-23,2015,2016
+27347,"Bullmastiff",11944,"manhattan","manhattan","greenport",2015-08-01,2016-08-01,2015,2016
+27378,"Pembroke Welsh Corgi",11944,"manhattan","manhattan","greenport",2015-08-01,2016-08-01,2015,2016
+27535,"American Staffordshire Terrier",8110,"manhattan","manhattan","pennsauken",2015-08-02,2016-08-02,2015,2016
+27658,"American Pit Bull Mix / Pit Bull Mix",10032,"new york","unknown","new york",2015-08-03,2016-08-03,2015,2016
+27661,"German Shepherd Dog",11040,"queens","queens","new hyde park",2015-08-03,2016-08-03,2015,2016
+27935,"Beagle",11580,"queens","queens","valley stream",2015-08-05,2016-07-01,2015,2016
+28162,"Bichon Frise",11005,"queens","queens","not nyc",2015-08-06,2016-08-06,2015,2016
+28194,"French Bulldog",11550,"queens","queens","hempstead",2015-08-07,2017-08-07,2015,2017
+28240,"Chihuahua",11550,"queens","queens","hempstead",2015-08-07,2017-08-07,2015,2017
+28294,"Vizsla",91607,"brooklyn","brooklyn","valley village",2015-08-07,2016-08-28,2015,2016
+28628,"Australian Shepherd",11305,"queens","queens",NA,2015-08-11,2016-08-11,2015,2016
+28766,"Rat Terrier",10457,"manhattan","manhattan","bronx",2015-08-11,2016-08-11,2015,2016
+28840,"German Shepherd Dog",10512,"bronx","bronx","carmel",2015-08-12,2016-08-12,2015,2016
+28863,"American Pit Bull Mix / Pit Bull Mix",10475,"manhattan","manhattan","bronx",2015-08-12,2016-08-12,2015,2016
+29019,"Unknown",11336,"queens","queens",NA,2015-08-13,2016-07-30,2015,2016
+29288,"Maltipoo",11220,"queens","queens","brooklyn",2015-08-14,2016-08-14,2015,2016
+29513,"American Pit Bull Terrier/Pit Bull",11378,"manhattan","manhattan","queens",2015-08-16,2016-08-16,2015,2016
+29554,"Beagle Crossbreed",14420,"manhattan","manhattan","brockport",2015-08-16,2016-08-16,2015,2016
+29948,"Pomeranian",11375,"manhattan","manhattan","queens",2015-08-18,2016-09-11,2015,2016
+30466,"Pomeranian",10805,"bronx","bronx","new rochelle",2015-08-24,2016-08-24,2015,2016
+30722,"Schnauzer, Miniature",11050,"queens","queens","port washington",2015-08-25,2017-09-29,2015,2017
+30966,"Cairn Terrier",10463,"manhattan","manhattan","bronx",2015-08-27,2016-08-27,2015,2016
+31026,"Unknown",11001,"queens","queens","not nyc",2015-08-27,2016-09-09,2015,2016
+31048,"Brussels Griffon",11096,"queens","queens","inwood",2015-08-27,2016-08-26,2015,2016
+31284,"Labrador Retriever",7675,"manhattan","manhattan","westwood",2015-08-30,2016-08-19,2015,2016
+31307,"Labrador Retriever",11355,"brooklyn","brooklyn","queens",2015-08-30,2016-08-30,2015,2016
+31327,"Boston Terrier",11413,"brooklyn","brooklyn","queens",2015-08-30,2016-08-30,2015,2016
+31845,"Chihuahua Crossbreed",10036,"staten island","staten","new york",2015-09-04,2016-09-04,2015,2016
+31942,"Catahoula Leopard Dog",11385,"brooklyn","brooklyn","queens",2015-09-05,2016-09-05,2015,2016
+32215,"Yorkshire Terrier",10025,"new york","unknown","new york",2015-09-08,2016-09-06,2015,2016
+32236,"Shiba Inu",12601,"queens","queens","poughkeepsie",2015-09-08,2016-09-08,2015,2016
+32248,"Boston Terrier",11010,"queens","queens","franklin square",2015-09-08,2016-09-29,2015,2016
+32256,"Shih Tzu",11001,"queens","queens","not nyc",2015-09-08,2016-08-02,2015,2016
+32446,"Dachshund Smooth Coat",10583,"manhattan","manhattan","scarsdale",2015-09-09,2016-05-30,2015,2016
+32448,"Unknown",11363,"manhattan","manhattan","queens",2015-09-09,2016-07-23,2015,2016
+32454,"Siberian Husky",11706,"queens","queens","bay shore",2015-09-10,2020-09-12,2015,2020
+32534,"Chihuahua",11003,"queens","queens","elmont",2015-09-10,2016-09-10,2015,2016
+32935,"Morkie",10801,"manhattan","manhattan","new rochelle",2015-09-14,2016-09-14,2015,2016
+32973,"Labrador Retriever Crossbreed",10550,"bronx","bronx","mount vernon",2015-09-14,2016-09-14,2015,2016
+32990,"Dachshund, Wirehaired, Miniature",11357,"brooklyn","brooklyn","queens",2015-09-15,2016-09-15,2015,2016
+33214,"Collie, Border",11732,"queens","queens","east norwich",2015-09-16,2016-09-04,2015,2016
+33234,"Papillon",11758,"queens","queens","massapequa",2015-09-16,2018-08-23,2015,2018
+33469,"Poodle, Miniature",10075,"brooklyn","brooklyn","new york",2015-09-19,2016-09-19,2015,2016
+33556,"Miniature Pinscher",11552,"staten island","staten","west hempstead",2015-09-20,2016-09-20,2015,2016
+33606,"Pomeranian",10004,"new york","unknown","new york",2015-09-20,2020-09-20,2015,2020
+33753,"Dachshund Smooth Coat",11368,"brooklyn","brooklyn","queens",2015-09-22,2016-07-14,2015,2016
+33791,"Bull Dog, English",11040,"queens","queens","new hyde park",2015-09-22,2017-10-06,2015,2017
+33874,"Pomeranian",7302,"manhattan","manhattan","not nyc",2015-09-23,2016-09-23,2015,2016
+33987,"Pomeranian",11978,"queens","queens","westhampton beach",2015-09-24,2016-09-24,2015,2016
+34051,"Shetland Sheepdog",11978,"queens","queens","westhampton beach",2015-09-24,2016-09-29,2015,2016
+34160,"American Pit Bull Terrier/Pit Bull",18705,"brooklyn","brooklyn","wilkes barre",2015-09-25,2016-11-03,2015,2016
+34170,"Shih Tzu",11590,"queens","queens","westbury",2015-09-25,2016-09-25,2015,2016
+34378,"Puggle",10029,"bronx","bronx","new york",2015-09-28,2016-09-28,2015,2016
+34473,"Yorkshire Terrier",11385,"brooklyn","brooklyn","queens",2015-09-29,2016-10-02,2015,2016
+34863,"Havanese",11001,"queens","queens","not nyc",2015-10-03,2016-10-03,2015,2016
+34876,"Miniature Schnauzer",11001,"queens","queens","not nyc",2015-10-03,2016-10-03,2015,2016
+35298,"Rhodesian Ridgeback",11791,"queens","queens","syosset",2015-10-07,2016-10-07,2015,2016
+35553,"Chihuahua",10029,"bronx","bronx","new york",2015-10-09,2016-10-09,2015,2016
+35614,"Morkie",14228,"brooklyn","brooklyn","buffalo",2015-10-10,2016-10-10,2015,2016
+35615,"Australian Cattledog",11385,"brooklyn","brooklyn","queens",2015-10-10,2016-10-10,2015,2016
+35652,"Golden Retriever",11021,"staten island","staten","great neck",2015-10-10,2016-10-10,2015,2016
+36168,"Unknown",11580,"queens","queens","valley stream",2015-10-15,2016-09-15,2015,2016
+36471,"Maltese",11040,"queens","queens","new hyde park",2015-10-17,2016-09-29,2015,2016
+36561,"Bull Dog, English",11040,"queens","queens","new hyde park",2015-10-18,2016-09-11,2015,2016
+36924,"Poodle, Toy",10028,"new york","unknown","new york",2015-10-21,2016-10-30,2015,2016
+37221,"American Eskimo dog",11040,"queens","queens","new hyde park",2015-10-22,2016-10-07,2015,2016
+37301,"Poodle, Standard",11001,"queens","queens","not nyc",2015-10-23,2016-03-11,2015,2016
+37438,"Terrier mix",10009,"brooklyn","brooklyn","new york",2015-10-24,2016-10-24,2015,2016
+37551,"Chihuahua",10701,"bronx","bronx","yonkers",2015-10-26,2016-10-26,2015,2016
+37585,"Unknown",10306,"bronx","bronx","staten",2015-10-26,2016-10-30,2015,2016
+38007,"Staffordshire Bull Terrier",7624,"manhattan","manhattan","closter",2015-10-29,2016-10-29,2015,2016
+38037,"Chinese Crested",12083,"queens","queens","greenville",2015-10-30,2016-10-30,2015,2016
+38123,"German Shepherd Dog",10606,"bronx","bronx","white plains",2015-10-31,2016-10-31,2015,2016
+38142,"Yorkshire Terrier",10464,"manhattan","manhattan","bronx",2015-11-01,2016-11-01,2015,2016
+38586,"Dachshund",11205,"manhattan","manhattan","brooklyn",2015-11-05,2016-11-28,2015,2016
+38673,"Shih Tzu",10466,"manhattan","manhattan","bronx",2015-11-06,2016-11-06,2015,2016
+38823,"American Pit Bull Terrier/Pit Bull",10301,"queens","queens","staten",2015-11-07,2016-11-07,2015,2016
+38939,"Labrador Retriever",90036,"brooklyn","brooklyn","los angeles",2015-11-09,2016-11-03,2015,2016
+38975,"Boston Terrier",90036,"brooklyn","brooklyn","los angeles",2015-11-09,2016-11-25,2015,2016
+39147,"Chihuahua",11001,"queens","queens","not nyc",2015-11-10,2016-11-10,2015,2016
+39244,"Jack Russell Terrier",10036,"new york","unknown","new york",2015-11-10,2016-11-10,2015,2016
+39807,"Pug",9012,"manhattan","manhattan","apo",2015-11-16,2016-10-15,2015,2016
+39993,"Unknown",10021,"new york","unknown","new york",2015-11-17,2016-11-14,2015,2016
+40103,"Labrador Retriever",77005,"manhattan","manhattan","houston",2015-11-17,2016-10-17,2015,2016
+40109,"Cocker Spaniel",11516,"queens","queens","cedarhurst",2015-11-17,2016-12-02,2015,2016
+40569,"Unknown",11378,"manhattan","manhattan","queens",2015-11-23,2016-12-04,2015,2016
+40627,"Unknown",11050,"queens","queens","port washington",2015-11-23,2016-07-30,2015,2016
+40685,"Yorkshire Terrier",11236,"bronx","bronx","brooklyn",2015-11-23,2016-10-26,2015,2016
+40936,"Pomeranian",11021,"queens","queens","great neck",2015-11-25,2016-10-12,2015,2016
+40998,"Shih Tzu Crossbreed",7302,"jersey city","not nyc","not nyc",2015-11-26,2016-11-26,2015,2016
+41118,"American Pit Bull Terrier/Pit Bull",10301,"manhattan","manhattan","staten",2015-11-28,2016-11-28,2015,2016
+41122,"Beagle",53494,"bronx","bronx",NA,2015-11-28,2016-11-28,2015,2016
+41233,"American Pit Bull Terrier/Pit Bull",10703,"bronx","bronx","yonkers",2015-11-29,2016-11-29,2015,2016
+41923,"Shih Tzu",10308,"queens","queens","staten",2015-12-04,2016-11-30,2015,2016
+42174,"Cavalier King Charles Spaniel",11361,"manhattan","manhattan","queens",2015-12-05,2016-12-05,2015,2016
+42199,"American Pit Bull Mix / Pit Bull Mix",10016,"brooklyn","brooklyn","new york",2015-12-06,2016-12-06,2015,2016
+42468,"Rottweiler Crossbreed",11040,"queens","queens","new hyde park",2015-12-08,2016-12-08,2015,2016
+42649,"Yorkshire Terrier",10704,"bronx","bronx","yonkers",2015-12-09,2016-12-09,2015,2016
+43115,"Morkie",11580,"queens","queens","valley stream",2015-12-12,2016-12-12,2015,2016
+43211,"Great Pyrenees",94109,"san francisco","not nyc","not nyc",2015-12-13,2016-12-13,2015,2016
+43388,"Maltese",11001,"queens","queens","not nyc",2015-12-15,2016-12-15,2015,2016
+43545,"Unknown",12218,"brooklyn","brooklyn",NA,2015-12-16,2016-12-30,2015,2016
+43693,"Labrador Retriever Crossbreed",11001,"queens","queens","not nyc",2015-12-17,2017-01-28,2015,2017
+43995,"Shih Tzu",11211,"queens","queens","brooklyn",2015-12-20,2016-12-20,2015,2016
+44087,"American Pit Bull Mix / Pit Bull Mix",11001,"queens","queens","not nyc",2015-12-21,2016-12-13,2015,2016
+44265,"Weimaraner",11040,"queens","queens","new hyde park",2015-12-22,2017-01-30,2015,2017
+44474,"American Pit Bull Terrier/Pit Bull",10459,"manhattan","manhattan","bronx",2015-12-23,2016-12-23,2015,2016
+44522,"Labrador Retriever",11001,"queens","queens","not nyc",2015-12-23,2018-12-20,2015,2018
+44779,"American Pit Bull Mix / Pit Bull Mix",11714,"bronx","bronx","bethpage",2015-12-28,2016-12-28,2015,2016
+44782,"Yorkshire Terrier",11743,"queens","queens","huntington",2015-12-28,2016-12-28,2015,2016
+44885,"Shih Tzu",10466,"manhattan","manhattan","bronx",2015-12-28,2017-01-13,2015,2017
+45025,"Mastiff, French (Dogue de Bordeaux)",11743,"queens","queens","huntington",2015-12-29,2016-12-29,2015,2016
+45485,"Jack Russell Terrier",11205,"manhattan","manhattan","brooklyn",2016-01-03,2017-02-13,2016,2017
+45565,"Yorkshire Terrier",7013,"queens","queens","clifton",2016-01-03,2016-10-27,2016,2016
+46189,"Shih Tzu",10805,"bronx","bronx","new rochelle",2016-01-07,2017-01-19,2016,2017
+46376,"Poodle",11001,"queens","queens","not nyc",2016-01-08,2017-01-09,2016,2017
+46401,"Labrador Retriever",11201,"manhattan","manhattan","brooklyn",2016-01-09,2017-01-09,2016,2017
+46639,"Maltese",11358,"brooklyn","brooklyn","queens",2016-01-11,2017-01-11,2016,2017
+47164,"American Staffordshire Terrier",10019,"queens","queens","new york",2016-01-13,2017-01-13,2016,2017
+47343,"Shih Tzu",10708,"bronxville","not nyc","not nyc",2016-01-14,2017-02-04,2016,2017
+47468,"Maltese",10010,"new york","unknown","new york",2016-01-14,2017-03-13,2016,2017
+47524,"Shiba Inu",10038,"brooklyn","brooklyn","new york",2016-01-14,2017-03-02,2016,2017
+47601,"Unknown",11379,"bronx","bronx","queens",2016-01-14,2017-02-16,2016,2017
+47725,"Chihuahua",11001,"queens","queens","not nyc",2016-01-15,2017-01-15,2016,2017
+48393,"French Bulldog",7030,"hoboken","not nyc","not nyc",2016-01-20,2017-01-20,2016,2017
+48422,"American Pit Bull Mix / Pit Bull Mix",11217,"manhattan","manhattan","brooklyn",2016-01-20,2017-01-20,2016,2017
+49116,"Shiba Inu",7302,"jersey city","not nyc","not nyc",2016-01-25,2017-01-25,2016,2017
+49372,"Poodle",31539,"manhattan","manhattan","hazlehurst",2016-01-26,2017-01-22,2016,2017
+49389,"Unknown",10012,"nyc","unknown","new york",2016-01-26,2017-02-22,2016,2017
+49507,"Rottweiler",11206,"bronx","bronx","brooklyn",2016-01-27,2016-12-27,2016,2016
+49521,"Bull Terrier",11004,"floral park","not nyc","queens",2016-01-27,2017-02-17,2016,2017
+49572,"Yorkshire Terrier",11141,"queens","queens",NA,2016-01-27,2017-03-15,2016,2017
+49625,"American Pit Bull Mix / Pit Bull Mix",11206,"manhattan","manhattan","brooklyn",2016-01-27,2017-01-27,2016,2017
+49675,"American Pit Bull Terrier/Pit Bull",11372,"manhattan","manhattan","queens",2016-01-27,2016-12-20,2016,2016
+49787,"Shih Tzu",11001,"queens","queens","not nyc",2016-01-28,2017-02-03,2016,2017
+49830,"Greyhound",11231,"manhattan","manhattan","brooklyn",2016-01-28,2017-02-04,2016,2017
+50074,"Poodle, Toy",10009,"new york","unknown","new york",2016-01-29,2017-01-29,2016,2017
+50077,"Italian Greyhound",11206,"manhattan","manhattan","brooklyn",2016-01-30,2017-01-30,2016,2017
+50167,"Shih Tzu Crossbreed",10024,"new york","unknown","new york",2016-01-30,2017-01-30,2016,2017
+50348,"French Bulldog",10002,"brooklyn","brooklyn","new york",2016-02-01,2017-02-01,2016,2017
+50581,"Havanese",10003,"staten island","staten","new york",2016-02-02,2017-02-26,2016,2017
+50771,"Golden Retriever",11001,"queens","queens","not nyc",2016-02-02,2017-02-28,2016,2017
+51102,"Labrador Retriever",11516,"queens","queens","cedarhurst",2016-02-03,2017-01-18,2016,2017
+51170,"Cavalier King Charles Spaniel",10520,"ny","unknown","croton on hudson",2016-02-04,2017-02-13,2016,2017
+51224,"Dachshund, Long Haired Miniature",11219,"manhattan","manhattan","brooklyn",2016-02-04,2017-02-04,2016,2017
+51272,"Poodle, Miniature",11219,"manhattan","manhattan","brooklyn",2016-02-04,2017-02-04,2016,2017
+51380,"Unknown",10021,"new york","unknown","new york",2016-02-05,2017-03-08,2016,2017
+51432,"Shih Tzu",11001,"queens","queens","not nyc",2016-02-05,2017-02-28,2016,2017
+51481,"Chihuahua",94608,"brooklyn","brooklyn","emeryville",2016-02-05,2017-01-31,2016,2017
+51535,"Basenji",11001,"queens","queens","not nyc",2016-02-05,2017-03-08,2016,2017
+51548,"Shih Tzu",20854,"potomac","unknown","potomac",2016-02-05,2017-03-17,2016,2017
+51638,"Labrador Retriever",11246,"queens","queens",NA,2016-02-06,2017-02-28,2016,2017
+51790,NA,NA,NA,"unknown",NA,NA,NA,NA,NA
+52311,"Cocker Spaniel",10647,"bronx","bronx",NA,2016-02-10,2016-07-10,2016,2016
+52388,"Shih Tzu",10452,"manhattan","manhattan","bronx",2016-02-11,2016-12-16,2016,2016
+52752,"American Pit Bull Mix / Pit Bull Mix",11201,"manhattan","manhattan","brooklyn",2016-02-12,2017-02-12,2016,2017
+52795,"Bull Dog, English",10013,"queens","queens","new york",2016-02-12,2017-03-17,2016,2017
+53160,"Yorkshire Terrier",11694,"brooklyn","brooklyn","queens",2016-02-15,2017-03-10,2016,2017
+53989,"Boxer",11001,"queens","queens","not nyc",2016-02-19,2017-01-31,2016,2017
+54113,"Yorkshire Terrier",10021,"new york","unknown","new york",2016-02-19,2017-01-31,2016,2017
+54562,"Cocker Spaniel",10025,"new york","unknown","new york",2016-02-22,2017-04-13,2016,2017
+54818,"Boxer",11378,"manhattan","manhattan","queens",2016-02-23,2017-03-11,2016,2017
+55066,"Belgian Malinois",11355,"manhattan","manhattan","queens",2016-02-24,2017-02-24,2016,2017
+55204,"Havanese",10463,"manhattan","manhattan","bronx",2016-02-25,2016-09-26,2016,2016
+55299,"Havanese",10463,"manhattan","manhattan","bronx",2016-02-25,2016-09-26,2016,2016
+55792,"Border Terrier",11201,"new york","unknown","brooklyn",2016-02-28,2016-12-04,2016,2016
+55920,"Shih Tzu",11376,"queens","queens",NA,2016-02-29,2017-04-09,2016,2017
+55957,"Shih Tzu",11001,"queens","queens","not nyc",2016-02-29,2017-01-17,2016,2017
+55975,"Poodle Crossbreed",11581,"queens","queens","valley stream",2016-02-29,2017-02-28,2016,2017
+56044,"Unknown",11419,"manhattan","manhattan","queens",2016-03-01,2017-04-17,2016,2017
+56214,"Jindo Dog, Korea",11001,"queens","queens","not nyc",2016-03-01,2017-03-30,2016,2017
+56283,"Poodle Crossbreed",10522,"bronx","bronx","dobbs ferry",2016-03-01,2017-03-01,2016,2017
+56374,"Labrador Retriever",11001,"queens","queens","not nyc",2016-03-02,2017-04-07,2016,2017
+56822,"Dalmatian",11040,"queens","queens","new hyde park",2016-03-04,2017-04-21,2016,2017
+56864,"Shih Tzu Crossbreed",10405,"bronx","bronx",NA,2016-03-04,2017-03-04,2016,2017
+56885,"Shih Tzu Crossbreed",10405,"bronx","bronx",NA,2016-03-04,2017-03-04,2016,2017
+56976,"American Pit Bull Terrier/Pit Bull",11758,"staten island","staten","massapequa",2016-03-05,2017-03-05,2016,2017
+57030,"Poodle, Miniature",11691,"brooklyn","brooklyn","queens",2016-03-05,2017-03-05,2016,2017
+57054,"Maltese",10021,"queens","queens","new york",2016-03-06,2017-04-30,2016,2017
+57260,"Yorkshire Terrier",11001,"queens","queens","not nyc",2016-03-07,2017-04-29,2016,2017
+57312,"American Pit Bull Mix / Pit Bull Mix",11422,"bronx","bronx","queens",2016-03-07,2017-03-07,2016,2017
+57514,"Yorkshire Terrier",12590,"wappingers falls, ny","not nyc","wappingers falls",2016-03-08,2017-03-20,2016,2017
+57526,"Beagle",11208,"queens","queens","brooklyn",2016-03-08,2017-03-08,2016,2017
+57882,"Yorkshire Terrier",11416,"manhattan","manhattan","queens",2016-03-10,2017-03-10,2016,2017
+57956,"West High White Terrier",10036,"new york","unknown","new york",2016-03-10,2017-04-30,2016,2017
+58704,"Poodle, Toy",11356,"new york","unknown","queens",2016-03-14,2017-03-14,2016,2017
+58815,"Chihuahua",11231,"b","unknown","brooklyn",2016-03-15,2017-02-25,2016,2017
+58857,"Unknown",11001,"queens","queens","not nyc",2016-03-15,2017-05-09,2016,2017
+59216,"Unknown",11375,"manhattan","manhattan","queens",2016-03-16,2017-04-18,2016,2017
+59227,"Yorkshire Terrier",11207,"bronx","bronx","brooklyn",2016-03-16,2017-03-16,2016,2017
+59447,"French Bulldog",12564,"queens","queens","pawling",2016-03-17,2017-03-17,2016,2017
+59544,"Dalmatian",11385,"brooklyn","brooklyn","queens",2016-03-17,2019-03-17,2016,2019
+59674,"Rat Terrier",10009,"new york","unknown","new york",2016-03-17,2017-03-17,2016,2017
+59716,"Pekingese",10018,"nyc","unknown","new york",2016-03-18,2017-03-18,2016,2017
+59901,"Poodle, Miniature",10151,"new york","unknown","new york",2016-03-18,2017-02-25,2016,2017
+59965,"Cavalier King Charles Spaniel",11004,"manhattan","manhattan","queens",2016-03-20,2017-03-20,2016,2017
+60309,"American Bully",10128,"new york","unknown","new york",2016-03-21,2017-05-24,2016,2017
+60673,"Unknown",10029,"new york","unknown","new york",2016-03-23,2017-03-11,2016,2017
+60846,"Pomeranian",11001,"queens","queens","not nyc",2016-03-23,2017-05-02,2016,2017
+60927,"American Pit Bull Mix / Pit Bull Mix",11040,"queens","queens","new hyde park",2016-03-24,2017-03-24,2016,2017
+60949,"Lhasa Apso",11040,"queens","queens","new hyde park",2016-03-24,2017-04-13,2016,2017
+61210,"Welsh Terrier",10014,"new york","unknown","new york",2016-03-25,2017-03-25,2016,2017
+61307,"French Bulldog",11545,"queens","queens","glen head",2016-03-26,2017-03-26,2016,2017
+61379,"Shih Tzu Crossbreed",10305,"manhattan","manhattan","staten",2016-03-26,2017-03-26,2016,2017
+61389,"Bull Dog, English",11206,"queens","queens","brooklyn",2016-03-26,2017-03-26,2016,2017
+61591,"Unknown",10025,"brooklyn","brooklyn","new york",2016-03-28,2017-04-30,2016,2017
+61645,"Chihuahua",11323,"queens","queens",NA,2016-03-28,2017-03-28,2016,2017
+61706,"Labrador Retriever",10463,"manhattan","manhattan","bronx",2016-03-28,2017-03-28,2016,2017
+61715,"Australian Cattle Dog",10005,"new york","unknown","new york",2016-03-28,2017-03-28,2016,2017
+61814,"Chihuahua",11001,"queens","queens","not nyc",2016-03-29,2017-04-17,2016,2017
+63468,"Bull Dog, French",11096,"queens","queens","inwood",2016-04-05,2017-04-03,2016,2017
+64219,"Beagle",11001,"queens","queens","not nyc",2016-04-08,2017-04-08,2016,2017
+64502,"Maltese Crossbreed",10314,"brooklyn","brooklyn","staten",2016-04-10,2017-04-10,2016,2017
+64825,"Rottweiler",10001,"new york","unknown","new york",2016-04-11,2017-05-01,2016,2017
+64936,"American Pit Bull Terrier/Pit Bull",11225,"queens","queens","brooklyn",2016-04-11,2017-04-11,2016,2017
+65011,"Yorkshire Terrier",11553,"manhattan","manhattan","uniondale",2016-04-12,2017-04-12,2016,2017
+65417,"Yorkshire Terrier",11429,"brooklyn","brooklyn","queens",2016-04-14,2017-04-14,2016,2017
+65552,"Poodle, Standard",11003,"queens","queens","elmont",2016-04-14,2017-04-22,2016,2017
+65601,"Labradoodle",10004,"new york","unknown","new york",2016-04-14,2017-04-03,2016,2017
+65609,"Labradoodle",10004,"new york","unknown","new york",2016-04-14,2017-03-14,2016,2017
+65687,"Cocker Spaniel",11713,"queens","queens","bellport",2016-04-15,2017-04-15,2016,2017
+66345,"Yorkshire Terrier",10009,"queens","queens","new york",2016-04-18,2017-05-28,2016,2017
+66628,"Unknown",11023,"manhattan","manhattan","great neck",2016-04-19,2018-05-02,2016,2018
+66838,"Rottweiler",11205,"queens","queens","brooklyn",2016-04-19,2017-03-27,2016,2017
+66916,"Jack Russell Terrier",10468,"manhattan","manhattan","bronx",2016-04-20,2017-04-20,2016,2017
+67081,"Yorkshire Terrier",11109,"manhattan","manhattan","queens",2016-04-20,2017-06-16,2016,2017
+67225,"Bull Dog, English",10468,"manhattan","manhattan","bronx",2016-04-21,2017-04-21,2016,2017
+67553,"Unknown",10026,"new york city","unknown","new york",2016-04-23,2017-03-23,2016,2017
+67922,"American Pit Bull Mix / Pit Bull Mix",11375,"brooklyn","brooklyn","queens",2016-04-25,2017-04-25,2016,2017
+68019,"Bichon Frise",11373,"staten island","staten","queens",2016-04-25,2017-06-02,2016,2017
+68051,"Havanese",11563,"lynbrook","not nyc","not nyc",2016-04-25,2017-04-18,2016,2017
+68260,"Maltese",11301,"queens","queens",NA,2016-04-25,2017-05-30,2016,2017
+68458,"Unknown",10005,"new york","unknown","new york",2016-04-26,2017-04-26,2016,2017
+68484,"Unknown",11001,"queens","queens","not nyc",2016-04-26,2018-06-21,2016,2018
+68551,"Collie Crossbreed",10032,"new york","unknown","new york",2016-04-27,2019-05-17,2016,2019
+68834,"Chihuahua",10028,"new york","unknown","new york",2016-04-28,2018-06-26,2016,2018
+69844,"Shih Tzu",1175,"manhattan","manhattan",NA,2016-05-02,2017-05-30,2016,2017
+69849,"Shih Tzu",1175,"manhattan","manhattan",NA,2016-05-02,2017-05-30,2016,2017
+70171,"American Pit Bull Terrier/Pit Bull",11102,"brooklyn","brooklyn","queens",2016-05-04,2017-05-04,2016,2017
+70317,"West Highland White Terrier",11003,"queens","queens","elmont",2016-05-04,2017-05-04,2016,2017
+70318,"Cocker Spaniel",11548,"queens","queens","greenvale",2016-05-04,2017-05-04,2016,2017
+70621,"Morkie",10014,"brooklyn","brooklyn","new york",2016-05-06,2017-05-06,2016,2017
+70650,"Maltese",11040,"queens","queens","new hyde park",2016-05-06,2017-06-25,2016,2017
+71268,"Siberian Husky",11716,"manhattan","manhattan","bohemia",2016-05-09,2017-05-09,2016,2017
+71342,"Yorkshire Terrier Crossbreed",11206,"queens","queens","brooklyn",2016-05-09,2017-05-09,2016,2017
+72216,"Poodle, Standard",11001,"queens","queens","not nyc",2016-05-12,2017-03-11,2016,2017
+72312,"Shetland Sheepdog",11001,"queens","queens","not nyc",2016-05-12,2017-06-08,2016,2017
+72471,"Poodle, Toy",11630,"queens","queens",NA,2016-05-12,2017-06-20,2016,2017
+72511,"Unknown",10308,"brooklyn","brooklyn","staten",2016-05-13,2017-04-02,2016,2017
+72624,"Labrador Retriever",11223,"manhattan","manhattan","brooklyn",2016-05-13,2017-06-08,2016,2017
+73186,"Maltese",11040,"queens","queens","new hyde park",2016-05-15,2017-07-03,2016,2017
+73710,"German Shepherd Dog",10460,"brooklyn","brooklyn","bronx",2016-05-17,2017-05-17,2016,2017
+73827,"Maltese Crossbreed",11106,"manhattan","manhattan","queens",2016-05-17,2017-05-17,2016,2017
+74143,"Chihuahua Crossbreed",11726,"queens","queens","copiague",2016-05-18,2017-05-18,2016,2017
+74463,"Chihuahua Crossbreed",11694,"brooklyn","brooklyn","queens",2016-05-20,2017-05-20,2016,2017
+75255,"American Pit Bull Mix / Pit Bull Mix",10704,"bronx","bronx","yonkers",2016-05-23,2017-05-23,2016,2017
+75529,"Shih Tzu",11040,"queens","queens","new hyde park",2016-05-25,2017-07-02,2016,2017
+75667,"American Pit Bull Terrier/Pit Bull",13642,"manhattan","manhattan","gouverneur",2016-05-25,2017-05-25,2016,2017
+76038,"Miniature Pinscher",10577,"manhattan","manhattan","purchase",2016-05-27,2017-05-27,2016,2017
+76232,"Chihuahua",11420,"brooklyn","brooklyn","queens",2016-05-29,2017-05-29,2016,2017
+76793,"Pekingese",11693,"brooklyn","brooklyn","queens",2016-06-01,2017-05-22,2016,2017
+76887,"Chihuahua",10023,"new york","unknown","new york",2016-06-01,2017-05-30,2016,2017
+77867,"Unknown",11109,"manhattan","manhattan","queens",2016-06-05,2017-07-22,2016,2017
+77914,"Jack Russell Terrier",11200,"brooklyn","brooklyn",NA,2016-06-05,2016-12-31,2016,2016
+78084,"Unknown",10940,"middletown","not nyc","not nyc",2016-06-06,2018-07-21,2016,2018
+78098,"Scottish Terrier",10002,"brooklyn","brooklyn","new york",2016-06-06,2017-06-30,2016,2017
+78235,"Chihuahua Crossbreed",10702,"bronx","bronx","yonkers",2016-06-07,2017-06-07,2016,2017
+78806,"Maltese",10021,"new york","unknown","new york",2016-06-09,2017-07-30,2016,2017
+79132,"Dachshund",11021,"queens","queens","great neck",2016-06-10,2017-06-10,2016,2017
+79182,"German Shepherd Crossbreed",11001,"queens","queens","not nyc",2016-06-10,2017-08-04,2016,2017
+79383,"Chihuahua",11040,"queens","queens","new hyde park",2016-06-10,2017-05-14,2016,2017
+79401,"Yorkshire Terrier",10545,"bronx","bronx","maryknoll",2016-06-11,2017-06-11,2016,2017
+79467,"Maltese",11694,"brooklyn","brooklyn","queens",2016-06-11,2017-06-11,2016,2017
+79498,"Lhasa Apso",10545,"bronx","bronx","maryknoll",2016-06-11,2017-06-11,2016,2017
+79590,"Pembroke Welsh Corgi",10570,"manhattan","manhattan","pleasantville",2016-06-12,2017-06-12,2016,2017
+79642,"Staffordshire Bull Terrier",11518,"brooklyn","brooklyn","east rockaway",2016-06-12,2017-06-12,2016,2017
+79956,"Beagle",11580,"queens","queens","valley stream",2016-06-13,2021-07-01,2016,2021
+79959,"Beagle Crossbreed",28677,"staten island","staten","statesville",2016-06-13,2017-05-29,2016,2017
+80064,"American Pit Bull Terrier/Pit Bull",10469,"manhattan","manhattan","bronx",2016-06-14,2017-06-10,2016,2017
+80216,"Unknown",10065,"queens","queens","new york",2016-06-14,2017-06-25,2016,2017
+80526,"Yorkshire Terrier",10456,"manhattan","manhattan","bronx",2016-06-15,2017-07-07,2016,2017
+80786,"Boston Terrier",11205,"manhattan","manhattan","brooklyn",2016-06-16,2017-08-09,2016,2017
+81064,"Yorkshire Terrier",10305,"brooklyn","brooklyn","staten",2016-06-16,2017-06-16,2016,2017
+81134,"Lhasa Apso",11416,"manhattan","manhattan","queens",2016-06-17,2017-06-17,2016,2017
+81516,"Mastiff",11414,"brooklyn","brooklyn","queens",2016-06-19,2017-06-19,2016,2017
+81885,"American Pit Bull Mix / Pit Bull Mix",11693,"brooklyn","brooklyn","queens",2016-06-21,2017-06-21,2016,2017
+81976,"Unknown",11363,"manhattan","manhattan","queens",2016-06-21,2017-07-23,2016,2017
+82115,"Unknown",11379,"brooklyn","brooklyn","queens",2016-06-22,2017-08-18,2016,2017
+82481,"German Shepherd Dog",11001,"queens","queens","not nyc",2016-06-23,2017-06-29,2016,2017
+82485,"American Pit Bull Mix / Pit Bull Mix",11040,"queens","queens","new hyde park",2016-06-23,2017-06-23,2016,2017
+82492,"Pomeranian",11361,"brooklyn","brooklyn","queens",2016-06-23,2017-06-23,2016,2017
+82661,"Pug",11001,"queens","queens","not nyc",2016-06-24,2017-08-18,2016,2017
+82717,"Pekingese",11207,"staten island","staten","brooklyn",2016-06-24,2017-06-24,2016,2017
+83267,"Wheaton Terrier",10024,"queens","queens","new york",2016-06-27,2017-05-30,2016,2017
+83372,"Cocker Spaniel",11001,"queens","queens","not nyc",2016-06-28,2017-07-30,2016,2017
+83374,"Pomeranian",11040,"queens","queens","new hyde park",2016-06-28,2017-06-28,2016,2017
+83560,"Shih Tzu",11753,"staten island","staten","jericho",2016-06-28,2017-06-28,2016,2017
+83643,"Poodle, Miniature",11753,"staten island","staten","jericho",2016-06-28,2017-08-19,2016,2017
+83697,"Unknown",1003,"manhattan","manhattan","amherst",2016-06-28,2017-05-12,2016,2017
+83906,"Yorkshire Terrier",11205,"manhattan","manhattan","brooklyn",2016-06-29,2017-07-10,2016,2017
+84001,"Unknown",11421,"brooklyn","brooklyn","queens",2016-06-29,2017-08-25,2016,2017
+84030,"German Shepherd Dog",11421,"brooklyn","brooklyn","queens",2016-06-29,2017-08-15,2016,2017
+84194,"Miniature Pinscher",10032,"brooklyn","brooklyn","new york",2016-06-30,2017-08-30,2016,2017
+84673,"Unknown",10021,"new york","unknown","new york",2016-07-02,2017-06-18,2016,2017
+85011,"Cocker Spaniel",11516,"queens","queens","cedarhurst",2016-07-05,2017-12-02,2016,2017
+85113,"American Pit Bull Mix / Pit Bull Mix",11420,"brooklyn","brooklyn","queens",2016-07-05,2017-07-05,2016,2017
+85997,"Maltese Crossbreed",11416,"brooklyn","brooklyn","queens",2016-07-09,2017-07-09,2016,2017
+86020,"Beagle",11230,"manhattan","manhattan","brooklyn",2016-07-09,2017-07-09,2016,2017
+86037,"Cocker Spaniel",11226,"manhattan","manhattan","brooklyn",2016-07-09,2017-07-09,2016,2017
+86066,"American Pit Bull Mix / Pit Bull Mix",11520,"queens","queens","freeport",2016-07-09,2017-07-09,2016,2017
+86083,"Jack Russell Terrier",11001,"queens","queens","not nyc",2016-07-09,2017-04-24,2016,2017
+86236,"Labrador Retriever Crossbreed",11001,"queens","queens","not nyc",2016-07-11,2017-08-30,2016,2017
+86628,"Shih Tzu",11693,"manhattan","manhattan","queens",2016-07-12,2017-08-04,2016,2017
+87216,"Poodle, Toy",11001,"queens","queens","not nyc",2016-07-13,2017-08-20,2016,2017
+87323,"Irish Terrier",11973,"queens","queens","upton",2016-07-13,2017-08-30,2016,2017
+87708,"Poodle, Toy",11001,"queens","queens","not nyc",2016-07-14,2018-07-14,2016,2018
+87729,"Coonhound, Black and Tan",10128,"new york","unknown","new york",2016-07-14,2017-06-19,2016,2017
+87778,"Havanese",11001,"queens","queens","not nyc",2016-07-14,2017-08-30,2016,2017
+87956,"Chihuahua",11365,"new york","unknown","queens",2016-07-15,2017-08-14,2016,2017
+87987,"Unknown",10022,"new york","unknown","new york",2016-07-15,2017-06-18,2016,2017
+88165,"Poodle, Toy",10151,"new york","unknown","new york",2016-07-15,2017-07-16,2016,2017
+88279,"Boxer",11106,"manhattan","manhattan","queens",2016-07-16,2017-07-16,2016,2017
+88610,"Parson Russell Terrier",11414,"brooklyn","brooklyn","queens",2016-07-18,2017-07-18,2016,2017
+88788,"Chihuahua",11367,"brooklyn","brooklyn","queens",2016-07-18,2017-07-18,2016,2017
+88797,"Australian Shepherd",11001,"queens","queens","not nyc",2016-07-18,2017-08-31,2016,2017
+89033,"Maltese",11024,"queens","queens","great neck",2016-07-19,2018-06-29,2016,2018
+90001,"Beagle Crossbreed",10805,"staten island","staten","new rochelle",2016-07-22,2017-08-27,2016,2017
+90100,"Pointer",10314,"queens","queens","staten",2016-07-23,2018-07-23,2016,2018
+90120,"Shih Tzu",10314,"queens","queens","staten",2016-07-23,2018-07-23,2016,2018
+90225,"Chihuahua",11373,"manhattan","manhattan","queens",2016-07-23,2016-09-12,2016,2016
+90226,"Chihuahua",11373,"manhattan","manhattan","queens",2016-07-23,2017-09-12,2016,2017
+90307,"American Staffordshire Terrier",10301,"brooklyn","brooklyn","staten",2016-07-24,2017-07-24,2016,2017
+90581,"Shih Tzu",11040,"queens","queens","new hyde park",2016-07-25,2017-08-30,2016,2017
+90754,"Maltese Crossbreed",11501,"queens","queens","mineola",2016-07-26,2017-07-26,2016,2017
+90892,"Shih Tzu",10460,"brooklyn","brooklyn","bronx",2016-07-26,2017-07-26,2016,2017
+91255,"Poodle",10025,"queens","queens","new york",2016-07-28,2017-07-28,2016,2017
+91285,"American Pit Bull Terrier/Pit Bull",11414,"brooklyn","brooklyn","queens",2016-07-28,2017-08-28,2016,2017
+91288,"Unknown",10306,"manhattan","manhattan","staten",2016-07-28,2017-09-10,2016,2017
+91483,"Pomeranian",11694,"brooklyn","brooklyn","queens",2016-07-29,2017-06-26,2016,2017
+91822,"Golden Retriever",11001,"queens","queens","not nyc",2016-07-31,2017-09-17,2016,2017
+91876,"Dachshund Smooth Coat Miniature",10128,"new york","unknown","new york",2016-07-31,2017-07-31,2016,2017
+92252,"Pomeranian",11375,"manhattan","manhattan","queens",2016-08-02,2017-09-11,2016,2017
+92430,"Coton de Tulear",11024,"staten island","staten","great neck",2016-08-03,2017-08-03,2016,2017
+92451,"Maltese",11418,"brooklyn","brooklyn","queens",2016-08-03,2017-08-25,2016,2017
+92756,"American Pit Bull Terrier/Pit Bull",10460,"manhattan","manhattan","bronx",2016-08-04,2017-03-02,2016,2017
+92800,"Yorkshire Terrier Crossbreed",10037,"brooklyn","brooklyn","new york",2016-08-04,2017-08-04,2016,2017
+92911,"Poodle, Miniature",10025,"new york","unknown","new york",2016-08-05,2017-09-26,2016,2017
+92927,"Lhasa Apso",11134,"queens","queens",NA,2016-08-05,2017-09-14,2016,2017
+93148,"Chihuahua",10454,"manhattan","manhattan","bronx",2016-08-05,2017-08-05,2016,2017
+93647,"West High White Terrier",11364,"manhattan","manhattan","queens",2016-08-08,2017-09-09,2016,2017
+93758,"Unknown",11581,"queens","queens","valley stream",2016-08-08,2017-08-11,2016,2017
+93831,"Unknown",11609,"queens","queens",NA,2016-08-08,2017-08-25,2016,2017
+93990,"Unknown",11050,"queens","queens","port washington",2016-08-08,2017-07-30,2016,2017
+94034,"American Pit Bull Mix / Pit Bull Mix",10009,"brooklyn","brooklyn","new york",2016-08-09,2017-08-09,2016,2017
+94544,"Unknown",11040,"queens","queens","new hyde park",2016-08-10,2017-08-30,2016,2017
+94701,"Beagle",33401,"west palm beach","not nyc","not nyc",2016-08-10,2018-07-16,2016,2018
+94817,"Yorkshire Terrier",11040,"queens","queens","new hyde park",2016-08-11,2017-02-28,2016,2017
+94984,"American Pit Bull Terrier/Pit Bull",10458,"manhattan","manhattan","bronx",2016-08-11,2017-08-11,2016,2017
+95198,"Poodle Crossbreed",10002,"queens","queens","new york",2016-08-12,2017-08-12,2016,2017
+95496,"Chihuahua Crossbreed",11225,"manhattan","manhattan","brooklyn",2016-08-14,2017-08-14,2016,2017
+95502,"Labrador Retriever Crossbreed",11040,"queens","queens","new hyde park",2016-08-14,2017-08-14,2016,2017
+95884,"Chihuahua",10030,"new york","unknown","new york",2016-08-16,2017-08-16,2016,2017
+96424,"Boston Terrier",11010,"queens","queens","franklin square",2016-08-18,2017-09-29,2016,2017
+96609,"Maltese Crossbreed",10362,"bronx","bronx",NA,2016-08-18,2017-08-18,2016,2017
+97198,"Chihuahua Crossbreed",10044,"bronx","bronx","new york",2016-08-22,2017-08-22,2016,2017
+97562,"Yorkshire Terrier",11001,"queens","queens","not nyc",2016-08-23,2017-10-20,2016,2017
+97923,"Boston Terrier",11040,"queens","queens","new hyde park",2016-08-25,2017-08-25,2016,2017
+98259,"Maltese Crossbreed",10450,"bronx","bronx",NA,2016-08-27,2017-08-27,2016,2017
+98630,"Brittany Spaniel",11001,"queens","queens","not nyc",2016-08-30,2017-09-29,2016,2017
+98887,"Unknown",11001,"queens","queens","not nyc",2016-08-31,2017-09-23,2016,2017
+98997,"Chow Chow",11040,"queens","queens","new hyde park",2016-08-31,2017-09-28,2016,2017
+99107,"Pekingese",7093,"queens","queens","west new york",2016-09-01,2017-09-01,2016,2017
+99258,"Shih Tzu",10128,"bronx","bronx","new york",2016-09-01,2017-09-30,2016,2017
+99633,"Unknown",11580,"queens","queens","valley stream",2016-09-03,2017-09-15,2016,2017
+99784,"Parson Russell Terrier",11373,"brooklyn","brooklyn","queens",2016-09-04,2017-09-04,2016,2017
+99850,"English Springer Spaniel",10023,"new york","unknown","new york",2016-09-05,2017-09-05,2016,2017
+100290,"Shiba Inu",12533,"manhattan","manhattan","hopewell junction",2016-09-07,2017-09-07,2016,2017
+100292,"Shiba Inu",12533,"manhattan","manhattan","hopewell junction",2016-09-07,2017-09-07,2016,2017
+100880,"Maltese",10021,"queens","queens","new york",2016-09-09,2017-05-12,2016,2017
+100933,"Ibizan Hound",11379,"staten island","staten","queens",2016-09-09,2017-09-09,2016,2017
+100935,"Shih Tzu",10301,"brooklyn","brooklyn","staten",2016-09-09,2017-09-22,2016,2017
+100966,"Havanese",11580,"queens","queens","valley stream",2016-09-10,2017-09-10,2016,2017
+100999,"Maltese Crossbreed",11963,"queens","queens","sag harbor",2016-09-10,2017-09-10,2016,2017
+101067,"Labrador Retriever Crossbreed",11109,"brooklyn","brooklyn","queens",2016-09-10,2017-09-10,2016,2017
+101404,"American Pit Bull Terrier/Pit Bull",11422,"manhattan","manhattan","queens",2016-09-12,2017-08-16,2016,2017
+101465,"Unknown",11233,"manhattan","manhattan","brooklyn",2016-09-12,2017-10-19,2016,2017
+101484,"Poodle Crossbreed",11020,"queens","queens","great neck",2016-09-12,2017-10-31,2016,2017
+102044,"Yorkshire Terrier",11385,"brooklyn","brooklyn","queens",2016-09-14,2017-10-02,2016,2017
+102154,"Chihuahua",10012,"brooklyn","brooklyn","new york",2016-09-15,2017-05-01,2016,2017
+102163,"Poodle, Toy",10028,"new york","unknown","new york",2016-09-15,2017-10-30,2016,2017
+102612,"Beagle",11001,"queens","queens","not nyc",2016-09-16,2017-11-08,2016,2017
+102712,"Maltese",11040,"queens","queens","new hyde park",2016-09-16,2017-09-19,2016,2017
+103064,"Chow Chow",11231,"manhattan","manhattan","brooklyn",2016-09-18,2017-09-18,2016,2017
+103132,"Cavalier King Charles Spaniel",11721,"queens","queens","centerport",2016-09-18,2017-09-18,2016,2017
+103186,"Morkie",10552,"bronx","bronx","mount vernon",2016-09-18,2017-09-18,2016,2017
+104113,"Shih Tzu",31539,"manhattan","manhattan","hazlehurst",2016-09-21,2017-08-31,2016,2017
+104256,"Maltese",11418,"brooklyn","brooklyn","queens",2016-09-22,2017-09-22,2016,2017
+104269,"Bichon Frise",11580,"queens","queens","valley stream",2016-09-22,2018-09-22,2016,2018
+104351,"Unknown",11385,"brooklyn","brooklyn","queens",2016-09-22,2017-09-22,2016,2017
+104666,"Labrador Retriever Crossbreed",10040,"bronx","bronx","new york",2016-09-24,2017-09-24,2016,2017
+104698,"Beagle Crossbreed",10040,"bronx","bronx","new york",2016-09-24,2017-09-24,2016,2017
+105166,"Unknown",11201,"bronx","bronx","brooklyn",2016-09-27,2017-11-06,2016,2017
+105381,"American Pit Bull Terrier/Pit Bull",11731,"staten island","staten","east northport",2016-09-28,2017-09-28,2016,2017
+105450,"Chihuahua",10458,"manhattan","manhattan","bronx",2016-09-28,2017-09-28,2016,2017
+105623,"Chihuahua",11772,"queens","queens","patchogue",2016-09-29,2017-11-04,2016,2017
+106389,"Rottweiler",10001,"new york","unknown","new york",2016-10-03,2017-10-29,2016,2017
+106428,"Shih Tzu",10028,"new york","unknown","new york",2016-10-03,2017-11-30,2016,2017
+106447,"Rottweiler",10001,"new york","unknown","new york",2016-10-03,2017-10-29,2016,2017
+106518,"Yorkshire Terrier",11211,"queens","queens","brooklyn",2016-10-03,2017-10-31,2016,2017
+106976,"Bull Dog, English",11693,"brooklyn","brooklyn","queens",2016-10-05,2017-10-05,2016,2017
+107024,"Shih Tzu",11206,"bronx","bronx","brooklyn",2016-10-05,2017-09-29,2016,2017
+107070,"Labrador Retriever",10603,"bronx","bronx","white plains",2016-10-05,2019-10-05,2016,2019
+107187,"Chihuahua",11205,"manhattan","manhattan","brooklyn",2016-10-06,2019-11-23,2016,2019
+107250,"American Staffordshire Terrier",10029,"bronx","bronx","new york",2016-10-06,2017-10-06,2016,2017
+107333,"Chihuahua",11002,"manhattan","manhattan","not nyc",2016-10-07,2017-06-09,2016,2017
+107382,"Shih Tzu",10705,"bronx","bronx","yonkers",2016-10-07,2017-10-07,2016,2017
+107425,"Unknown",11226,"manhattan","manhattan","brooklyn",2016-10-07,2017-06-02,2016,2017
+107462,"Terrier mix",10009,"brooklyn","brooklyn","new york",2016-10-07,2017-10-24,2016,2017
+107529,"Maltese",11385,"brooklyn","brooklyn","queens",2016-10-08,2017-10-08,2016,2017
+107904,"French Bulldog",11226,"manhattan","manhattan","brooklyn",2016-10-11,2017-10-11,2016,2017
+107912,"Labradoodle",10023,"new york","unknown","new york",2016-10-11,2017-08-31,2016,2017
+108036,"Dachshund",11205,"manhattan","manhattan","brooklyn",2016-10-12,2017-11-28,2016,2017
+108445,"Bull Dog, English",11209,"queens","queens","brooklyn",2016-10-13,2021-04-07,2016,2021
+108564,"German Shepherd Crossbreed",10025,"new york","unknown","new york",2016-10-14,2017-03-26,2016,2017
+108932,"Wheaton Terrier",10708,"bronx","bronx","not nyc",2016-10-16,2017-10-16,2016,2017
+108941,"Boxer",10968,"bronx","bronx","piermont",2016-10-16,2017-10-16,2016,2017
+109171,"Border Collie",11569,"queens","queens","point lookout",2016-10-17,2017-10-17,2016,2017
+109179,"Bulldog",11372,"manhattan","manhattan","queens",2016-10-17,2017-10-17,2016,2017
+109249,"Shih Tzu",11422,"staten island","staten","queens",2016-10-18,2017-11-26,2016,2017
+109279,"American Staffordshire Terrier",10019,"queens","queens","new york",2016-10-18,2017-11-03,2016,2017
+109419,"Shih Tzu",10308,"queens","queens","staten",2016-10-18,2017-11-30,2016,2017
+109479,"Yorkshire Terrier",11338,"queens","queens",NA,2016-10-18,2017-09-14,2016,2017
+109601,"Unknown",10306,"bronx","bronx","staten",2016-10-19,2017-11-29,2016,2017
+109648,"Brussels Griffon",11096,"queens","queens","inwood",2016-10-19,2017-08-26,2016,2017
+109877,"Beagle Crossbreed",11106,"brooklyn","brooklyn","queens",2016-10-20,2017-10-20,2016,2017
+110208,"West Highland White Terrier",11358,"brooklyn","brooklyn","queens",2016-10-21,2017-10-21,2016,2017
+110290,"Dachshund, Long Haired Miniature",11372,"manhattan","manhattan","queens",2016-10-21,2017-10-21,2016,2017
+110446,"Chihuahua",10707,"manhattan","manhattan","tuckahoe",2016-10-22,2017-09-30,2016,2017
+110475,"Maltese",34746,"kissimmee florida","not nyc","kissimmee",2016-10-22,2017-11-20,2016,2017
+111027,"Welsh Corgi, Pembroke",11201,"manhattan","manhattan","brooklyn",2016-10-25,2017-08-13,2016,2017
+111062,"Labrador Retriever",11697,"brooklyn","brooklyn","queens",2016-10-25,2017-01-21,2016,2017
+111241,"Yorkshire Terrier Crossbreed",10301,"bronx","bronx","staten",2016-10-27,2017-10-27,2016,2017
+111342,"Labrador Retriever",11001,"queens","queens","not nyc",2016-10-27,2017-10-21,2016,2017
+111486,"Poodle Crossbreed",10040,"bronx","bronx","new york",2016-10-28,2017-10-28,2016,2017
+111521,"Pug Crossbreed",11563,"queens","queens","not nyc",2016-10-28,2017-10-28,2016,2017
+111634,"Border Collie Crossbreed",10031,"bronx","bronx","new york",2016-10-28,2017-10-28,2016,2017
+111897,"Yorkshire Terrier",11360,"brooklyn","brooklyn","queens",2016-10-31,2017-11-23,2016,2017
+112025,"Unknown",11040,"queens","queens","new hyde park",2016-10-31,2017-11-25,2016,2017
+112914,"American Pit Bull Terrier/Pit Bull",11372,"manhattan","manhattan","queens",2016-11-04,2017-12-20,2016,2017
+113221,"Chihuahua Crossbreed",11758,"queens","queens","massapequa",2016-11-06,2017-11-06,2016,2017
+113449,"Chihuahua",11200,"brooklyn","brooklyn",NA,2016-11-08,2017-11-08,2016,2017
+113574,"Jack Russell Terrier",11200,"brooklyn","brooklyn",NA,2016-11-08,2017-12-31,2016,2017
+113787,"Brussels Griffon",11216,"manhattan","manhattan","brooklyn",2016-11-10,2017-11-10,2016,2017
+114000,"Unknown",10034,"brooklyn","brooklyn","new york",2016-11-11,2021-07-21,2016,2021
+114066,"Chihuahua",11370,"brooklyn","brooklyn","queens",2016-11-12,2017-11-12,2016,2017
+114347,"Labrador Retriever",11001,"queens","queens","not nyc",2016-11-14,2017-11-29,2016,2017
+114526,"Maltese",11001,"queens","queens","not nyc",2016-11-14,2017-12-15,2016,2017
+114571,"Chihuahua Crossbreed",10457,"brooklyn","brooklyn","bronx",2016-11-15,2018-11-15,2016,2018
+114593,"Pekingese",10473,"manhattan","manhattan","bronx",2016-11-15,2017-11-29,2016,2017
+114691,"Cocker Spaniel",10024,"brooklyn","brooklyn","new york",2016-11-15,2017-11-22,2016,2017
+114847,"American Pit Bull Mix / Pit Bull Mix",11231,"staten island","staten","brooklyn",2016-11-15,2017-11-15,2016,2017
+115219,"Terrier mix",11040,"queens","queens","new hyde park",2016-11-17,2017-11-17,2016,2017
+115384,"American Pit Bull Terrier/Pit Bull",11003,"queens","queens","elmont",2016-11-18,2017-11-18,2016,2017
+115507,"Unknown",11003,"queens","queens","elmont",2016-11-18,2017-11-24,2016,2017
+116080,"Shih Tzu",10044,"new york","unknown","new york",2016-11-22,2017-11-22,2016,2017
+116558,"French Bulldog",11205,"manhattan","manhattan","brooklyn",2016-11-26,2017-11-26,2016,2017
+116665,"American Pit Bull Mix / Pit Bull Mix",11237,"bronx","bronx","brooklyn",2016-11-27,2017-11-27,2016,2017
+116771,"American Pit Bull Mix / Pit Bull Mix",10451,"manhattan","manhattan","bronx",2016-11-28,2017-11-28,2016,2017
+117005,"Shiba Inu",11211,"manhattan","manhattan","brooklyn",2016-11-29,2017-11-29,2016,2017
+117658,"Rat Terrier Crossbreed",11106,"manhattan","manhattan","queens",2016-12-04,2017-12-04,2016,2017
+118509,"American Pit Bull Mix / Pit Bull Mix",10027,"bronx","bronx","new york",2016-12-08,2017-12-08,2016,2017
+118583,"Papillon",11238,"manhattan","manhattan","brooklyn",2016-12-08,2017-10-30,2016,2017
+118846,"Cavalier King Charles Spaniel",11040,"queens","queens","new hyde park",2016-12-09,2017-12-09,2016,2017
+118961,"American Pit Bull Mix / Pit Bull Mix",11414,"brooklyn","brooklyn","queens",2016-12-10,2017-12-10,2016,2017
+119138,"Shih Tzu",10803,"bronx","bronx","pelham",2016-12-11,2017-12-11,2016,2017
+119280,"Unknown",11030,"queens","queens","manhasset",2016-12-12,2018-01-31,2016,2018
+119593,"Labrador Retriever Crossbreed",11101,"brooklyn","brooklyn","queens",2016-12-14,2021-12-14,2016,2021
+119687,"Pomeranian",11001,"queens","queens","not nyc",2016-12-14,2017-12-14,2016,2017
+119813,"Labrador Retriever",90403,"santa monica","not nyc","not nyc",2016-12-15,2017-01-30,2016,2017
+119887,"Shih Tzu Crossbreed",11704,"queens","queens","west babylon",2016-12-15,2017-12-15,2016,2017
+119943,"American Staffordshire Terrier",11001,"queens","queens","not nyc",2016-12-16,2018-01-27,2016,2018
+119990,"American Pit Bull Terrier/Pit Bull",11001,"queens","queens","not nyc",2016-12-16,2018-01-27,2016,2018
+120077,"Tibetan Spaniel",22314,"manhattan","manhattan","alexandria",2016-12-17,2018-01-26,2016,2018
+120170,"Pug Crossbreed",10009,"brooklyn","brooklyn","new york",2016-12-18,2017-12-18,2016,2017
+120224,"Unknown",12202,"albany","not nyc","not nyc",2016-12-18,2017-12-11,2016,2017
+120316,"Pomeranian Crossbreed",11967,"staten island","staten","shirley",2016-12-19,2017-12-19,2016,2017
+120352,"Cocker Spaniel Crossbreed",11423,"manhattan","manhattan","queens",2016-12-19,2017-12-19,2016,2017
+120358,"Shih Tzu",11361,"staten island","staten","queens",2016-12-19,2017-12-19,2016,2017
+120523,"Yorkshire Terrier",11590,"queens","queens","westbury",2016-12-20,2017-12-20,2016,2017
+120527,"Pomeranian",11204,"queens","queens","brooklyn",2016-12-20,2017-12-20,2016,2017
+120812,"Australian Shepherd",10009,"brooklyn","brooklyn","new york",2016-12-21,2017-12-21,2016,2017
+120954,"Chihuahua",11552,"queens","queens","west hempstead",2016-12-23,2017-12-23,2016,2017
+121015,"American Pit Bull Mix / Pit Bull Mix",11385,"brooklyn","brooklyn","queens",2016-12-23,2017-12-23,2016,2017
+121072,"Pomeranian",10454,"manhattan","manhattan","bronx",2016-12-24,2017-12-24,2016,2017
+121077,"Pomeranian Crossbreed",10591,"brooklyn","brooklyn","tarrytown",2016-12-24,2017-12-24,2016,2017
+121210,"Labrador Retriever",11694,"brooklyn","brooklyn","queens",2016-12-26,2017-12-26,2016,2017
+121963,"Yorkshire Terrier",10312,"brooklyn","brooklyn","staten",2016-12-29,2017-12-29,2016,2017
+122057,"Maltese",10023,"new york","unknown","new york",2016-12-30,2017-12-06,2016,2017
