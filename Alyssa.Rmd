@@ -14,24 +14,35 @@ theme_set(theme_bw())
 ```
 
 ```{r}
-dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
-                    col_type = cols(UniqueID = col_integer(),
-                        DateOfBite = col_date(format = '%B %d %Y'), # set as date variable
-                        Species = col_character(),
-                        Breed = col_character(),
-                        Age = col_number(),
-                        Gender = col_character(),
-                        SpayNeuter = col_logical(),
-                        Borough = col_character(),
-                        ZipCode = col_character()
-                      )) %>% # read data
-  janitor::clean_names() %>%
-  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) # logical column for whether dog was a pitbull breed or not
+dog_bite = read_csv('./data/dog_bite.csv') %>%
+  filter(borough != 'Other')
 
 # dog bites in 2016 only (to match to licensing data)
 dg_2016 = dog_bite %>%
   filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
+
+
+license = read_csv('./data/cleaned_license_data.csv') %>%
+  filter(final_borough %in% c('Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island'))
+
 ```
+
+```{r}
+# number of dog bites (pitbull vs. other) by boro
+dg_2016 %>%
+  group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
+  count %>% # get total counts
+  ungroup %>%
+  spread(key = pit_bull, value = n) 
+
+# number of registered dogs (pitbull vs. other) by boro
+license %>%
+  
+  group_by(final_borough, pit_bull) %>%
+  count %>%
+  spread(key = pit_bull, value = n)
+```
+
 
 ```{r}
 # point plot of all dog bites in data
