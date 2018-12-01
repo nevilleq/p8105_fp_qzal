@@ -85,7 +85,7 @@ dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
   ) %>% 
   select(-c(zip_nest, zip_sample))
 
-# write.csv(dog_bite, './data/dog_bite.csv', row.names = F)
+write.csv(dog_bite, './data/dog_bite.csv', row.names = F)
 
 ```
 
