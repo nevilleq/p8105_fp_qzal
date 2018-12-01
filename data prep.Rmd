@@ -140,6 +140,6 @@ agreed_df <- counts_df %>%
 problematic_df <- counts_df %>%
   filter(!RowNumber %in% agree_ids)
 
-# write.csv(agreed_df, './data/cleaned_license_data.csv')
+# write.csv(agreed_df, './data/cleaned_license_data.csv', row.names = F)
 ```
 
