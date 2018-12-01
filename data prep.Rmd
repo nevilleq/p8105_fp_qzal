@@ -31,12 +31,12 @@ unknown_borough <- c("new york", "new york city", "nyc", "ny", "b", "potomac", N
 data(zipcode) 
 zipcode = zipcode %>%
   mutate(city = tolower(city),
-         borough = ifelse(city %in% c('new york', 'manhattan'), 'New York', NA),
+         borough = ifelse(city %in% c('new york', 'manhattan'), 'Manhattan', NA),
          borough = ifelse(city == 'bronx', 'Bronx', borough),
          borough = ifelse(city == 'brooklyn', 'Brooklyn', borough),
          borough = ifelse(city %in% c('queens', queens), 'Queens', borough),
          borough = ifelse(city %in% c('staten island', staten_island), 'Staten Island', borough)) %>%
-  filter(borough %in% c('New York', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island') & state == 'NY')
+  filter(borough %in% c('Manhattan', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island') & state == 'NY')
 
 zip_list = zipcode %>%
   select(borough, zip) %>%
@@ -122,14 +122,18 @@ license_df <- license_df %>%
          cleaned_borough = ifelse(cleaned_borough %in% unknown_borough, "unknown", cleaned_borough),
          zip = as.character(ZipCode))
 
-license_df <- left_join(license_df, zipcode, by = 'zip') %>% 
+license_df <- left_join(license_df, zipcode, by = 'zip')
+
+license_df <- license_df %>%
+  rowwise() %>%
   mutate(borough = ifelse(is.na(borough), simpleCap(cleaned_borough), borough)) %>%
   rename(final_borough = borough)
 
 counts_df <- license_df %>%
-  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, final_borough, issued_year, expired_year)
+  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, final_borough, issued_year, expired_year) %>%
+  ungroup
 
-agree_ids <- counts_df$RowNumber[which(counts_df$cleaned_borough == counts_df$final_borough)]
+agree_ids <- counts_df$RowNumber[which(tolower(counts_df$cleaned_borough) == tolower(counts_df$final_borough))]
 
 agreed_df <- counts_df %>%
   filter(RowNumber %in% agree_ids) %>%
@@ -137,9 +141,10 @@ agreed_df <- counts_df %>%
          pit_bull = str_detect(BreedName, 'pit bull')) %>%
   janitor::clean_names()
 
+# only 312 out of 121949 licenses are now a problem
 problematic_df <- counts_df %>%
   filter(!RowNumber %in% agree_ids)
 
-# write.csv(agreed_df, './data/cleaned_license_data.csv', row.names = F)
+write.csv(agreed_df, './data/cleaned_license_data.csv', row.names = F)
 ```
 
