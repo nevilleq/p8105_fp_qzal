@@ -102,7 +102,7 @@ unknown_borough_df <- license_df %>%
   filter(cleaned_borough == "unknown") %>%
   select(RowNumber, ZipCode, cleaned_borough)
 
-zip_code_borough <- read_csv("zip_codes_borough.csv") # change this to use the data that Quinton downloaded from OpenSource
+zip_code_borough <- read_csv("./zelos/zip_codes_borough.csv")
 
 license_df <- license_df %>%
   mutate(cleaned_borough = ifelse(cleaned_borough %in% misassigned_queens, "queens", cleaned_borough),
@@ -115,11 +115,6 @@ license_df <- left_join(license_df, zip_code_borough)
 counts_df <- license_df %>%
   select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, supposed_borough, issued_year, expired_year)
 
-#what to do with these odd cases ~ 140 of them
-counts_df %>%
-  group_by(ZipCode, Borough, cleaned_borough, supposed_borough) %>%
-  View()
-
 agree_ids <- counts_df$RowNumber[which(counts_df$cleaned_borough == counts_df$supposed_borough)]
 
 agreed_df <- counts_df %>%
@@ -128,5 +123,8 @@ agreed_df <- counts_df %>%
 
 problematic_df <- counts_df %>%
   filter(!RowNumber %in% agree_ids)
+
+#View(problematic_df)
+#write.csv(problematic_df, "problematic_ids.csv", row.names = FALSE)
 ```
 
