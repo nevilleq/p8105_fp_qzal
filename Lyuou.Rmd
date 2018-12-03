@@ -9,39 +9,22 @@ output: html_document
 library(tidyverse)
 library(plotly)
 library(rgdal)
-library(tmap)
 library(plotly)
 library(maps)
 
 
 library(devtools)
 
-library(choroplethrZip)
 library(leaflet)
-library(leafletR)
 
-Sys.setenv('MAPBOX_TOKEN' = 'pk.eyJ1IjoibHl1b3V6IiwiYSI6ImNqcDA3Y2g1azA1bTQza3BkN2tjODd6dWMifQ.gSasGb6Ou-MmyHoSf82mQQ')
 ```
 
 
 ```{r include = FALSE}
 # data import
-dog_bite = read_csv('~/Desktop/DOHMH_Dog_Bite_Data.csv',
-                    col_type = cols(UniqueID = col_integer(),
-                        DateOfBite = col_date(format = '%B %d %Y'), 
-                        Species = col_character(),
-                        Breed = col_character(),
-                        Age = col_number(),
-                        Gender = col_character(),
-                        SpayNeuter = col_logical(),
-                        Borough = col_character(),
-                        ZipCode = col_character()
-                      )) %>% 
-  janitor::clean_names() %>%
-  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) 
+dog_bite <- read_csv('./data/dog_bite.csv', skip = 2)
 
-dog_license <- read_csv('~/Desktop/NYC_Dog_Licensing_Dataset.csv') %>%
-  janitor::clean_names()
+dog_license <- read_csv('./data/cleaned_license_data.csv')
   
   
 ```
@@ -83,6 +66,18 @@ dog_bite %>%
 
 # Copied from Q_work
 # Imputing Zip Codes
+```{r message = FALSE}
+nyc.official.zip <- read_csv("./data/Demographic_Statistics_By_Zip_Code.csv") %>%
+  janitor::clean_names() %>% 
+  rename(official_zip = jurisdiction_name) %>%
+  select(official_zip)
+
+
+official.zip <- paste0(nyc.official.zip$official_zip, collapse = "|")
+  
+#https://data.cityofnewyork.us/City-Government/Demographic-Statistics-By-Zip-Code/kku6-nxdu
+```
+
 ```{r warning = FALSE, message = FALSE}
 dog.bite.df <- read_csv("./data/DOHMH_Dog_Bite_Data.csv") %>%
   janitor::clean_names() %>%
@@ -125,8 +120,6 @@ dog.bite.df %>% select(borough, zip_code, zip_code_imputed)
 dog.bite.df %>% distinct(., zip_code_imputed) %>% nrow()
 ```
 
-
-
 # Number of dog bites by zip code tabulation areas?
 
 
@@ -137,9 +130,6 @@ bite_count <- dog.bite.df %>%
   group_by(zip_code_imputed) %>% 
   summarize(n_bite = n())
 
-# count the number of pit bull bites by zip code
-n_pit_bite <- dog.bite.df %>% 
-  filter()
 
 ```
 
@@ -151,109 +141,66 @@ n_pit_bite <- dog.bite.df %>%
 # import the shape file
 # https://plotly-book.cpsievert.me/maps.html
 
-zip_map <- readOGR(dsn = './data/ZIP_CODE_040114/ZIP_CODE_040114.shp')
-
-# attribute table
-map_attr <- as.tibble(zip_map@data) %>% 
-  janitor::clean_names() %>% 
-  select(-(url:shape_len))
-
-# plot
-plot(zip_map)
-
-bite_count$zip_code_imputed %in% map_attr$zipcode
+zip_map <- readOGR(dsn = './data/ZIP_CODE_040114/ZIP_CODE_040114.shp', encoding = "UTF-8")
 
 zip_map@data <- left_join(zip_map@data, bite_count, by = c('ZIPCODE' = 'zip_code_imputed'))
 
-# plot of dog bite counts by zip code
-# change classifications?
-qtm(zip_map, 'n_bite')
-
-# choropleth?
-# https://www.r-graph-gallery.com/chloropleth-map/
-
 
 ```
 
-plotly?
+Interactive choropleth map by leaflet
 
 ```{r}
-plot_ly(type="choropleth", locations=dog.bite.df$zip_code_imputed, locationmode="New York City", z = bite_count$n_bite)
+
+# CRS setting
+zip_map_crs <- spTransform(zip_map, CRS("+init=epsg:4326"))
+
+# export the json file
+writeOGR(zip_map_crs, './data/zip_map_geojson', layer = 'zip_map', driver = 'GeoJSON')
 
 
-county_df <- map_data('county')
-
-data(df_pop_zip)
-
-ec_states = c("maine", "new hampshire", "massachusetts", "rhode island", "connecticut", 
-              "new york", "new jersey", "delaware", "maryland", 
-              "virginia", "north carolina", "south carolina", "georgia", "florida",
-              "pennsylvania", "district of columbia", "vermont", "west virginia")
-
-zip_choropleth(df_pop_zip, 
-               state_zoom = ec_states, 
-               title      = "2012 ZCTA Population Estimates",
-               legend     = "Population") + coord_map() 
-
-
-
-zip_choropleth(df_pop_zip, 
-               state_zoom = 'new york', 
-               title      = "zip code tabulation area",
-               legend     = "Population") + coord_map()
-
-
-```
-
-leaflet?
-
-```{r}
-# quantile map style
-pal <- colorQuantile('YlGn', NULL, n = 5)
-  
+# Layout 
 # format of the label that pops up for each polygon
 label_popup <- paste0(
   "<strong>Zip code: </strong>",
   zip_map$ZIPCODE,
-  "<br><strong>Number of bites, 2008: </strong>",
+  "<br><strong>Number of dog bites: </strong>",
   zip_map$n_bite
 )
 
-leaflet(data = zip_map) %>% 
+cuts <- round(quantile(zip_map$n_bite, probs = seq(0, 1, 0.25), na.rm = TRUE), 0)
+cuts[1] <- 2
+
+sty <- styleGrad(prop = "count",
+ breaks = cuts, # from the "cuts" creation, above
+ right = FALSE,
+ style.par = "col",
+ style.val = rev(heat.colors(4)),
+ leg = "dog bites", lwd = 1)
+
+# legend setting
+pal <- colorBin(palette = "BuPu", domain = zip_map$n_bite, bins = 5)
+
+# choropleth map
+leaflet::leaflet(data = zip_map_crs) %>% 
   addProviderTiles('CartoDB.Positron') %>% 
   addPolygons(fillColor = ~pal(n_bite),
-              fillOpacity = 0.8,
-              color = '#BDBDC3',
+              fillOpacity = 0.7,
+              color = "#BDBDC3",
               weight = 1,
-              popup = label_popup)
-
-# http://www.kimberlycoffey.com/blog/2015/9/19/interactive-choropleth-map-for-the-web
-
-```
-
-Need GeoJSON to use leaflet for zip codes
-
-```{r}
-# export the json file
-writeOGR(zip_map, 'zip_map_geojson', layer = 'zip_map', driver = 'GeoJSON')
-
-cuts <- c(-0.7, -0.001, 0.0001, 0.25, 0.5, 0.75, 1.0, 1.25)
-
-sty <- styleGrad(prop="trend",
- breaks = cuts, # from the "cuts" creation, above
- right=FALSE,
- style.par="col",
- style.val=c("blue", "white",rev(heat.colors(5))),
- leg="Addresses Added / Day", lwd=1)
-
-map <- leaflet(data = 'zip_map_geojson',
-               dest = '',
-               style = )
-
+              popup = label_popup) %>% 
+  addLegend('bottomleft',
+            pal = pal,
+            values = ~n_bite,
+            title = 'n_bite',
+            opacity = 1)
 
 
 
 ```
+
+
+
 
 
 
