@@ -120,9 +120,9 @@ bite_df %>%
          gender = ifelse(gender == "U", "Unknown", gender),
          spay_neuter = ifelse(spay_neuter == TRUE, "Spayed/Neutered", "Not Spayed/Neutered")) %>%
   ggplot(aes(x = spay_neuter, y = n, fill = pit_bull)) + 
-  geom_bar(stat = "identity",  aes(alpha = pit_bull)) + 
-  scale_alpha_manual(values=c(1,1)) +
-  scale_fill_manual(values=c('#FFFF00','#4B0082')) + 
+  geom_bar(stat = "identity",  position = "stack") + 
+  geom_text(aes(label = n), position = position_stack(vjust = 0.5)) + 
+  scale_fill_manual(values=c('#FFF8DC','#9370DB')) + 
   ylab("Number of Bites") +
   xlab("Spayed/Neutered Status") +
   theme_hc() + 
