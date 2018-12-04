@@ -1,0 +1,41 @@
+---
+title: "Final Report"
+author: "all"
+date: "12/4/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Motivation
+
+
+
+
+## Related work
+
+
+
+## Initial questions
+
+
+
+
+## Data
+
+
+
+
+## Exploratory analysis
+
+
+
+
+## Additional analysis
+
+
+
+
+## Discussion
