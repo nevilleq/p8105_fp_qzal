@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Motivation
 
-
+Pit bulls have a historically poor reputation as an aggressive breed. But in recent years, there's been a push to change this stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
 
 ## Related work
@@ -20,11 +20,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Initial questions
 
+- Are there more bites given by pit bulls than other breeds?
+  - Does this number change by borough? Over time? 
+- Are there more pitbulls in certain neighborhoods?
+- Do pit bulls tend to be spayed/neutered more or less often than other breeds?
+- How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
+- Does season / weather affect the number of dog bites?
 
 
 
 ## Data
 
+**Dog Licensing data**: Active Dog Licenses during 2016.
+
+All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the [DOHMH Dog Licensing System](https://a816-healthpsi.nyc.gov/DogLicense), where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.
+
+Variables provided:
+RowNumber,	AnimalName,	AnimalGender,	AnimalBirthMonth,	BreedName,	Borough,	ZipCode,	CommunityDistrict,	CensusTract2010,	NTA,	CityCouncilDistrict,	CongressionalDistrict,	StateSenatorialDistrict,	LicenseIssuedDate,	LicenseExpiredDate
+
+**Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
+
+Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
+
+Variables provided:
+UniqueID,	DateOfBite,	Species,	Breed,	Age,	Gender,	SpayNeuter,	Borough,	ZipCode
 
 
 
