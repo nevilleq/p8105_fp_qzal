@@ -1,0 +1,145 @@
+---
+title: "Breed standardize"
+author: "Alyssa Vanderbeek (amv2187)"
+date: " "
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(patchwork)
+
+theme_set(theme_bw())
+```
+
+```{r, warning=FALSE}
+dog_bite = read_csv('~/Desktop/dog_bite.csv')
+
+# dog bites in 2016 only (to match to licensing data)
+dg_2016 = dog_bite %>%
+  filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
+
+license = read_csv('~/Desktop/cleaned_license_data.csv')
+```
+
+We were interested to know how the raw counts of dog bites compared to the number of registered dogs; if there are more pit bull bites, does that mean that pit bulls are more aggressive and likely to bite than other breeds, or is it simply that there are more pit bulls in the city?
+
+```{r}
+# number of dog bites (pitbull vs. other) by boro
+bite_counts = dg_2016 %>%
+  group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
+  count %>% # get total counts
+  ungroup %>%
+  spread(key = pit_bull, value = n)  %>%
+  `colnames<-`(c('boro', 'not_pitbull_bites', 'pitbull_bites')) %>%
+  mutate(boro = tolower(boro),
+         total_bites = `not_pitbull_bites` + `pitbull_bites`)
+
+# number of registered dogs (pitbull vs. other) by boro
+license_counts = license %>%
+  group_by(cleaned_borough, pit_bull) %>%
+  count %>%
+  spread(key = pit_bull, value = n) %>%
+  dplyr::select(1:3) %>%
+  `colnames<-`(c('boro', 'not_pitbull_lic', 'pitbull_lic')) %>%
+  mutate(boro = tolower(boro),
+         total_lic = `not_pitbull_lic` + `pitbull_lic`)
+
+
+master = dplyr::inner_join(bite_counts, license_counts, by = 'boro') %>%
+  filter(boro != 'other')
+
+master$total_bites/master$total_lic # what percentage of licensed dogs bite?
+master$pitbull_bites/master$pitbull_lic # what percentage of licensed pitbulls bite?
+master$not_pitbull_bites/master$not_pitbull_lic # what percentage of licensed non-pitbulls bite?
+
+```
+
+Assumptions made in this analysis:
+  - each reported bite is made by a different dog
+  - no dog appears in the licensing dataset more than once
+  - all dogs that bite are licensed
+  - dogs bite only in their borough
+  
+  
+If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, `r round(sum(master$total_bites)/sum(master$total_lic)*100, 2)`% of licensed dogs bite. By borough, it breaks down as follows:
+
+```{r}
+master %>%
+  mutate('Percent' = round((total_bites / total_lic) * 100, 2)) %>%
+  dplyr::select(boro, total_lic, total_bites, Percent) %>%
+  arrange(-total_lic) %>%
+  `colnames<-`(c('Borough', 'No. Licenses', 'No. bites', 'Percent')) %>%
+  knitr::kable()
+```
+
+A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total). 
+
+We can break this analysis down by dog breed; pit bull or not. Across all years, `r dog_bite %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`% of all bites are given by pitbulls; in 2016, this number was `r dg_2016 %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`%. This is a rather high percentage for a single breed. 
+
+The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B). 
+
+```{r}
+lic_bar = license %>%
+  filter(cleaned_borough != 'Other') %>%
+  ggplot(aes(x = cleaned_borough, fill = pit_bull)) +
+  geom_bar() + 
+  viridis::scale_fill_viridis(
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  theme(legend.position = 'bottom') + 
+  labs(title = '(A) Dog licenses (2016)',
+       x = '',
+       y = 'Number of licenses')
+
+bite_bar_2016 = dg_2016 %>%
+  filter(borough != 'Other') %>%
+  ggplot(aes(x = borough, fill = pit_bull)) +
+  geom_bar() + 
+  viridis::scale_fill_viridis(
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  labs(title = '(B) Dog bites (2016)',
+       x = '',
+       y = 'Number of bites') +
+  theme(legend.position = 'right')
+
+
+lic_bar + theme(legend.position = 'none',
+                axis.text.x = element_text(angle = 45, hjust = 1)) + bite_bar_2016 + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+
+
+```{r}
+# point plot of all dog bites in data
+# dog_bite %>%
+#   group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
+#   count %>% # get total counts
+#   ungroup %>%
+#   spread(key = pit_bull, value = n) %>% # spread to calculate percentage of bites that were given by pit bulls
+#   mutate(total_bites = `FALSE` + `TRUE`, # column of total number of bites
+#          pct_pb_bites = `TRUE` / total_bites, # percentage of bites that are from pit bulls
+#          borough = fct_reorder(borough, total_bites, .desc = T)) %>% # factor and order borough by total number of bites
+#   ggplot(aes(x = borough, y = total_bites)) +
+#   geom_point(aes(size = pct_pb_bites)) + # change size of plotted points by the percentage of the bites that were given by pit bulls
+#   labs(title = 'Dog bites in NYC (2015-2018)',
+#        x = 'Borough',
+#        y = 'Number of dog bites',
+#        size = 'Percentage of pit bull bites') +
+#   scale_y_continuous(limits = c(0, 2500)) +
+#   theme(legend.position = 'bottom')
+
+
+# stacked bar plot for 2016 only (to be matched with licensing data)
+
+
+```
+

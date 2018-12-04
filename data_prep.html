@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Alyssa Vanderbeek" />
+
+<meta name="date" content="2018-11-27" />
+
+<title>Data cleaning/prep</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="https://github.com/nevilleq/p8105_fp_qzal">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data cleaning/prep</h1>
+<h4 class="author"><em>Alyssa Vanderbeek</em></h4>
+<h4 class="date"><em>11/27/2018</em></h4>
+
+</div>
+
+
+<div id="dog-bite-data" class="section level2">
+<h2>Dog Bite data</h2>
+<pre class="r"><code>queens &lt;- c(&quot;astoria&quot;, &quot;elmhurst&quot;, &quot;flushing&quot;, &quot;jackson heights&quot;, &quot;kew gardens&quot;, &quot;woodside&quot;, &quot;briarwood&quot;, &quot;corona&quot;, &quot;forest hills&quot;, &quot;ozone park&quot;, &quot;richmond hill&quot;, &quot;rockaway park&quot;, &quot;arverne&quot;, &quot;bayside&quot;, &quot;belle harbor&quot;, &quot;cambria heights&quot;, &quot;college point&quot;, &quot;east elmhurst&quot;, &quot;glen oaks&quot;, &quot;glendale&quot;, &quot;jackson hgts&quot;, &quot;long island city&quot;, &quot;maspeth&quot;, &quot;middle vilg&quot;, &quot;middle village&quot;, &quot;oakland gardens&quot;, &quot;quens&quot;, &quot;ridgewood&quot;, &quot;so richmond&quot;, &quot;south richmond hil&quot;, &quot;woodside ny.&quot;, &quot;fresh meadows&quot;, &#39;queens village&#39;)
+
+not_nyc &lt;- c(&quot;jersey city&quot;, &quot;albany&quot;, &quot;bronxville&quot;, &quot;floral park&quot;, &quot;hoboken&quot;, &quot;kissimmee florida&quot;, &quot;lynbrook&quot;, &quot;middletown&quot;, &quot;san francisco&quot;, &quot;santa monica&quot;, &quot;wappingers falls, ny&quot;, &quot;west palm beach&quot;, &quot;the villages&quot;)
+
+staten_island &lt;- c(&quot;staten is&quot;, &quot;staten island, ny&quot;, &quot;staten island&quot;)
+
+unknown_borough &lt;- c(&quot;new york&quot;, &quot;new york city&quot;, &quot;nyc&quot;, &quot;ny&quot;, &quot;b&quot;, &quot;potomac&quot;, NA)
+
+
+# get list of real zipcodes for each borough
+data(zipcode) 
+zipcode = zipcode %&gt;%
+  mutate(city = tolower(city),
+         borough = ifelse(city %in% c(&#39;new york&#39;, &#39;manhattan&#39;), &#39;Manhattan&#39;, NA),
+         borough = ifelse(city == &#39;bronx&#39;, &#39;Bronx&#39;, borough),
+         borough = ifelse(city == &#39;brooklyn&#39;, &#39;Brooklyn&#39;, borough),
+         borough = ifelse(city %in% c(&#39;queens&#39;, queens), &#39;Queens&#39;, borough),
+         borough = ifelse(city %in% c(&#39;staten island&#39;, staten_island), &#39;Staten Island&#39;, borough)) %&gt;%
+  filter(borough %in% c(&#39;Manhattan&#39;, &#39;Bronx&#39;, &#39;Brooklyn&#39;, &#39;Queens&#39;, &#39;Staten Island&#39;) &amp; state == &#39;NY&#39;)
+
+zip_list = zipcode %&gt;%
+  select(borough, zip) %&gt;%
+  nest(-borough)</code></pre>
+<pre class="r"><code># list of official NYC zip codes 
+official.zip = paste(zipcode$zip, collapse = &#39;|&#39;)
+
+# dog bite data
+dog_bite = read_csv(&#39;./data/DOHMH_Dog_Bite_Data.csv&#39;,
+                    col_type = cols(UniqueID = col_integer(),
+                        DateOfBite = col_date(format = &#39;%B %d %Y&#39;), # set as date variable
+                        Species = col_character(),
+                        Breed = col_character(),
+                        Age = col_number(),
+                        Gender = col_character(),
+                        SpayNeuter = col_logical(),
+                        Borough = col_character(),
+                        ZipCode = col_character()
+                      )) %&gt;% # read data
+  janitor::clean_names() %&gt;%
+  mutate(pit_bull = str_detect(tolower(breed), &#39;pit bull|pitbull|pit-bull&#39;)) %&gt;% # logical column for whether dog was a pitbull breed or not
+  mutate(
+    zip_code = zip_code %&gt;% 
+               ifelse(str_length(.) != 5, NA, .) %&gt;%  # set zip codes without length 5 equal to NA
+               str_replace(., &quot;O&quot;, &quot;0&quot;) %&gt;% # replace O&#39;s with zeros
+               ifelse(str_detect(., &quot;^[02-9]&quot;), NA, .), # ?
+    zip_match = str_detect(zip_code, official.zip), # is the given zip code valid?
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
+  ) %&gt;%
+  left_join(.,
+            na.omit(.) %&gt;% 
+            left_join(., count(., borough), by = &quot;borough&quot;) %&gt;% 
+            group_by(borough, zip_code) %&gt;%
+            summarize(proportion = n()/unique(n)) %&gt;% 
+            rename(zip_list = zip_code) %&gt;%
+            nest(zip_list, proportion) %&gt;% 
+            rename(zip_nest = data),
+            by = &#39;borough&#39;) %&gt;% 
+  mutate(
+    zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
+    zip_code_imputed = zip_code %&gt;% ifelse(is.na(.), zip_sample, .)
+  ) %&gt;% 
+  select(-c(zip_nest, zip_sample))
+
+write.csv(dog_bite, &#39;./data/dog_bite_12.4.csv&#39;, row.names = F)</code></pre>
+</div>
+<div id="licensing-data" class="section level2">
+<h2>Licensing data</h2>
+<pre class="r"><code># function to capitalize first letter of words
+simpleCap &lt;- function(x) {
+    s &lt;- strsplit(x, &quot; &quot;)[[1]]
+    paste(toupper(substring(s, 1, 1)), substring(s, 2),
+          sep = &quot;&quot;, collapse = &quot; &quot;)
+}
+
+license_df &lt;- read_csv(&quot;./data/NYC_Dog_Licensing_Dataset.csv&quot;) %&gt;%
+  mutate(Borough = tolower(Borough),
+         LicenseIssuedDate = as.Date(LicenseIssuedDate, &quot;%m/%d/%Y&quot;),
+         LicenseExpiredDate = as.Date(LicenseExpiredDate, &quot;%m/%d/%Y&quot;),
+         issued_year = year(LicenseIssuedDate),
+         expired_year = year(LicenseExpiredDate),
+         cleaned_borough = Borough)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   RowNumber = col_integer(),
+##   AnimalName = col_character(),
+##   AnimalGender = col_character(),
+##   AnimalBirthMonth = col_character(),
+##   BreedName = col_character(),
+##   Borough = col_character(),
+##   ZipCode = col_integer(),
+##   CommunityDistrict = col_integer(),
+##   CensusTract2010 = col_character(),
+##   NTA = col_character(),
+##   CityCouncilDistrict = col_integer(),
+##   CongressionalDistrict = col_integer(),
+##   StateSenatorialDistrict = col_integer(),
+##   LicenseIssuedDate = col_character(),
+##   LicenseExpiredDate = col_character()
+## )</code></pre>
+<pre class="r"><code>unknown_borough_df &lt;- license_df %&gt;%
+  filter(cleaned_borough == &quot;unknown&quot;) %&gt;%
+  select(RowNumber, ZipCode, cleaned_borough)
+
+zip_code_borough &lt;- read_csv(&quot;./zelos/zip_codes_borough.csv&quot;) # change this to use the data that Quinton downloaded from OpenSource</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   ZipCode = col_integer(),
+##   supposed_borough = col_character()
+## )</code></pre>
+<pre class="r"><code>license_df &lt;- license_df %&gt;%
+  mutate(cleaned_borough = ifelse(cleaned_borough %in% queens, &quot;queens&quot;, cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% not_nyc, &quot;not nyc&quot;, cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% staten_island, &quot;Staten Island&quot;, cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% unknown_borough, &quot;Other&quot;, cleaned_borough),
+         zip = as.character(ZipCode))
+
+license_df &lt;- left_join(license_df, zipcode, by = &#39;zip&#39;)
+
+license_df &lt;- license_df %&gt;%
+  rowwise() %&gt;%
+  mutate(borough = ifelse(is.na(borough), simpleCap(cleaned_borough), borough)) %&gt;%
+  rename(final_borough = borough)
+
+counts_df &lt;- license_df %&gt;%
+  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, final_borough, issued_year, expired_year) %&gt;%
+  ungroup
+
+agree_ids &lt;- counts_df$RowNumber[which(tolower(counts_df$cleaned_borough) == tolower(counts_df$final_borough))]
+
+agreed_df &lt;- counts_df %&gt;%
+  filter(RowNumber %in% agree_ids) %&gt;%
+  mutate(BreedName = tolower(BreedName),
+         pit_bull = str_detect(BreedName, &#39;pit bull&#39;)) %&gt;%
+  janitor::clean_names() %&gt;%
+  filter(cleaned_borough != &#39;not nyc&#39;)
+
+# only 312 out of 121949 licenses are now a problem
+problematic_df &lt;- counts_df %&gt;%
+  filter(!RowNumber %in% agree_ids)
+
+write.csv(agreed_df, &#39;./data/cleaned_license_data.csv&#39;, row.names = F)</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
