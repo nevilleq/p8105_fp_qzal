@@ -11,24 +11,267 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Motivation
 
-
-
-
-## Related work
-
+Pit bulls have a historically poor reputation as an aggressive breed. But in recent years, there's been a push to change this stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
 
 ## Initial questions
 
+- Are there more bites given by pit bulls than other breeds?
+  - Does this number change by borough? Over time? 
+- Are there more pitbulls in certain neighborhoods?
+- Do pit bulls tend to be spayed/neutered more or less often than other breeds?
+- How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
+- Does season / weather affect the number of dog bites?
 
 
 
 ## Data
 
+### Data sources
+
+**Dog Licensing data**: Active Dog Licenses during 2016.
+
+All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the [DOHMH Dog Licensing System](https://a816-healthpsi.nyc.gov/DogLicense), where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.
+
+Variables provided:
+RowNumber,	AnimalName,	AnimalGender,	AnimalBirthMonth,	BreedName,	Borough,	ZipCode,	CommunityDistrict,	CensusTract2010,	NTA,	CityCouncilDistrict,	CongressionalDistrict,	StateSenatorialDistrict,	LicenseIssuedDate,	LicenseExpiredDate
+
+**Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
+
+Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
+
+Variables provided:
+UniqueID,	DateOfBite,	Species,	Breed,	Age,	Gender,	SpayNeuter,	Borough,	ZipCode
+
+
+### Data cleaning
+
+```{r}
+queens <- c("astoria", "elmhurst", "flushing", "jackson heights", "kew gardens", "woodside", "briarwood", "corona", "forest hills", "ozone park", "richmond hill", "rockaway park", "arverne", "bayside", "belle harbor", "cambria heights", "college point", "east elmhurst", "glen oaks", "glendale", "jackson hgts", "long island city", "maspeth", "middle vilg", "middle village", "oakland gardens", "quens", "ridgewood", "so richmond", "south richmond hil", "woodside ny.", "fresh meadows", 'queens village')
+
+not_nyc <- c("jersey city", "albany", "bronxville", "floral park", "hoboken", "kissimmee florida", "lynbrook", "middletown", "san francisco", "santa monica", "wappingers falls, ny", "west palm beach", "the villages")
+
+staten_island <- c("staten is", "staten island, ny", "staten island")
+
+unknown_borough <- c("new york", "new york city", "nyc", "ny", "b", "potomac", NA)
+
+
+# get list of real zipcodes for each borough
+data(zipcode) 
+zipcode = zipcode %>%
+  mutate(city = tolower(city),
+         borough = ifelse(city %in% c('new york', 'manhattan'), 'Manhattan', NA),
+         borough = ifelse(city == 'bronx', 'Bronx', borough),
+         borough = ifelse(city == 'brooklyn', 'Brooklyn', borough),
+         borough = ifelse(city %in% c('queens', queens), 'Queens', borough),
+         borough = ifelse(city %in% c('staten island', staten_island), 'Staten Island', borough)) %>%
+  filter(borough %in% c('Manhattan', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island') & state == 'NY')
+
+zip_list = zipcode %>%
+  select(borough, zip) %>%
+  nest(-borough)
+```
+
+
+```{r}
+# list of official NYC zip codes 
+official.zip = paste(zipcode$zip, collapse = '|')
+
+# dog bite data
+dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
+                    col_type = cols(UniqueID = col_integer(),
+                        DateOfBite = col_date(format = '%B %d %Y'), # set as date variable
+                        Species = col_character(),
+                        Breed = col_character(),
+                        Age = col_number(),
+                        Gender = col_character(),
+                        SpayNeuter = col_logical(),
+                        Borough = col_character(),
+                        ZipCode = col_character()
+                      )) %>% # read data
+  janitor::clean_names() %>%
+  mutate(pit_bull = str_detect(tolower(breed), 'pit bull|pitbull|pit-bull')) %>% # logical column for whether dog was a pitbull breed or not
+  mutate(
+    zip_code = zip_code %>% 
+               ifelse(str_length(.) != 5, NA, .) %>%  # set zip codes without length 5 equal to NA
+               str_replace(., "O", "0") %>% # replace O's with zeros
+               ifelse(str_detect(., "^[02-9]"), NA, .), # ?
+    zip_match = str_detect(zip_code, official.zip), # is the given zip code valid?
+    zip_code  = ifelse(zip_match == FALSE, NA, zip_code)
+  ) %>%
+  left_join(.,
+            na.omit(.) %>% 
+            left_join(., count(., borough), by = "borough") %>% 
+            group_by(borough, zip_code) %>%
+            summarize(proportion = n()/unique(n)) %>% 
+            rename(zip_list = zip_code) %>%
+            nest(zip_list, proportion) %>% 
+            rename(zip_nest = data),
+            by = 'borough') %>% 
+  mutate(
+    zip_sample = map_chr(.x = zip_nest, ~sample(.x$zip_list, 1, prob = .x$proportion)),
+    zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
+  ) %>% 
+  select(-c(zip_nest, zip_sample))
+
+
+```
+
+
+**Licensing data**
+
+```{r}
+# function to capitalize first letter of words
+simpleCap <- function(x) {
+    s <- strsplit(x, " ")[[1]]
+    paste(toupper(substring(s, 1, 1)), substring(s, 2),
+          sep = "", collapse = " ")
+}
+
+license_df <- read_csv("./data/NYC_Dog_Licensing_Dataset.csv") %>%
+  mutate(Borough = tolower(Borough),
+         LicenseIssuedDate = as.Date(LicenseIssuedDate, "%m/%d/%Y"),
+         LicenseExpiredDate = as.Date(LicenseExpiredDate, "%m/%d/%Y"),
+         issued_year = year(LicenseIssuedDate),
+         expired_year = year(LicenseExpiredDate),
+         cleaned_borough = Borough)
+
+
+unknown_borough_df <- license_df %>%
+  filter(cleaned_borough == "unknown") %>%
+  select(RowNumber, ZipCode, cleaned_borough)
+
+zip_code_borough <- read_csv("./zelos/zip_codes_borough.csv") # change this to use the data that Quinton downloaded from OpenSource
+
+license_df <- license_df %>%
+  mutate(cleaned_borough = ifelse(cleaned_borough %in% queens, "queens", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% not_nyc, "not nyc", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% staten_island, "Staten Island", cleaned_borough),
+         cleaned_borough = ifelse(cleaned_borough %in% unknown_borough, "Other", cleaned_borough),
+         zip = as.character(ZipCode))
+
+license_df <- left_join(license_df, zipcode, by = 'zip')
+
+license_df <- license_df %>%
+  rowwise() %>%
+  mutate(borough = ifelse(is.na(borough), simpleCap(cleaned_borough), borough)) %>%
+  rename(final_borough = borough)
+
+counts_df <- license_df %>%
+  select(RowNumber, BreedName, ZipCode, Borough, cleaned_borough, final_borough, issued_year, expired_year) %>%
+  ungroup
+
+agree_ids <- counts_df$RowNumber[which(tolower(counts_df$cleaned_borough) == tolower(counts_df$final_borough))]
+
+# final cleaned license data
+license <- counts_df %>%
+  filter(RowNumber %in% agree_ids) %>%
+  mutate(BreedName = tolower(BreedName),
+         pit_bull = str_detect(BreedName, 'pit bull')) %>%
+  janitor::clean_names() %>%
+  filter(cleaned_borough != 'not nyc')
+
+
+```
+
 
 
 
 ## Exploratory analysis
+
+
+Assumptions made in this analysis:
+  - each reported bite is made by a different dog
+  - no dog appears in the licensing dataset more than once
+  - all dogs that bite are licensed
+  - dogs bite only in their borough
+  
+  
+```{r}
+dg_2016 = dog_bite %>%
+  filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
+```
+
+We were interested to know how the raw counts of dog bites compared to the number of registered dogs; if there are more pit bull bites, does that mean that pit bulls are more aggressive and likely to bite than other breeds, or is it simply that there are more pit bulls in the city?
+
+```{r}
+# number of dog bites (pitbull vs. other) by boro
+bite_counts = dg_2016 %>%
+  group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
+  count %>% # get total counts
+  ungroup %>%
+  spread(key = pit_bull, value = n)  %>%
+  `colnames<-`(c('boro', 'not_pitbull_bites', 'pitbull_bites')) %>%
+  mutate(boro = tolower(boro),
+         total_bites = `not_pitbull_bites` + `pitbull_bites`)
+
+# number of registered dogs (pitbull vs. other) by boro
+license_counts = license %>%
+  group_by(cleaned_borough, pit_bull) %>%
+  count %>%
+  spread(key = pit_bull, value = n) %>%
+  dplyr::select(1:3) %>%
+  `colnames<-`(c('boro', 'not_pitbull_lic', 'pitbull_lic')) %>%
+  mutate(boro = tolower(boro),
+         total_lic = `not_pitbull_lic` + `pitbull_lic`)
+
+
+master = dplyr::inner_join(bite_counts, license_counts, by = 'boro') %>%
+  filter(boro != 'other')
+
+```
+
+If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, `r round(sum(master$total_bites)/sum(master$total_lic)*100, 2)`% of licensed dogs bite. By borough, it breaks down as follows:
+
+```{r}
+master %>%
+  mutate('Percent' = round((total_bites / total_lic) * 100, 2)) %>%
+  dplyr::select(boro, total_lic, total_bites, Percent) %>%
+  arrange(-total_lic) %>%
+  `colnames<-`(c('Borough', 'No. Licenses', 'No. bites', 'Percent')) %>%
+  knitr::kable()
+```
+
+A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total). 
+
+We can break this analysis down by dog breed; pit bull or not. Across all years, `r dog_bite %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`% of all bites are given by pitbulls; in 2016, this number was `r dg_2016 %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`%. This is a rather high percentage for a single breed. 
+
+The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B). 
+
+```{r}
+lic_bar = license %>%
+  filter(cleaned_borough != 'Other') %>%
+  ggplot(aes(x = cleaned_borough, fill = pit_bull)) +
+  geom_bar() + 
+  viridis::scale_fill_viridis(
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  theme(legend.position = 'bottom') + 
+  labs(title = '(A) Dog licenses (2016)',
+       x = '',
+       y = 'Number of licenses')
+
+bite_bar_2016 = dg_2016 %>%
+  filter(borough != 'Other') %>%
+  ggplot(aes(x = borough, fill = pit_bull)) +
+  geom_bar() + 
+  viridis::scale_fill_viridis(
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  labs(title = '(B) Dog bites (2016)',
+       x = '',
+       y = 'Number of bites') +
+  theme(legend.position = 'right')
+
+
+lic_bar + theme(legend.position = 'none',
+                axis.text.x = element_text(angle = 45, hjust = 1)) + bite_bar_2016 + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
 
 
 

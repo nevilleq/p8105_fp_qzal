@@ -73,7 +73,7 @@ problematic_df <- counts_df %>%
   filter(!RowNumber %in% agree_ids | cleaned_borough == "not nyc")
 
 View(problematic_df)
-write.csv(problematic_df, "problematic_ids.csv", row.names = FALSE)
+#write.csv(problematic_df, "problematic_ids.csv", row.names = FALSE)
 
 #All Dogs -- Based on Issued Year Zip Code
 a <- agreed_df %>%
@@ -106,7 +106,7 @@ write.csv(agreed_df, file = "./data/agreed_boroughs_license_df.csv", row.names =
 
 #My own plot I need to render
 ```{r}
-bite_df <- read_csv("./data/dog_bite.csv")
+bite_df <- read_csv("./data/dog_bite_12.4.csv")
 
 bite_df %>%
   group_by(gender) %>%
@@ -126,7 +126,14 @@ bite_df %>%
   group_by(gender, spay_neuter) %>%
   count() %>%
   mutate(gender_spay = paste(gender, spay_neuter, " "))%>%
-  ggplot(aes(x = gender_spay,, y = n, fill = gender))  +
-  geom_bar(stat="identity", position=position_dodge()) + 
-  scale_fill_manual(values=c('#FFC0CB','#87CEEB', '#A9A9A9'))
+  ggplot(., aes(gender_spay, fill = interaction(gender, spay_neuter), color = gender))  +
+  geom_bar(stat = "count", position = "fill") + 
+  scale_fill_manual(values=c('#FFC0CB','#87CEEB', '#A9A9A9', '#FFC0CB','#87CEEB', '#A9A9A9'))
+
+
+ggplot(fruit, aes(Fruit)) +
+  geom_bar( aes(fill=interaction(Color,Ripe), color=Color), stat="count", position="fill")+ 
+  scale_y_continuous(labels=scales::percent)+
+  scale_fill_manual(values=c("pink","lightgreen","lightblue","red", "green","blue"))+
+  theme_bw()
 ```
