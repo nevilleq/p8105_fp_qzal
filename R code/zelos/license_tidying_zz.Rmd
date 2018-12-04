@@ -10,6 +10,7 @@ library(tidyverse)
 library(readxl)
 library(lubridate)
 library(zipcode)
+library(ggthemes)
 
 license_df <- read_csv("./data/NYC_Dog_Licensing_Dataset.csv")
 
@@ -96,7 +97,9 @@ d <- agreed_df %>%
   filter(grepl("pit bull", BreedName)) %>%
   group_by(issued_year) %>%
   count(cleaned_borough)
+```
 
+```{RUN ONCE for files r, eval = FALSE}
 write.csv(a, file = "./data/all_dogs_zip.csv", row.names = FALSE)
 write.csv(b, file = "./data/all_dogs_borough.csv", row.names = FALSE)
 write.csv(c, file = "./data/pitbulls_zip.csv", row.names = FALSE)
@@ -109,31 +112,19 @@ write.csv(agreed_df, file = "./data/agreed_boroughs_license_df.csv", row.names =
 bite_df <- read_csv("./data/dog_bite_12.4.csv")
 
 bite_df %>%
-  group_by(gender) %>%
+  group_by(gender, spay_neuter, pit_bull) %>%
   count() %>%
-  ggplot(aes(x = gender,, y = n, fill = gender))  +
-  geom_bar(stat="identity", position=position_dodge()) + 
-  scale_fill_manual(values=c('#FFC0CB','#87CEEB', '#A9A9A9'))
-
-bite_df %>%
-  group_by(spay_neuter) %>%
-  count() %>%
-  ggplot(aes(x = spay_neuter, y = n, fill = spay_neuter))  +
-  geom_bar(stat="identity", position = position_dodge()) + 
-  scale_fill_manual(values=c('#B22222','#90EE90'))
-
-bite_df %>%
-  group_by(gender, spay_neuter) %>%
-  count() %>%
-  mutate(gender_spay = paste(gender, spay_neuter, " "))%>%
-  ggplot(., aes(gender_spay, fill = interaction(gender, spay_neuter), color = gender))  +
-  geom_bar(stat = "count", position = "fill") + 
-  scale_fill_manual(values=c('#FFC0CB','#87CEEB', '#A9A9A9', '#FFC0CB','#87CEEB', '#A9A9A9'))
-
-
-ggplot(fruit, aes(Fruit)) +
-  geom_bar( aes(fill=interaction(Color,Ripe), color=Color), stat="count", position="fill")+ 
-  scale_y_continuous(labels=scales::percent)+
-  scale_fill_manual(values=c("pink","lightgreen","lightblue","red", "green","blue"))+
-  theme_bw()
+  ungroup(gender, spay_neuter) %>%
+  mutate(gender = ifelse(gender == "F", "Female", gender),
+         gender = ifelse(gender == "M", "Male", gender),
+         gender = ifelse(gender == "U", "Unknown", gender),
+         spay_neuter = ifelse(spay_neuter == TRUE, "Spayed/Neutered", "Not Spayed/Neutered")) %>%
+  ggplot(aes(x = spay_neuter, y = n, fill = pit_bull)) + 
+  geom_bar(stat = "identity",  aes(alpha = pit_bull)) + 
+  scale_alpha_manual(values=c(1,1)) +
+  scale_fill_manual(values=c('#FFFF00','#4B0082')) + 
+  ylab("Number of Bites") +
+  xlab("Spayed/Neutered Status") +
+  theme_hc() + 
+  facet_grid(~gender)
 ```
