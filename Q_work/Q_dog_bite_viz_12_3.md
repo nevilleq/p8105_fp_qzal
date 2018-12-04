@@ -144,7 +144,7 @@ time.boro.df <- dog_bite %>%
 time.boro.plot <- time.boro.df %>%
   filter(borough != "Other") %>%
   ggplot(aes(x = date_numeric, y = num_bites, colour = pit_bull)) + 
-  geom_point(alpha = 0.3, size = 2) + 
+ # geom_point(alpha = 0.3, size = 2) + 
   geom_line(size = 1, alpha = 0.6) + 
   geom_smooth(aes(colour = pit_bull), alpha = 0.3, se = F, method = "lm") + 
   theme(legend.position = "bottom",
@@ -157,8 +157,8 @@ time.boro.plot <- time.boro.df %>%
     y = "Number of Bites",
     title = "Number of Bites by Borough in Time"
   ) + 
-  xlim(c(2015, 2018)) +
-  facet_grid(~borough)
+#  xlim(c(2015, 2018)) +
+  facet_grid(borough~.)
 
 
 time.overall.plot
@@ -169,10 +169,6 @@ time.overall.plot
 ``` r
 time.boro.plot
 ```
-
-    ## Warning: Removed 10 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 10 rows containing missing values (geom_point).
 
 <img src="Q_dog_bite_viz_12_3_files/figure-markdown_github/unnamed-chunk-4-2.png" width="90%" style="display: block; margin: auto;" />
 
@@ -321,5 +317,58 @@ summary(logit.2)
     ##     Null deviance: 10990  on 8706  degrees of freedom
     ## Residual deviance: 10776  on 8700  degrees of freedom
     ## AIC: 10790
+    ## 
+    ## Number of Fisher Scoring iterations: 4
+
+``` r
+ #Check Effect Modifier
+ logit.full.3 <- glm(pit_bull ~ date_numeric + borough + borough:date_numeric, family = "binomial", data = logit.df)
+ summary(logit.full.3)
+```
+
+    ## 
+    ## Call:
+    ## glm(formula = pit_bull ~ date_numeric + borough + borough:date_numeric, 
+    ##     family = "binomial", data = logit.df)
+    ## 
+    ## Deviance Residuals: 
+    ##     Min       1Q   Median       3Q      Max  
+    ## -1.1795  -0.8928  -0.7615   1.3078   1.9609  
+    ## 
+    ## Coefficients:
+    ##                                   Estimate Std. Error z value   Pr(>|z|)
+    ## (Intercept)                       -0.33217    0.10689  -3.108    0.00189
+    ## date_numeric                       0.10995    0.06037   1.821    0.06854
+    ## boroughBrooklyn                   -0.11817    0.14439  -0.818    0.41311
+    ## boroughManhattan                  -0.75310    0.15117  -4.982 0.00000063
+    ## boroughOther                      -0.81854    0.28793  -2.843    0.00447
+    ## boroughQueens                     -0.17083    0.14255  -1.198    0.23075
+    ## boroughStaten Island              -0.42830    0.18340  -2.335    0.01952
+    ## date_numeric:boroughBrooklyn      -0.22355    0.08129  -2.750    0.00596
+    ## date_numeric:boroughManhattan     -0.11758    0.08464  -1.389    0.16476
+    ## date_numeric:boroughOther         -0.31551    0.16920  -1.865    0.06222
+    ## date_numeric:boroughQueens        -0.31555    0.08040  -3.925 0.00008675
+    ## date_numeric:boroughStaten Island -0.12865    0.10458  -1.230    0.21865
+    ##                                      
+    ## (Intercept)                       ** 
+    ## date_numeric                      .  
+    ## boroughBrooklyn                      
+    ## boroughManhattan                  ***
+    ## boroughOther                      ** 
+    ## boroughQueens                        
+    ## boroughStaten Island              *  
+    ## date_numeric:boroughBrooklyn      ** 
+    ## date_numeric:boroughManhattan        
+    ## date_numeric:boroughOther         .  
+    ## date_numeric:boroughQueens        ***
+    ## date_numeric:boroughStaten Island    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## (Dispersion parameter for binomial family taken to be 1)
+    ## 
+    ##     Null deviance: 10990  on 8706  degrees of freedom
+    ## Residual deviance: 10758  on 8695  degrees of freedom
+    ## AIC: 10782
     ## 
     ## Number of Fisher Scoring iterations: 4

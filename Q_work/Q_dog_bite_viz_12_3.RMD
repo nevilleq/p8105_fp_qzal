@@ -194,7 +194,7 @@ time.boro.df <- dog_bite %>%
 time.boro.plot <- time.boro.df %>%
   filter(borough != "Other") %>%
   ggplot(aes(x = date_numeric, y = num_bites, colour = pit_bull)) + 
-  geom_point(alpha = 0.3, size = 2) + 
+ # geom_point(alpha = 0.3, size = 2) + 
   geom_line(size = 1, alpha = 0.6) + 
   geom_smooth(aes(colour = pit_bull), alpha = 0.3, se = F, method = "lm") + 
   theme(legend.position = "bottom",
@@ -247,5 +247,9 @@ summary(logit.2)
  #Add Borough effect
  logit.full.2 <- glm(pit_bull ~ date_numeric + borough, family = "binomial", data = logit.df)
  summary(logit.full.2)
+ 
+ #Check Effect Modifier
+ logit.full.3 <- glm(pit_bull ~ date_numeric + borough + borough:date_numeric, family = "binomial", data = logit.df)
+ summary(logit.full.3)
 ```
 
