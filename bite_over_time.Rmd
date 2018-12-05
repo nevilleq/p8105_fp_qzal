@@ -1,6 +1,189 @@
 ---
-title: "Trends over time"
-
+title: "Trends in Time"
 ---
 
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
+#Load necessary packages
+library(tidyverse)
+library(readxl)
+library(readr)
+library(p8105.datasets)
+library(patchwork)
+library(ggridges)
+library(gridExtra)
+library(shiny)
+library(plotly)
+library(broom)
+library(scales)
+library(purrr)
+library(koRpus)
+library(rvest)
+library(httr)
+library(zipcode)
+library(lubridate)
 
+#Controlling figure output in markdown
+knitr::opts_chunk$set(
+#  fig.height =   
+  fig.width = 6,
+#  fig.asp = .5,
+  out.width = "90%",
+#  out.height = 
+ fig.align = "center",
+  cache = FALSE
+)
+
+#Set Theme for ggplot2
+theme_set(theme_bw() + theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom"))
+
+#Set Scientific notation output for knitr
+options(scipen = 999)
+
+```
+
+##Visualization
+
+Beggining in 2015 and terminating in the end of 2017, these data open a three year window into the temporal dynamics of documented dog bite incidents in N.Y.C. Specifically, we sought to elucidate whether any noticable trends existed in time, if seasonal effects where important, whether pit bulls bit less people over time, and whether borough level effects had any impact. In order to answer these questions, we first visualized the overall trends in time. Here, number of bites is found on the y-axis, time on the x-axis, and trends are split between pit bulls and other breeds.  
+
+```{r message = FALSE, warning = FALSE, error = FALSE, echo = FALSE}
+#Read in dog bite data
+dog_bite <- read_csv("./data/dog_bite_12.4.csv")
+
+#Manipulate and tidy data for 
+ time.overall.df <- dog_bite %>%
+  mutate(date = ymd(date_of_bite)) %>% 
+  mutate_at(vars(date), funs(year, month, day)) %>%
+  select(-date) %>% 
+  mutate(borough = as.factor(borough)) %>% 
+  group_by(year, month) %>%
+  summarise(
+    pitbull    = sum(pit_bull),
+    no_pitbull = sum(!(pit_bull))
+  ) %>% ungroup() %>%
+  gather(key = breed, value = `number of bites`, pitbull:no_pitbull) %>%
+  mutate(
+    breed = ifelse(breed == "pitbull", "Pit Bull", "Other") %>% as.factor(),
+    date = year + (month - 1)/12
+  )
+
+
+time.overall.plot <- time.overall.df %>%
+ ggplot(aes(x = date, y = `number of bites`, colour = breed)) + 
+  geom_point(alpha = 0.3, size = 2) + 
+  geom_line(size = 1, alpha = 0.5) + 
+  geom_smooth(size = 1.5, alpha = 0.5, se = F, method = "lm") + 
+    theme(legend.position = "bottom",
+        axis.text.y = element_text(color = "black", 
+                                   size = 10,  hjust = 1), 
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1, size = 10)) +
+  labs(
+    x = "Time",
+    y = "Number of Bites per Month",
+    title = "Number of Bites Over Time"
+  ) + 
+    viridis::scale_colour_viridis(
+    name = "Dog Breed", 
+    discrete = TRUE
+   ) +
+  xlim(c(2015, 2018)) 
+
+ggplotly(time.overall.plot)
+```
+
+Most notably we observed a moderate overall increase in the mean number of bites per month by non-pitbull breeds. However, for pit bulls, the trend in number of bites per month is more stable, portraying a slight decrease in the mean number of bites in time. Additionally, we an oscillating fluctation is very evident in the plot, most likely corresponding to seasonal effects, with overall dog bites rising during the summer months and falling during the winter months. 
+
+Next, we wished to stratify these data to observe what effect, if any, borough had on dog bite trends in time.
+
+```{r message = FALSE, warning = FALSE, error = FALSE, echo = FALSE}
+#Create Bites Per Month Data Frame, by Borough
+time.boro.df <- dog_bite %>%
+  mutate(date = ymd(date_of_bite)) %>% 
+  mutate_at(vars(date), funs(year, month, day)) %>%
+  select(-date) %>% 
+  mutate(borough = as.factor(borough)) %>% group_by(year, month, borough) %>%
+  summarise(
+    pitbull    = sum(pit_bull),
+    no_pitbull = sum(!(pit_bull))
+  ) %>% ungroup() %>%
+  gather(key = breed, value = `number of bites`, pitbull:no_pitbull) %>%
+  mutate(
+    breed = ifelse(breed == "pitbull", "Pit Bull", "Other") %>% as.factor(),
+    date = year + (month - 1)/12
+  )
+
+#Lineplot of Bites per Month by Borough
+time.boro.plot <- time.boro.df %>%
+  filter(borough != "Other") %>%
+  ggplot(aes(x = date, y = `number of bites`, colour = breed)) + 
+  geom_line(size = 1, alpha = 0.6) + 
+  geom_smooth(size = 1.5, alpha = 0.3, se = F, method = "lm") + 
+  theme(legend.position = "bottom",
+        axis.text.y = element_text(color = "black", 
+                                   size = 10,  hjust = 1), 
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1, size = 10)) +
+  labs(
+    x = "Time",
+    y = "Number of Bites per Month",
+    title = "Number of Bites by Borough in Time"
+  ) + 
+  viridis::scale_colour_viridis(
+    name = "Dog Breed", 
+    discrete = TRUE
+   ) +
+  xlim(c(2015, 2018)) +
+  facet_grid(~borough)
+
+#time.boro.plot
+ggplotly(time.boro.plot)
+```
+
+In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean.
+
+##Statistical Modeling and Analysis
+
+After visually inspecting the temporal dynamics of pit bull bites in time, we sought to formally test the hypothesis that the number of pit bull dog bites decreased from 2015-2018 in N.Y.C. Motivated by our exploratory visualizations above, we also decided it was necessary to control for seasonal and borough level effects. Subsequently, we utilized a linear regression where our final model took the form
+
+$$ Number \ of \ Bites_i \sim \beta_0 + \beta_1 Time_i + \beta_2 Pitbull_i + \beta_3 Pitbull_i:Time_i + \beta_4 Season_i + \beta_5 Borough_i + \varepsilon_i,$$
+with the results found below.
+
+```{r echo = FALSE}
+#Data Frame for linear modeling
+#Center time at 2015, borough factor, seasonal factor, filter 2015-2018
+#Modeling with data grouped by month
+lm.df <- time.boro.df %>%
+  mutate(date = date - 2015,
+         season = ifelse(month %in% c(12, 1, 2), "Winter", 
+                         ifelse(month %in% c(3, 4, 5), "Spring", 
+                                ifelse(month %in% c(6, 7, 8), "Summer",
+                                       "Fall"))),
+         season = as.factor(season),
+         season = fct_relevel(season, "Winter", "Spring", "Summer", "Fall")) %>%
+  rename(time = date) %>%
+  filter(time >= 0 & borough != "Other")
+
+#Full Model
+lm.final <- lm(`number of bites` ~ time + breed + breed:time + season + borough, data = lm.df)
+
+#Display
+lm.final %>% 
+  broom::tidy() %>%
+  select(term, estimate, p.value) %>%
+  knitr::kable(digits = 3)
+```
+
+Our final regression results describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed a moderate expected mean increase in bites per month overall (2.03, adj. breed, season, borough), and bites per month from the winter to the spring, summer, and fall respectively,(6.89, 11.02, 5.49, adj. time, borough, breed). Compared to the Bronx, we also observed moderate expected bites per month increases in Brooklyn, Manhattan, Queens, and a decrease in Staten Island respectively(5.95, 5.04, 9.39, -8.92, adj. time, season, breed). Most notably though, the main result was an observed additional mean decrease of 1.91 bites per month in pit bulls for each additional month of observation, adjusting for season and borough effects.
+
+##Discussion
+
+Ultimately, our hypothesis that pit bull bites decreased in N.Y.C. from 2015-2018, adjusting for significant seasonal and borough level effects, is supported at the $\alpha_{0.1}$ level. Our initial intuition that seasonal flucuation, from low in the winter to high in the warmer seasons, and differing mean borough level effects had a significant impact on dog bites over time was also supported by these regression results. Although we cannot conclude whether media campaigns to destigmatize and rehabilitate pit bulls in recent years have directly caused the decline in pit bull agression and citation which we observed, we have identified a meaningful decrease in the amount of violent interactions with pit bulls in the City of New York.
+
+##Appendix
+
+Considering the assumptions for inference in our linear model, there is moderate deviance from normality in the upper tail of the Q-Q plot and a slight curvilinear trend in the residuals vs. fitted plot, but nothing too terrible. However, the residuals vs. leverage plot (along with normality) is the most concerning barrier for inference.  
+
+```{r echo = FALSE}
+par(mfrow = c(2,2))
+plot(lm.final)
+```
