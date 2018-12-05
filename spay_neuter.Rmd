@@ -1,5 +1,35 @@
 ---
-title: "Spay/neuter"
+title: "Dog Bites by Gender and Spayed/Neutered Status"
 ---
+```{r, echo = FALSE, message = FALSE, results = 'hide', warning = FALSE}
+library(tidyverse)
+library(ggthemes)
+library(plotly)
+dog_bite <- read_csv("./data/dog_bite_12.4.csv")
+bite_figure <- dog_bite %>%
+  group_by(gender, spay_neuter, pit_bull) %>%
+  count() %>% # counts of spay/neuter status by sex and breed type
+  ungroup() %>%
+  mutate(gender = recode(gender, 'F' = 'Female', 'M' = 'Male', 'U' = 'Unknown'), # recode gender variable
+         spay_neuter = ifelse(spay_neuter == TRUE, "Yes", "No"),
+         pit_bull = ifelse(pit_bull == TRUE, "Pit Bull", "Other")) %>% # recode spay/neuter status
+  ggplot(aes(x = spay_neuter, y = n, fill = pit_bull)) + 
+  geom_bar(stat = "identity",  position = "stack") + 
+  labs(y = "Number of Bites",
+       x = "Spayed/Neutered Status") +
+  theme_hc() + 
+  facet_grid(~ gender) + 
+  viridis::scale_fill_viridis(
+    name = 'Dog Breed',
+    discrete = T
+  )
+#bite_figure
+```
 
+```{r, echo = FALSE}
+ggplotly(bite_figure)
+```
 
+From a visual standpoint, it seems male pitbulls generally bite more often, more than twice as much. Among dogs whose gender is accounted for, non-spayed/neutered dogs bite slightly less frequently than their spayed/neutered counterparts. Interestingly enough, this relationship is the flipped for pit bulls. Non-spayed/neutered pit bulls bite more than spayed/neutered pit bulls regardless of gender; this effect is much more pronounced in males than females. However, we wonder if there may be misclassification error associated with the spaying status of female dogs since it is easier to physically see whether or not a male dog is neutered. The "eye test" of spaying status for female dogs is not quite as easy to do. 
+
+With that said, it is especially worth noting that we have a handful of dogs whose gender is unknown, which brings up the integrity of their spayed/neutered status since it seems almost all were coded to be not spayed/neutered. If we took the data as it is now, the phenomenon of non-spayed/neutered dogs biting less frequently would easily change to biting much more frequently if we were to impute a gender status for the unknowns. However, among the unknown gender dogs it is likely a lot of them are actually spayed or neutered which would likely change the associations we see. 
