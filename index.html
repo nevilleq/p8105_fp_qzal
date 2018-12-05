@@ -11,7 +11,7 @@
 
 
 
-<title>Holy cow!</title>
+<title>I thought you said your dog did not bite!</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -179,7 +179,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Home</a>
+      <a class="navbar-brand" href="index.html">Background</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -187,13 +187,40 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="about.html">About</a>
-</li>
-<li>
   <a href="data.html">Data</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dog_bites.html">Dog bites across NYC</a>
+    </li>
+    <li>
+      <a href="spay_neuter.html">Spay/neuter</a>
+    </li>
+    <li>
+      <a href="bite_over_time.html">Trends over time</a>
+    </li>
+    <li>
+      <a href="spatial_maps.html">Spatial trends/visualization</a>
+    </li>
+  </ul>
+</li>
 <li>
-  <a href="analysis.html">Analysis</a>
+  <a>
+    <span class="fa fa-video fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:&lt;qn2119@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
 </li>
 <li>
   <a href="https://github.com/nevilleq/p8105_fp_qzal">
@@ -210,14 +237,33 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Holy cow!</h1>
+<h1 class="title toc-ignore">I thought you said your dog did not bite!</h1>
 
 </div>
 
 
-<div id="i-have-a-webpage" class="section level3">
-<h3>I have a webpage!</h3>
-<p>And I can put all kinds of stuff on it!</p>
+<div id="motivation" class="section level3">
+<h3>Motivation</h3>
+<p>Pit bulls have a historically poor reputation as an aggressive breed. They’re most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Because of their poor reputation, thousands of pitbulls are euthanized in kill shelters each year. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma that surrounds them. Below are some resources that dive into these topics, from both organizations and individuals:</p>
+<ul>
+<li><a href="https://americanpitbullfoundation.com">The American Pit Bull Foundation</a> provides resources for adoption and responsible pet ownership.</li>
+<li>News organizations publish <a href="https://www.huffingtonpost.com/chris-white/myths-lies-and-misconceptions-pit-bulls_b_8072204.html">articles</a> that advocate for pitbulls.</li>
+<li>Social media platforms like <a href="https://www.facebook.com/PitBullAdvocates1/">Facebook</a> and <a href="https://twitter.com/pitbulladvocate?lang=en">Twitter</a> provide a space for advocates to come together.</li>
+</ul>
+<p>The purpose of this project was to use quantitative data to assess whether pitbulls are more aggressive than other breeds. By using reporting of dog bites as a surrogate measure of aggression, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?</p>
+</div>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>We used data publicly available on <a href="https://opendata.cityofnewyork.us">NYC Open Data</a>. More detailed information on the datasets used can be found in the Data tab. A Google Drive folder of the datasets can be found here.</p>
+</div>
+<div id="research-questions" class="section level3">
+<h3>Research questions</h3>
+<ul>
+<li>Are there more bites by pitbulls than other breeds? Does this number vary by borough?</li>
+<li>Are there more pitbulls in certain neighborhoods? How does this compare to the number of bites seen in each borough?</li>
+<li>What is the relationship between dog breed, spay/neuter status, and dog bites?</li>
+<li>Can we identify any trends in dog bite reports over time? Does season / weather affect the number of dog bites?</li>
+</ul>
 </div>
 
 

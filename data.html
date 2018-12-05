@@ -179,7 +179,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Home</a>
+      <a class="navbar-brand" href="index.html">Background</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -192,8 +192,32 @@ $(document).ready(function () {
 <li>
   <a href="data.html">Data</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dog_bites.html">Dog bites across NYC</a>
+    </li>
+    <li>
+      <a href="spay_neuter.html">Spay/neuter</a>
+    </li>
+    <li>
+      <a href="bite_over_time.html">Trends over time</a>
+    </li>
+    <li>
+      <a href="spatial_maps.html">Spatial trends/visualization</a>
+    </li>
+  </ul>
+</li>
 <li>
-  <a href="analysis.html">Analysis</a>
+  <a href="mailto:&lt;qn2119@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
 </li>
 <li>
   <a href="https://github.com/nevilleq/p8105_fp_qzal">
@@ -215,12 +239,11 @@ $(document).ready(function () {
 </div>
 
 
+<p><strong>Dog Bite data</strong> NYC Reported Dog Bites (2015 - 2018)</p>
+<p>Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is provided by the <a href="https://www1.nyc.gov/site/doh/index.page">Department of Health and Mental Hygiene (DOHMH)</a> collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.</p>
 <p><strong>Dog Licensing data</strong>: Active Dog Licenses during 2016.</p>
 <p>All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the <a href="https://a816-healthpsi.nyc.gov/DogLicense">DOHMH Dog Licensing System</a>, where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.</p>
-<p>Variables provided: RowNumber, AnimalName, AnimalGender, AnimalBirthMonth, BreedName, Borough, ZipCode, CommunityDistrict, CensusTract2010, NTA, CityCouncilDistrict, CongressionalDistrict, StateSenatorialDistrict, LicenseIssuedDate, LicenseExpiredDate</p>
-<p><strong>Dog Bite data</strong> NYC Reported Dog Bites (2015 - 2018)</p>
-<p>Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.</p>
-<p>Variables provided: UniqueID, DateOfBite, Species, Breed, Age, Gender, SpayNeuter, Borough, ZipCode</p>
+<p>*All data was downloaded from <a href="https://opendata.cityofnewyork.us">NYC Open Data</a>.</p>
 
 
 

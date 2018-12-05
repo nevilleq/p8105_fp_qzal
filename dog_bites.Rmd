@@ -2,3 +2,124 @@
 title: "Dog bites across NYC"
 ---
 
+```{r, echo=FALSE, results='hide', message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(patchwork)
+
+theme_set(theme_bw())
+
+dog_bite = read_csv('./data/dog_bite_12.4.csv',
+                    col_types = cols(unique_id = col_integer(),
+                                     date_of_bite = col_date(format = ""),
+                                     species = col_character(),
+                                     breed = col_character(),
+                                     age = col_integer(),
+                                     gender = col_character(),
+                                     spay_neuter = col_logical(),
+                                     borough = col_character(),
+                                     zip_code = col_integer(),
+                                     pit_bull = col_logical(),
+                                     zip_match = col_logical(),
+                                     zip_code_imputed = col_integer()))
+
+# dog bite data from only 2016 to match dog licensing data
+dg_2016 = dog_bite %>%
+  filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
+
+
+license = read_csv('./data/cleaned_license_data.csv', 
+                   col_types = cols(row_number = col_integer(),
+                                    breed_name = col_character(),
+                                    zip_code = col_integer(),
+                                    borough = col_character(),
+                                    cleaned_borough = col_character(),
+                                    final_borough = col_character(),
+                                    issued_year = col_integer(),
+                                    expired_year = col_integer(),
+                                    pit_bull = col_logical()))
+
+```
+
+
+We were interested to know how the raw counts of dog bites compared to the number of registered dogs; if there are more pit bull bites, does that mean that pit bulls are more aggressive and likely to bite than other breeds, or is it simply that there are more pit bulls in the city?
+
+```{r, echo=FALSE}
+# number of dog bites (pitbull vs. other) by boro
+bite_counts = dg_2016 %>%
+  group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
+  count %>% # get total counts
+  ungroup %>%
+  spread(key = pit_bull, value = n)  %>%
+  `colnames<-`(c('boro', 'not_pitbull_bites', 'pitbull_bites')) %>%
+  mutate(total_bites = `not_pitbull_bites` + `pitbull_bites`)
+
+# number of registered dogs (pitbull vs. other) by boro
+license_counts = license %>%
+  group_by(final_borough, pit_bull) %>%
+  count %>%
+  spread(key = pit_bull, value = n) %>%
+  dplyr::select(1:3) %>%
+  `colnames<-`(c('boro', 'not_pitbull_lic', 'pitbull_lic')) %>%
+  mutate(total_lic = `not_pitbull_lic` + `pitbull_lic`)
+
+
+master = dplyr::inner_join(bite_counts, license_counts, by = 'boro') %>%
+  filter(boro != 'Other')
+
+```
+
+If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, `r round(sum(master$total_bites)/sum(master$total_lic)*100, 2)`% of licensed dogs bite. By borough, it breaks down as follows:
+
+```{r, echo=FALSE}
+# print table of dog bites / licenses by borough
+master %>%
+  mutate('Percent' = round((total_bites / total_lic) * 100, 2)) %>%
+  dplyr::select(boro, total_lic, total_bites, Percent) %>%
+  arrange(-total_lic) %>%
+  `colnames<-`(c('Borough', 'No. Licenses', 'No. bites', 'Percent')) %>%
+  knitr::kable()
+```
+
+A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total). 
+
+We can break this analysis down by dog breed; pit bull or not. Across all years, `r dog_bite %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`% of all bites are given by pitbulls; in 2016, this number was `r dg_2016 %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`%. This is a rather high percentage for a single breed. 
+
+The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B). 
+
+```{r, fig.width=10, echo=FALSE}
+# number of licenses in each borough in 2016 by breed type
+lic_bar = license %>%
+  filter(final_borough != 'Other') %>% # remove unknown borough
+  ggplot(aes(x = final_borough, fill = pit_bull)) +
+  geom_bar() +  # bar plot
+  viridis::scale_fill_viridis( # color scheme
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  theme(legend.position = 'bottom') + 
+  labs(title = '(A) Dog licenses (2016)',
+       x = '',
+       y = 'Number of licenses')
+
+# number of dog bites in each borough by breed type
+bite_bar_2016 = dg_2016 %>%
+  filter(borough != 'Other') %>%
+  ggplot(aes(x = borough, fill = pit_bull)) +
+  geom_bar() + 
+  viridis::scale_fill_viridis(
+    name = 'Dog breed',
+    labels = c('Other', 'Pit Bull'),
+    discrete = T
+  ) + 
+  labs(title = '(B) Dog bites (2016)',
+       x = '',
+       y = 'Number of bites') +
+  theme(legend.position = 'right')
+
+
+# print figures
+lic_bar + theme(legend.position = 'none',
+                axis.text.x = element_text(angle = 45, hjust = 1)) + bite_bar_2016 + theme(axis.text.x = element_text(angle = 45, hjust = 1))

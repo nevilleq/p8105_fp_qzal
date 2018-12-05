@@ -3,16 +3,15 @@ title: "Data"
 ---
 
 
+**Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
+
+Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is provided by the [Department of Health and Mental Hygiene (DOHMH)](https://www1.nyc.gov/site/doh/index.page) collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
+
+
 **Dog Licensing data**: Active Dog Licenses during 2016.
 
 All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the [DOHMH Dog Licensing System](https://a816-healthpsi.nyc.gov/DogLicense), where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.
 
-Variables provided:
-RowNumber,	AnimalName,	AnimalGender,	AnimalBirthMonth,	BreedName,	Borough,	ZipCode,	CommunityDistrict,	CensusTract2010,	NTA,	CityCouncilDistrict,	CongressionalDistrict,	StateSenatorialDistrict,	LicenseIssuedDate,	LicenseExpiredDate
 
-**Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
 
-Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
-
-Variables provided:
-UniqueID,	DateOfBite,	Species,	Breed,	Age,	Gender,	SpayNeuter,	Borough,	ZipCode
+*All data was downloaded from [NYC Open Data](https://opendata.cityofnewyork.us).

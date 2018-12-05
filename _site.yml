@@ -3,8 +3,6 @@ output_dir: "."
 navbar:
   title: "Background"
   right:
-    - text: "About"
-      href: about.html
     - text: "Data"
       href: data.html
     - text: "Analysis"
@@ -17,6 +15,7 @@ navbar:
           href: bite_over_time.html
         - text: "Spatial trends/visualization"
           href: spatial_maps.html
+    - icon: fa-video fa-lg
     - icon: fa-envelope fa-lg
       href: mailto:<qn2119@cumc.columbia.edu>
     - icon: fa-github fa-lg

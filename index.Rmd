@@ -1,7 +1,30 @@
 ---
-title: "Holy cow!"
+title: "I thought you said your dog did not bite!"
 ---
 
-### I have a webpage!
 
-And I can put all kinds of stuff on it!
+### Motivation
+
+Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Because of their poor reputation, thousands of pitbulls are euthanized in kill shelters each year. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma that surrounds them. Below are some resources that dive into these topics, from both organizations and individuals:
+
+- [The American Pit Bull Foundation](https://americanpitbullfoundation.com) provides resources for adoption and responsible pet ownership.
+- News organizations publish [articles](https://www.huffingtonpost.com/chris-white/myths-lies-and-misconceptions-pit-bulls_b_8072204.html) that advocate for pitbulls. 
+- Social media platforms like [Facebook](https://www.facebook.com/PitBullAdvocates1/) and [Twitter](https://twitter.com/pitbulladvocate?lang=en) provide a space for advocates to come together.
+
+The purpose of this project was to use quantitative data to assess whether pitbulls are more aggressive than other breeds. By using reporting of dog bites as a surrogate measure of aggression, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
+
+
+
+### Data
+
+We used data publicly available on [NYC Open Data](https://opendata.cityofnewyork.us). More detailed information on the datasets used can be found in the Data tab. A Google Drive folder of the datasets can be found here.
+
+
+
+### Research questions
+
+- Are there more bites by pitbulls than other breeds? Does this number vary by borough?
+- Are there more pitbulls in certain neighborhoods? How does this compare to the number of bites seen in each borough?
+- What is the relationship between dog breed, spay/neuter status, and dog bites? 
+- Can we identify any trends in dog bite reports over time? Does season / weather affect the number of dog bites?
+

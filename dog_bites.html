@@ -11,7 +11,7 @@
 
 
 
-<title>About</title>
+<title>Dog bites across NYC</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -234,16 +234,59 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">About</h1>
+<h1 class="title toc-ignore">Dog bites across NYC</h1>
 
 </div>
 
 
-<div id="about-this-site" class="section level3">
-<h3>About this site</h3>
-<p>Sometimes you need to say a bit about the site – how it was made, where it’s hosted, where the source code can be found.</p>
-<p>If this is for a project or analysis, I recommend giving some details about the R package versions that you used to create the content.</p>
-</div>
+<p>We were interested to know how the raw counts of dog bites compared to the number of registered dogs; if there are more pit bull bites, does that mean that pit bulls are more aggressive and likely to bite than other breeds, or is it simply that there are more pit bulls in the city?</p>
+<p>If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, 2.09% of licensed dogs bite. By borough, it breaks down as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Borough</th>
+<th align="right">No. Licenses</th>
+<th align="right">No. bites</th>
+<th align="right">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Manhattan</td>
+<td align="right">42507</td>
+<td align="right">530</td>
+<td align="right">1.25</td>
+</tr>
+<tr class="even">
+<td align="left">Brooklyn</td>
+<td align="right">30271</td>
+<td align="right">598</td>
+<td align="right">1.98</td>
+</tr>
+<tr class="odd">
+<td align="left">Queens</td>
+<td align="right">25109</td>
+<td align="right">664</td>
+<td align="right">2.64</td>
+</tr>
+<tr class="even">
+<td align="left">Bronx</td>
+<td align="right">12585</td>
+<td align="right">486</td>
+<td align="right">3.86</td>
+</tr>
+<tr class="odd">
+<td align="left">Staten Island</td>
+<td align="right">11146</td>
+<td align="right">264</td>
+<td align="right">2.37</td>
+</tr>
+</tbody>
+</table>
+<p>A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total).</p>
+<p>We can break this analysis down by dog breed; pit bull or not. Across all years, 32.57% of all bites are given by pitbulls; in 2016, this number was 35.74%. This is a rather high percentage for a single breed.</p>
+<p>The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B).</p>
+<p><img src="dog_bites_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
 
 
 
