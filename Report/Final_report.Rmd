@@ -1,7 +1,7 @@
 ---
 title: "Final Report"
-author: "all"
-date: "12/4/2018"
+author: "Quinton Neville (qn2119), Alyssa Vanderbeek (amv2187), Lyuou Zhang (lz2586), Zelos Zhu (zdz2101)"
+date: "5 December 2018"
 output: github_document
 ---
 
@@ -29,20 +29,21 @@ theme_set(theme_bw() + theme(plot.title = element_text(hjust = 0.5)))
 
 ## Motivation
 
-Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
+Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Because of their poor reputation, thousands of pitbulls are euthanized in kill shelters each year. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma that surrounds them. Below are some resources that dive into these topics, from both organizations and individuals:
+
+- [The American Pit Bull Foundation](https://americanpitbullfoundation.com) provides resources for adoption and responsible pet ownership.
+- News organizations publish [articles](https://www.huffingtonpost.com/chris-white/myths-lies-and-misconceptions-pit-bulls_b_8072204.html) that advocate for pitbulls. 
+- Social media platforms like [Facebook](https://www.facebook.com/PitBullAdvocates1/) and [Twitter](https://twitter.com/pitbulladvocate?lang=en) provide a space for advocates to come together.
+
+The purpose of this project was to use quantitative data to assess whether pitbulls are more aggressive than other breeds. By using reporting of dog bites as a surrogate measure of aggression, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
 
-## Initial questions
+## Research questions
 
-Several questions arose for us:
-
-- Are there more bites given by pit bulls than other breeds?
-  - Does this number change by borough? Over time? 
-- Are there more pitbulls in certain neighborhoods?
-- Do pit bulls tend to be spayed/neutered more or less often than other breeds?
-- How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
-- Does season / weather affect the number of dog bites?
-
+- Are there more bites by pitbulls than other breeds? Does this number vary by borough?
+- Are there more pitbulls in certain neighborhoods? How does this compare to the number of bites seen in each borough?
+- What is the relationship between dog breed, spay/neuter status, and dog bites? 
+- Can we identify any trends in dog bite reports over time? Does season / weather affect the number of dog bites?
 
 
 ## Data
