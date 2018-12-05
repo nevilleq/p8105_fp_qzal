@@ -1,14 +1,24 @@
 name: "I thought you said your dog did not bite!"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Background"
   right:
     - text: "About"
       href: about.html
     - text: "Data"
       href: data.html
     - text: "Analysis"
-      href: analysis.html
+      menu:
+        - text: "Dog bites across NYC"
+          href: dog_bites.html
+        - text: "Spay/neuter"
+          href: spay_neuter.html
+        - text: "Trends over time"
+          href: bite_over_time.html
+        - text: "Spatial trends/visualization"
+          href: spatial_maps.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<qn2119@cumc.columbia.edu>
     - icon: fa-github fa-lg
       href: https://github.com/nevilleq/p8105_fp_qzal
 output:
