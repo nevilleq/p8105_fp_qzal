@@ -1,51 +1,27 @@
----
-title: "Final Report"
-author: "all"
-date: "12/4/2018"
-output: github_document
----
+Final Report
+================
+all
+12/4/2018
 
-```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
-#knitr::opts_chunk$set(echo = TRUE)
-
-library(tidyverse)
-library(zipcode)
-library(patchwork)
-library(lubridate)
-
-#Controlling figure output in markdown
-knitr::opts_chunk$set(
-#  fig.height =   
-  fig.width = 6,
-#  fig.asp = .5,
-  out.width = "90%",
-#  out.height = 
- fig.align = "center"
-)
-
-#Set Theme for ggplot2
-theme_set(theme_bw() + theme(plot.title = element_text(hjust = 0.5)))
-```
-
-## Motivation
+Motivation
+----------
 
 Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
-
-## Initial questions
+Initial questions
+-----------------
 
 Several questions arose for us:
 
-- Are there more bites given by pit bulls than other breeds?
-  - Does this number change by borough? Over time? 
-- Are there more pitbulls in certain neighborhoods?
-- Do pit bulls tend to be spayed/neutered more or less often than other breeds?
-- How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
-- Does season / weather affect the number of dog bites?
+-   Are there more bites given by pit bulls than other breeds?
+-   Does this number change by borough? Over time?
+-   Are there more pitbulls in certain neighborhoods?
+-   Do pit bulls tend to be spayed/neutered more or less often than other breeds?
+-   How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
+-   Does season / weather affect the number of dog bites?
 
-
-
-## Data
+Data
+----
 
 ### Data sources
 
@@ -55,26 +31,23 @@ All data was taken from [NYC Open Data](https://opendata.cityofnewyork.us). We e
 
 All dog owners residing in NYC are required by law to license their dogs. The data is sourced from the [DOHMH Dog Licensing System](https://a816-healthpsi.nyc.gov/DogLicense), where owners can apply for and renew dog licenses. Each record represents a unique dog license that was active during the year, but not necessarily a unique record per dog, since a license that is renewed during the year results in a separate record of an active license period. Each record stands as a unique license period for the dog over the course of the yearlong time frame.
 
-Variables provided:
-RowNumber,	AnimalName,	AnimalGender,	AnimalBirthMonth,	BreedName,	Borough,	ZipCode,	CommunityDistrict,	CensusTract2010,	NTA,	CityCouncilDistrict,	CongressionalDistrict,	StateSenatorialDistrict,	LicenseIssuedDate,	LicenseExpiredDate
+Variables provided: RowNumber, AnimalName, AnimalGender, AnimalBirthMonth, BreedName, Borough, ZipCode, CommunityDistrict, CensusTract2010, NTA, CityCouncilDistrict, CongressionalDistrict, StateSenatorialDistrict, LicenseIssuedDate, LicenseExpiredDate
 
 **Dog Bite data** NYC Reported Dog Bites (2015 - 2018)
 
 Information reported assists the Health Department to determine if the biting dog is healthy ten days after the person was bitten in order to avoid having the person bitten receive unnecessary rabies shots. Data is collected from reports received online, mail, fax or by phone to 311 or NYC DOHMH Animal Bite Unit. Each record represents a single dog bite incident. Information on breed, age, gender and spayed or neutered status have not been verified by DOHMH and is listed only as reported to DOHMH.
 
-Variables provided:
-UniqueID,	DateOfBite,	Species,	Breed,	Age,	Gender,	SpayNeuter,	Borough,	ZipCode
-
+Variables provided: UniqueID, DateOfBite, Species, Breed, Age, Gender, SpayNeuter, Borough, ZipCode
 
 ### Data cleaning
 
 The biggest hurdle to overcome in cleaning the data was identifying the borough (Bronx, Brooklyn, Manhattan, Queens, Staten Island). There were many miscellaneous (e.g. Jersey City) or narrow (e.g. Astoria, which is part of Queens) entries, and identifying them required a bit of labor.
 
-In the dog bite data, we had the additional challenge of verifying validity of existing zip codes and imputing zip codes where they were missing or invalid. Through some exploration, we found that about 25% of the data (~2,000 reports) had a missing or invalid zip code.  We imputed on these entries by assuming that the listed borough was correct and (1) getting a full list of true zip codes by borough from the  data found in the `zipcode` library; (2) matching the verifying whether the zip codes given were legitimate by cross referencing said data; and (3) imputing a zip code for missing entries based on frequencies found in the non-missing dog bite data.
+In the dog bite data, we had the additional challenge of verifying validity of existing zip codes and imputing zip codes where they were missing or invalid. Through some exploration, we found that about 25% of the data (~2,000 reports) had a missing or invalid zip code. We imputed on these entries by assuming that the listed borough was correct and (1) getting a full list of true zip codes by borough from the data found in the `zipcode` library; (2) matching the verifying whether the zip codes given were legitimate by cross referencing said data; and (3) imputing a zip code for missing entries based on frequencies found in the non-missing dog bite data.
 
 The licensing data required us to clean the borough names. We did this by (1) manually obtaining a list of clearly mis-classified borough entries and recoding them properly; (2)
 
-```{r}
+``` r
 # list of Queens neighborhood strings found in license/dog bite datasets
 queens <- c("astoria", "elmhurst", "flushing", "jackson heights", "kew gardens", "woodside", "briarwood", "corona", "forest hills", "ozone park", "richmond hill", "rockaway park", "arverne", "bayside", "belle harbor", "cambria heights", "college point", "east elmhurst", "glen oaks", "glendale", "jackson hgts", "long island city", "maspeth", "middle vilg", "middle village", "oakland gardens", "quens", "ridgewood", "so richmond", "south richmond hil", "woodside ny.", "fresh meadows", 'queens village')
 
@@ -105,8 +78,7 @@ zip_list = zipcode %>%
   nest(-borough)
 ```
 
-
-```{r}
+``` r
 # list of official NYC zip codes 
 official.zip = paste(zipcode$zip, collapse = '|')
 
@@ -146,14 +118,11 @@ dog_bite = read_csv('./data/DOHMH_Dog_Bite_Data.csv',
     zip_code_imputed = zip_code %>% ifelse(is.na(.), zip_sample, .)
   ) %>% 
   select(-c(zip_nest, zip_sample)) # final data frame of dog bites
-
-
 ```
-
 
 **Licensing data**
 
-```{r message = FALSE}
+``` r
 # function to capitalize first letter of words
 simpleCap <- function(x) {
     s <- strsplit(x, " ")[[1]]
@@ -183,23 +152,14 @@ license <- read_csv("./data/NYC_Dog_Licensing_Dataset.csv") %>%
          pit_bull = str_detect(BreedName, 'pit bull')) %>%
   janitor::clean_names() %>%
   filter(cleaned_borough != 'not nyc')
-
 ```
 
+Exploratory analysis
+--------------------
 
+Assumptions made in this analysis: - each reported bite is made by a different dog - no dog appears in the licensing dataset more than once - all dogs that bite are licensed - dogs bite only in their borough
 
-
-## Exploratory analysis
-
-
-Assumptions made in this analysis:
-  - each reported bite is made by a different dog
-  - no dog appears in the licensing dataset more than once
-  - all dogs that bite are licensed
-  - dogs bite only in their borough
-  
-  
-```{r}
+``` r
 # dog bite data from only 2016 to match dog licensing data
 dg_2016 = dog_bite %>%
   filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
@@ -207,7 +167,7 @@ dg_2016 = dog_bite %>%
 
 We were interested to know how the raw counts of dog bites compared to the number of registered dogs; if there are more pit bull bites, does that mean that pit bulls are more aggressive and likely to bite than other breeds, or is it simply that there are more pit bulls in the city?
 
-```{r warning = FALSE}
+``` r
 # number of dog bites (pitbull vs. other) by boro
 bite_counts = dg_2016 %>%
   group_by(borough, pit_bull) %>% # group by borough and whether the dog was a pit bull or not
@@ -229,12 +189,11 @@ license_counts = license %>%
 
 master = dplyr::inner_join(bite_counts, license_counts, by = 'boro') %>%
   filter(boro != 'Other')
-
 ```
 
-If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, `r round(sum(master$total_bites)/sum(master$total_lic)*100, 2)`% of licensed dogs bite. By borough, it breaks down as follows:
+If we assume that no dog bites twice, and all dogs that bite are licensed, then across all boroughs, 2.09% of licensed dogs bite. By borough, it breaks down as follows:
 
-```{r}
+``` r
 # print table of dog bites / licenses by borough
 master %>%
   mutate('Percent' = round((total_bites / total_lic) * 100, 2)) %>%
@@ -244,13 +203,21 @@ master %>%
   knitr::kable()
 ```
 
-A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total). 
+| Borough       |  No. Licenses|  No. bites|  Percent|
+|:--------------|-------------:|----------:|--------:|
+| Manhattan     |         42507|        530|     1.25|
+| Brooklyn      |         30271|        598|     1.98|
+| Queens        |         25109|        664|     2.64|
+| Bronx         |         12585|        486|     3.86|
+| Staten Island |         11146|        264|     2.37|
 
-We can break this analysis down by dog breed; pit bull or not. Across all years, `r dog_bite %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`% of all bites are given by pitbulls; in 2016, this number was `r dg_2016 %>% group_by(pit_bull) %>% count %>% ungroup %>% mutate(pit_bull = ifelse(pit_bull == FALSE, 'no', 'yes')) %>% spread(key = pit_bull, value = n) %>%  mutate(total_bites = no + yes, pct_pb_bites = yes / total_bites) %>% summarise(p = round(pct_pb_bites * 100, 2))`%. This is a rather high percentage for a single breed. 
+A higher percentage of licensed dogs bite in the Bronx than any other NYC borough; Manhattan has the lowest percentage of total dog bites. However, Manhattan has the most licensed dogs by quite a bit, whereas the Bronx has the second fewest number of registered dogs. Queens has the highest number of reported bites (664 total).
 
-The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B). 
+We can break this analysis down by dog breed; pit bull or not. Across all years, 32.57% of all bites are given by pitbulls; in 2016, this number was 35.74%. This is a rather high percentage for a single breed.
 
-```{r}
+The figures below show the number of registered dogs and number of bites by borough, and classified by breed type. Only a small percentage of registered dogs are pitbulls (A), but upwards of 30% of all reported bites are given by pit bulls (B).
+
+``` r
 # number of licenses in each borough in 2016 by breed type
 lic_bar = license %>%
   filter(final_borough != 'Other') %>% # remove unknown borough
@@ -287,9 +254,11 @@ lic_bar + theme(legend.position = 'none',
                 axis.text.x = element_text(angle = 45, hjust = 1)) + bite_bar_2016 + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+<img src="Final_report_files/figure-markdown_github/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
+
 Are pitbulls spayed/neutered more often than other breeds?
 
-```{r}
+``` r
 dog_bite %>%
   group_by(gender, spay_neuter, pit_bull) %>%
   count() %>% # counts of spay/neuter status by sex and breed type
@@ -311,10 +280,11 @@ dog_bite %>%
   )
 ```
 
+<img src="Final_report_files/figure-markdown_github/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
 
-With respect to the temporal dynamics of pit bull bites versus non-pitbulls, from the beggining of 2015 through the end of 2017, we observed a moderate overall increase in the mean number of bites per month by non-pitbulls. However, for pit bulls, the trend in number of bites per month is more stable, portraying a slight decrease in the mean number of bites in time. 
+With respect to the temporal dynamics of pit bull bites versus non-pitbulls, from the beggining of 2015 through the end of 2017, we observed a moderate overall increase in the mean number of bites per month by non-pitbulls. However, for pit bulls, the trend in number of bites per month is more stable, portraying a slight decrease in the mean number of bites in time.
 
-```{r message = FALSE, warning = FALSE, error = FALSE}
+``` r
  time.overall.df <- dog_bite %>%
   mutate(date = ymd(date_of_bite)) %>% 
   mutate_at(vars(date), funs(year, month, day)) %>%
@@ -358,11 +328,13 @@ time.overall.plot <- time.overall.df %>%
 time.overall.plot
 ```
 
-Additionally, we observed an oscillating fluctation in seasonal effects, with overall dog bites rising during the summer months and falling during the winter months. 
+<img src="Final_report_files/figure-markdown_github/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
+
+Additionally, we observed an oscillating fluctation in seasonal effects, with overall dog bites rising during the summer months and falling during the winter months.
 
 Next, we considered the borough level effects on the temporal patterns of dog bites.
 
-```{r fig.height = 6, message = FALSE, warning = FALSE, error = FALSE}
+``` r
 #Create Bites Per Month Data Frame, by Borough
 time.boro.df <- dog_bite %>%
   mutate(date = ymd(date_of_bite)) %>% 
@@ -405,14 +377,12 @@ time.boro.plot <- time.boro.df %>%
 time.boro.plot
 ```
 
-In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean number of bites per month by the end of 2017. 
+<img src="Final_report_files/figure-markdown_github/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" />
 
+In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean number of bites per month by the end of 2017.
 
+Additional analysis
+-------------------
 
-
-## Additional analysis
-
-
-
-
-## Discussion
+Discussion
+----------
