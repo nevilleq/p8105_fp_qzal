@@ -72,8 +72,7 @@ time.overall.plot <- time.overall.df %>%
   geom_point(alpha = 0.3, size = 2) + 
   geom_line(size = 1, alpha = 0.5) + 
   geom_smooth(size = 1.5, alpha = 0.5, se = F, method = "lm") + 
-    theme(legend.position = "bottom",
-        axis.text.y = element_text(color = "black", 
+  theme(axis.text.y = element_text(color = "black", 
                                    size = 10,  hjust = 1), 
         axis.text.x = element_text(angle = 45, 
                                    hjust = 1, size = 10)) +
@@ -118,8 +117,7 @@ time.boro.plot <- time.boro.df %>%
   ggplot(aes(x = date, y = `number of bites`, colour = breed)) + 
   geom_line(size = 1, alpha = 0.6) + 
   geom_smooth(size = 1.5, alpha = 0.3, se = F, method = "lm") + 
-  theme(legend.position = "bottom",
-        axis.text.y = element_text(color = "black", 
+  theme(axis.text.y = element_text(color = "black", 
                                    size = 10,  hjust = 1), 
         axis.text.x = element_text(angle = 45, 
                                    hjust = 1, size = 10)) +
