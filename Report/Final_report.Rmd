@@ -408,12 +408,38 @@ time.boro.plot
 
 In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean number of bites per month by the end of 2017. 
 
+## Additional Analysis
 
+After visually inspecting the temporal dynamics of pit bull bites in time, we sought to formally test the hypothesis that the number of given pit bull dog bites decreased from 2015-2018 in N.Y.C. Additionally, we controlled for seasonal and borough level effects, as indicated by our exploratory analysis. Utilizing linear regression, our final model took the form
 
+$$ Number \ of \ Bites_i \sim \beta_0 + \beta_1 Time_i + \beta_2 Pitbull_i + \beta_3 Pitbull_i:Time_i + \beta_4 Season_i + \beta_5 Borough_i + \varepsilon_i.$$
 
-## Additional analysis
+```{r}
+#Data Frame for linear modeling
+#Center time at 2015, borough factor, seasonal factor, filter 2015-2018
+#Modeling with data grouped by month
+lm.df <- time.boro.df %>%
+  mutate(date_numeric = date_numeric - 2015,
+         season = ifelse(month %in% c(12, 1, 2), "Winter", 
+                         ifelse(month %in% c(3, 4, 5), "Spring", 
+                                ifelse(month %in% c(6, 7, 8), "Summer",
+                                       "Fall"))),
+         season = as.factor(season),
+         season = fct_relevel(season, "Winter", "Spring", "Summer", "Fall")) %>%
+  rename(time = date_numeric,
+         number_bites = num_bites) %>%
+  filter(time >= 0 & borough != "Other")
 
+#Full Model
+lm.full <- lm(number_bites ~ time + pit_bull + pit_bull:time + season + borough, data = lm.df)
 
+#Display
+lm.full %>% 
+  broom::tidy() %>%
+  select(term, estimate, p.value) %>%
+  knitr::kable(digits = 3)
+```
 
+Our final regression results, found in the table above, describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed an expected mean increase of 2.03 bites per month for each additional month in 2015-2018, adjusting for season, borough, and breed. With respect to seasonal changes, we observed an expected mean increase of 6.89, 11.02, and 5.49 bites per month from baseline in the spring, summer, and fall respectively, adjusting for time, borough, and breed. Analysis of the borough effects elicited an expected mean increase of 5.95, 5.04, 9.39, and a decrease of 8.92 bites per month from baseline in Brooklyn, Manhattan, Queens, and Staten Island respectively, adjusting for time, season, and breed. Most importantly, we observed an expected mean decrease of 12.42 bites per month from baseline for pit bulls and an additional mean decrease of 1.91 bites per month in pit bulls for each additional month of observation, adjusting for season and borough effects. 
 
 ## Discussion

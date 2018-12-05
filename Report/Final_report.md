@@ -1,24 +1,26 @@
 Final Report
 ================
-all
-12/4/2018
+Quinton Neville (qn2119), Alyssa Vanderbeek (amv2187), Lyuou Zhang (lz2586), Zelos Zhu (zdz2101)
+5 December 2018
 
 Motivation
 ----------
 
-Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma. Based on the occurrence of dog bites, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
+Pit bulls have a historically poor reputation as an aggressive breed. They're most commonly used in dog fighting, and are often not permitted as pets in many leasing communities. Because of their poor reputation, thousands of pitbulls are euthanized in kill shelters each year. Supporters of the breed have championed these dogs as sweet and loving in nature, and in recent years have been pushing to change the negative stigma that surrounds them. Below are some resources that dive into these topics, from both organizations and individuals:
 
-Initial questions
------------------
+-   [The American Pit Bull Foundation](https://americanpitbullfoundation.com) provides resources for adoption and responsible pet ownership.
+-   News organizations publish [articles](https://www.huffingtonpost.com/chris-white/myths-lies-and-misconceptions-pit-bulls_b_8072204.html) that advocate for pitbulls.
+-   Social media platforms like [Facebook](https://www.facebook.com/PitBullAdvocates1/) and [Twitter](https://twitter.com/pitbulladvocate?lang=en) provide a space for advocates to come together.
 
-Several questions arose for us:
+The purpose of this project was to use quantitative data to assess whether pitbulls are more aggressive than other breeds. By using reporting of dog bites as a surrogate measure of aggression, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
--   Are there more bites given by pit bulls than other breeds?
--   Does this number change by borough? Over time?
--   Are there more pitbulls in certain neighborhoods?
--   Do pit bulls tend to be spayed/neutered more or less often than other breeds?
--   How does the number of dog bites by breed compare to the total number of registered dogs in a certain time period?
--   Does season / weather affect the number of dog bites?
+Research questions
+------------------
+
+-   Are there more bites by pitbulls than other breeds? Does this number vary by borough?
+-   Are there more pitbulls in certain neighborhoods? How does this compare to the number of bites seen in each borough?
+-   What is the relationship between dog breed, spay/neuter status, and dog bites?
+-   Can we identify any trends in dog bite reports over time? Does season / weather affect the number of dog bites?
 
 Data
 ----
@@ -381,8 +383,54 @@ time.boro.plot
 
 In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean number of bites per month by the end of 2017.
 
-Additional analysis
+Additional Analysis
 -------------------
+
+After visually inspecting the temporal dynamics of pit bull bites in time, we sought to formally test the hypothesis that the number of given pit bull dog bites decreased from 2015-2018 in N.Y.C. Additionally, we controlled for seasonal and borough level effects, as indicated by our exploratory analysis. Utilizing linear regression, our final model took the form
+
+*N**u**m**b**e**r* *o**f* *B**i**t**e**s*<sub>*i*</sub> ∼ *β*<sub>0</sub> + *β*<sub>1</sub>*T**i**m**e*<sub>*i*</sub> + *β*<sub>2</sub>*P**i**t**b**u**l**l*<sub>*i*</sub> + *β*<sub>3</sub>*P**i**t**b**u**l**l*<sub>*i*</sub> : *T**i**m**e*<sub>*i*</sub> + *β*<sub>4</sub>*S**e**a**s**o**n*<sub>*i*</sub> + *β*<sub>5</sub>*B**o**r**o**u**g**h*<sub>*i*</sub> + *ε*<sub>*i*</sub>.
+
+``` r
+#Data Frame for linear modeling
+#Center time at 2015, borough factor, seasonal factor, filter 2015-2018
+#Modeling with data grouped by month
+lm.df <- time.boro.df %>%
+  mutate(date_numeric = date_numeric - 2015,
+         season = ifelse(month %in% c(12, 1, 2), "Winter", 
+                         ifelse(month %in% c(3, 4, 5), "Spring", 
+                                ifelse(month %in% c(6, 7, 8), "Summer",
+                                       "Fall"))),
+         season = as.factor(season),
+         season = fct_relevel(season, "Winter", "Spring", "Summer", "Fall")) %>%
+  rename(time = date_numeric,
+         number_bites = num_bites) %>%
+  filter(time >= 0 & borough != "Other")
+
+#Full Model
+lm.full <- lm(number_bites ~ time + pit_bull + pit_bull:time + season + borough, data = lm.df)
+
+#Display
+lm.full %>% 
+  broom::tidy() %>%
+  select(term, estimate, p.value) %>%
+  knitr::kable(digits = 3)
+```
+
+| term                   |  estimate|  p.value|
+|:-----------------------|---------:|--------:|
+| (Intercept)            |    19.237|    0.000|
+| time                   |     2.038|    0.005|
+| pit\_bullPit Bull      |   -12.423|    0.000|
+| seasonSpring           |     6.886|    0.000|
+| seasonSummer           |    11.016|    0.000|
+| seasonFall             |     5.490|    0.000|
+| boroughBrooklyn        |     5.946|    0.000|
+| boroughManhattan       |     5.041|    0.000|
+| boroughQueens          |     9.392|    0.000|
+| boroughStaten Island   |    -8.919|    0.000|
+| time:pit\_bullPit Bull |    -1.912|    0.059|
+
+Our final regression results, found in the table above, describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed an expected mean increase of 2.03 bites per month for each additional month in 2015-2018, adjusting for season, borough, and breed. With respect to seasonal changes, we observed an expected mean increase of 6.89, 11.02, and 5.49 bites per month from baseline in the spring, summer, and fall respectively, adjusting for time, borough, and breed. Analysis of the borough effects elicited an expected mean increase of 5.95, 5.04, 9.39, and a decrease of 8.92 bites per month from baseline in Brooklyn, Manhattan, Queens, and Staten Island respectively, adjusting for time, season, and breed. Most importantly, we observed an expected mean decrease of 12.42 bites per month from baseline for pit bulls and an additional mean decrease of 1.91 bites per month in pit bulls for each additional month of observation, adjusting for season and borough effects.
 
 Discussion
 ----------
