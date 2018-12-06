@@ -1,5 +1,6 @@
 ---
 title: "I thought you said your dog did not bite!"
+author: "Quinton Neville,  Alyssa Vanderbeek,  Lyuou Zhang,  Zelos Zhu"
 ---
 
 <img src = "./pitbullbaby.jpg" style = "width:40%; float:right; padding-left:25px; padding-bottom:25px">
