@@ -21,4 +21,5 @@ navbar:
     - icon: fa-github fa-lg
       href: https://github.com/nevilleq/p8105_fp_qzal
 output:
-  html_document
+  html_document:
+    theme: flatly

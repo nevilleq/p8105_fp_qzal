@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -105,34 +105,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 60px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 </style>
 
@@ -255,7 +255,7 @@ $(document).ready(function () {
 </div>
 <div id="data" class="section level3">
 <h3>Data</h3>
-<p>We used data publicly available on <a href="https://opendata.cityofnewyork.us">NYC Open Data</a>. More detailed information on the datasets used can be found in the Data tab. A Google Drive folder of the datasets can be found here.</p>
+<p>We used data publicly available on <a href="https://opendata.cityofnewyork.us">NYC Open Data</a>. More detailed information on the datasets used can be found in the Data tab. A Google Drive folder of the datasets can be found <a href="https://drive.google.com/drive/folders/1wZfIbv9UWAoI-YO1mwRgoXmU-ucr0inX">here</a>.</p>
 </div>
 <div id="research-questions" class="section level3">
 <h3>Research questions</h3>
@@ -265,6 +265,22 @@ $(document).ready(function () {
 <li>What is the relationship between dog breed, spay/neuter status, and dog bites?</li>
 <li>Can we identify any trends in dog bite reports over time? Does season / weather affect the number of dog bites?</li>
 </ul>
+</div>
+<div id="main-results" class="section level3">
+<h3>Main results</h3>
+<ul>
+<li>Pit bulls don’t bite more than all other breeds combined, but they make up for about a third of all bites - a significant number for a single breed. This number varies only slightly by borough, with a range of 264 biets (~90 pit bull) in Staten Island, and 664 bites (~230 pit bull) in Queens.</li>
+<li>Manhattan has the largest number of licensed dogs - unsurprising given its human population. The most licensed pit bulls live in Brooklyn.</li>
+<li>Pit bulls account for 5.5% of all registered dogs in NYC, but they account for over 30% of all dog bites.</li>
+<li>Males bite more often than females. Spayed/neutered dogs bite more, but this trend flips for pitbulls - non-spayed/neutered pit bulls bite more often.</li>
+<li>Dog bite occurrence/reporting increases over time (2015-2018) across all breeds, but this trend is almost negligible for pit bulls specifically. Trends are different across boroughs. Season affects the number of dog bites, with a higher frequency occurring in the summer months.</li>
+</ul>
+</div>
+<div id="discussion" class="section level3">
+<h3>Discussion</h3>
+<p>Quantifying dog aggression with individual-reported dog bite data in NYC provides insights into trends across breeds, locations, and over time. It was interesting to note that pit bulls account for such a high percentage of reported dog bites, especially since they make up such a small proportion of all registered dogs. It begs the question: why? Is this because pit bulls bite people more often, or is it a matter of people being more inclined to report bites by pit bulls versus other breeds? Unfortunately, this is something we can’t answer.</p>
+<p>Still, we found that pit bull bites increased over time at a much lower rate - almost not at all- compared to bites from other breeds. If this is a facet of reporting, then it may be that efforts to change the stigma surrounding pit bulls is working, and people are reporting such bites less often.</p>
+<p>The limitations of this dataset make inference difficult. The opt-in data collection makes for potentially biased data. Dog sex was largely unknown, calling into question the meaningfulness of our conclusions regarding the associations between dog bites and gender. Despite this, we think our findings are interesting, and at the very least prompt further investigation regarding pit bull behavior and stigma.</p>
 </div>
 
 
