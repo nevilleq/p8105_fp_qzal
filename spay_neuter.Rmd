@@ -5,7 +5,11 @@ title: "Dog Bites by Gender and Spayed/Neutered Status"
 library(tidyverse)
 library(ggthemes)
 library(plotly)
+
+# read data
 dog_bite <- read_csv("./data/dog_bite_12.4.csv")
+
+# figure
 bite_figure <- dog_bite %>%
   group_by(gender, spay_neuter, pit_bull) %>%
   count() %>% # counts of spay/neuter status by sex and breed type
@@ -23,10 +27,11 @@ bite_figure <- dog_bite %>%
     name = 'Dog Breed',
     discrete = T
   )
-#bite_figure
+
 ```
 
 ```{r, echo = FALSE, fig.width=9}
+# render as plotly
 ggplotly(bite_figure)
 ```
 
