@@ -1,5 +1,9 @@
 ---
 title: "Trends in Time"
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
@@ -137,7 +141,7 @@ subplot(ggplotly(time.boro.plot)) %>% layout(xaxis3 = list(title = "Time"), yaxi
 
 In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean.
 
-##Statistical Modeling and Analysis
+##Statistical Analysis
 
 After visually inspecting the temporal dynamics of pit bull bites in time, we sought to formally test the hypothesis that the number of pit bull dog bites decreased from 2015-2018 in N.Y.C. Motivated by our exploratory visualizations above, we also decided it was necessary to control for seasonal and borough level effects. Subsequently, we utilized a linear regression where our final model took the form
 
@@ -169,11 +173,11 @@ lm.final %>%
   knitr::kable(digits = 3)
 ```
 
-Our final regression results describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed a moderate expected mean increase in bites per month overall (2.03, adj. breed, season, borough), and bites per month from the winter to the spring, summer, and fall respectively,(6.89, 11.02, 5.49, adj. time, borough, breed). Compared to the Bronx, we also observed moderate expected bites per month increases in Brooklyn, Manhattan, Queens, and a decrease in Staten Island respectively(5.95, 5.04, 9.39, -8.92, adj. time, season, breed). Most notably though, the main result was an observed additional mean decrease of 1.91 bites per month in pit bulls for each additional month of observation, adjusting for season and borough effects.
+Our final regression results describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed a moderate expected mean increase in bites per month overall (2.03, adj. breed, season, borough), and bites per month from the winter to the spring, summer, and fall respectively (6.89, 11.02, 5.49, adj. time, borough, breed). Compared to the Bronx, we also observed moderate expected bites per month increases in Brooklyn, Manhattan, Queens, and a decrease in Staten Island (5.95, 5.04, 9.39, -8.92, adj. time, season, breed). Most notably though, the main result was an expected additional mean decrease of 1.91 bites per month in pit bulls for each additional month of observation, adjusting for season and borough effects.
 
 ##Discussion
 
-Ultimately, our hypothesis that pit bull bites decreased in N.Y.C. from 2015-2018, adjusting for significant seasonal and borough level effects, is supported at the $\alpha_{0.1}$ level. Our initial intuition that seasonal flucuation, from low in the winter to high in the warmer seasons, and differing mean borough level effects had a significant impact on dog bites over time was also supported by these regression results. Although we cannot conclude whether media campaigns to destigmatize and rehabilitate pit bulls in recent years have directly caused the decline in pit bull agression and citation which we observed, we have identified a meaningful decrease in the amount of violent interactions with pit bulls in the City of New York.
+Ultimately, our hypothesis that pit bull bites decreased in N.Y.C. from 2015-2018, adjusting for significant seasonal and borough level effects, is supported at the $\alpha_{0.1}$ level. Our initial intuition that seasonal fluctuation, from low in the winter to high in the warmer seasons, and differing mean borough level effects had a significant impact on dog bites over time was also supported by these regression results. Although we cannot conclude whether media campaigns to destigmatize and rehabilitate pit bulls in recent years have directly caused the decline in pit bull agression and citation which we observed, but we have identified a meaningful decrease in the amount of violent interactions with pit bulls in the City of New York.
 
 ##Appendix
 
