@@ -446,14 +446,123 @@ In Manhattan, we see the largest mean difference in pit bull vs. non-pit bull bi
 
 We decided to look at visualizations of the geographical distribution of dog bites across the five boroughs. Fortunately, we were able to do so by making use of the `leaflet` library, and produced interactive plots. Screenshots of these maps are given below, with the fully rendered versions available on our [website.](https://nevilleq.github.io/p8105_fp_qzal/) The purpose of this exploration was not to test any hypotheses, but to provide us and our readers with an interactive tool to explore our data. The trends we see in the geography match the exploratory analysis we conducted up to this point For example, as we saw in a previous section, there is a higher concentration of pit bull bites in the Bronx compared to other boroughs, in relation to the total number of dog bites. Interestingly, the places with more bites overall also had the most pit bull bites as well; the distribution of bites by breed is consistent across location.
 
-<img src="../leaflet_alldogs.png" width="80%" style="display: block; margin: auto;" /><img src="../leaflet_pitbulls.png" width="80%" style="display: block; margin: auto;" />
+<img src="./images/leaflet_alldogs.png" width="80%" style="display: block; margin: auto;" /><img src="./images/leaflet_pitbulls.png" width="80%" style="display: block; margin: auto;" />
+
+``` r
+# Code for rendering leaflet maps
+
+# count the number of dog bite incidence by zip code
+bite_count <- dog_bite %>%
+  group_by(zip_code_imputed) %>%
+  summarize(n_bite = n())
+
+# for pit bulls
+pit_bite <- dog_bite %>%
+  filter(
+   str_detect(breed, '[pP][iI][Tt].[Bb][Uu][Ll][Ll]')
+  ) %>%
+  group_by(zip_code_imputed) %>%
+  summarize(
+    n_pit = n()
+  )
+
+# zip code tabulation area
+# https://data.cityofnewyork.us/Business/Zip-Code-Boundaries/i8iw-xf4u/data
+# import the shape file
+# https://plotly-book.cpsievert.me/maps.html
+
+zip_map <- readOGR(dsn = './data/ZIP_CODE_040114/ZIP_CODE_040114.shp', encoding = "UTF-8")
+
+zip_map@data <- left_join(zip_map@data, bite_count, by = c('ZIPCODE' = 'zip_code_imputed'))
+
+zip_map@data <- left_join(zip_map@data, pit_bite, by = c('ZIPCODE' = 'zip_code_imputed'))
+
+# assign 0 for zip codes that have no match in the dog bite data
+zip_map$n_bite[is.na(zip_map$n_bite)] <- 0
+zip_map$n_pit[is.na(zip_map$n_pit)] <- 0
+
+# CRS setting
+zip_map_crs <- spTransform(zip_map, CRS("+init=epsg:4326"))
+
+# export the json file
+# writeOGR(zip_map_crs, './data/zip_map_geojson', layer = 'zip_map', driver = 'GeoJSON')
+
+# Layout
+# format of the label that pops up for each polygon
+label_popup <- paste0(
+  "<strong>Zip code: </strong>",
+  zip_map$ZIPCODE,
+  "<br><strong>Number of dog bites: </strong>",
+  zip_map$n_bite
+)
+
+# format of the label for each polygon: pit bull bites
+label_popup_pit <- paste0(
+  "<strong>Zip code: </strong>",
+  zip_map$ZIPCODE,
+  "<br><strong>Number of dog bites: </strong>",
+  zip_map$n_pit
+)
+
+# get jenks natural break for dog bites
+getJenksBreaks(zip_map$n_bite, 6)
+
+# get jenks natural breaks for pit bull bites
+getJenksBreaks(zip_map$n_pit, 6)
+
+# set bins
+bite_bins <- c(0, 25, 62, 97, 141, 260)
+pit_bins <- c(0 , 4, 14, 25, 41, 80)
+
+# set pals
+bite_pal <- colorBin('Greens', bins = bite_bins, na.color = '#aaff56')
+pit_pal <- colorBin('Greens', bins = pit_bins, na.color = '#aaff56')
+
+## Number of dog bites by zip code
+
+# choropleth map for dog bites
+leaflet::leaflet(data = zip_map_crs) %>%
+  addProviderTiles('CartoDB.Positron') %>%
+  addPolygons(fillColor = ~bite_pal(n_bite),
+              fillOpacity = 0.8,
+              color = "#BDBDC3",
+              weight = 1,
+              popup = label_popup,
+              highlightOptions = highlightOptions(color = "black", weight = 2,
+      bringToFront = TRUE)) %>%
+  addLegend('bottomleft',
+            pal = bite_pal,
+            values = ~n_bite,
+            title = 'Number of dog bite incidents by zip code',
+            opacity = 1)
+
+## Number of pit bull bites by zip code
+# choropleth map for pit bull bites
+leaflet::leaflet(data = zip_map_crs) %>%
+  addProviderTiles('CartoDB.Positron') %>%
+  addPolygons(fillColor = ~pit_pal(n_pit),
+              fillOpacity = 0.8,
+              color = "#BDBDC3",
+              weight = 1,
+              popup = label_popup_pit,
+              highlightOptions = highlightOptions(color = "black", weight = 2,
+      bringToFront = TRUE)) %>%
+  addLegend('bottomleft',
+            pal = pit_pal,
+            values = ~n_pit,
+            title = 'Number of pit bull bite incidents by zip code',
+            opacity = 1)
+
+
+#https://gist.github.com/brianhigh/2efe4d0bedf0eebe70cbcd58f2b894f7
+```
 
 Additional Analysis
 -------------------
 
 After visually inspecting the temporal dynamics of pit bull bites in time, we sought to formally test the hypothesis that the number of given pit bull dog bites decreased from 2015-2018 in NYC. The purpose of this analysis was not to formally predict the number of bites, but rather to see whether there was a significant change in the expected number of dog bites over time, adjusting for breed, seasonal, and borough-level effects. We initially tried to fit a logistic regression to model the odds of being bitten by a pit bull versus another breed, but found the interpretation of this model difficult in accounting for the temporal component. We also fit a Poisson regression, which confirmed the interpretation in our final model below. Ultimately we opted for multiple linear regression, since the logit and Poisson model assumptions were violated. Our final linear model took the form
 
-<img src="../model_tex.png" width="90%" style="display: block; margin: auto;" />
+<img src="./images/model_tex.png" width="90%" style="display: block; margin: auto;" />
 
 for month *i*.
 
