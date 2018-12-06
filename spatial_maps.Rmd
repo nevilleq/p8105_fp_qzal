@@ -92,6 +92,14 @@ label_popup <- paste0(
   zip_map$n_bite
 )
 
+# format of the label for each polygon: pit bull bites
+label_popup_pit <- paste0(
+  "<strong>Zip code: </strong>",
+  zip_map$ZIPCODE,
+  "<br><strong>Number of dog bites: </strong>",
+  zip_map$n_pit
+)
+
 # get jenks natural break for dog bites
 getJenksBreaks(zip_map$n_bite, 6)
 
@@ -125,7 +133,7 @@ leaflet::leaflet(data = zip_map_crs) %>%
   addLegend('bottomleft',
             pal = bite_pal,
             values = ~n_bite,
-            title = 'Number of dog bite incidents by zip code tabulation area',
+            title = 'Number of dog bite incidents by zip code',
             opacity = 1)
 ```
 
@@ -139,13 +147,13 @@ leaflet::leaflet(data = zip_map_crs) %>%
               fillOpacity = 0.8,
               color = "#BDBDC3",
               weight = 1,
-              popup = label_popup,
+              popup = label_popup_pit,
               highlightOptions = highlightOptions(color = "black", weight = 2,
       bringToFront = TRUE)) %>% 
   addLegend('bottomleft',
             pal = pit_pal,
             values = ~n_pit,
-            title = 'Number of pit bull bite incidents by zip code tabulation area',
+            title = 'Number of pit bull bite incidents by zip code',
             opacity = 1)
 
 
@@ -154,8 +162,5 @@ leaflet::leaflet(data = zip_map_crs) %>%
 
 ```
 
-### Comment
-
-...
 
 
