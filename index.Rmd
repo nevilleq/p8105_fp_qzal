@@ -1,5 +1,5 @@
 ---
-title: "I thought you said your dog did not bite!"
+title: "*I thought you said your dog did not bite!*"
 author: "Quinton Neville,  Alyssa Vanderbeek,  Lyuou Zhang,  Zelos Zhu"
 ---
 
@@ -15,7 +15,7 @@ Pit bulls have a historically poor reputation as an aggressive breed. They're mo
 
 The purpose of this project was to use quantitative data to assess whether pitbulls are more aggressive than other breeds. By using reporting of dog bites as a surrogate measure of aggression, can we see whether pit bulls are more aggressive than other breeds, and whether this has changed over time?
 
-A screencast of our project can be found [here](https://youtu.be/c2ObWvVlsYQ). A more fun version of this screencast can be found [here - with music](https://youtu.be/SQQ34Q-LdBc)! Please enjoy both.
+A screencast of our project can be found [here](https://nevilleq.github.io/p8105_fp_qzal/about.html). A more fun version of this screencast can be found [here - with music](https://youtu.be/SQQ34Q-LdBc)! Please enjoy both.
 
 
 

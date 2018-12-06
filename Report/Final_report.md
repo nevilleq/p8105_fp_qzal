@@ -17,6 +17,8 @@ The purpose of this project was to use quantitative data to assess whether pitbu
 Research questions
 ------------------
 
+Our research questions did not evolve much over the course of our project. Our final question broke down into the following:
+
 -   Are there more bites by pitbulls than other breeds? Does this number vary by borough?
 -   Are there more pitbulls in certain neighborhoods? How does this compare to the number of bites seen in each borough?
 -   What is the relationship between dog breed, spay/neuter status, and dog bites?
@@ -27,7 +29,7 @@ Data
 
 ### Data sources
 
-All data was taken from [NYC Open Data](https://opendata.cityofnewyork.us). We examine two datasets to answer our research questions:
+All data was downloaded as .csv files from [NYC Open Data](https://opendata.cityofnewyork.us). We examine two datasets to answer our research questions:
 
 **Dog Licensing data**: Active Dog Licenses during 2016.
 
@@ -607,6 +609,12 @@ lm.full %>%
 | time:pit\_bullPit Bull |    -1.912|    0.059|
 
 After adjusting for season and borough, we see an almost negligible increase in the expected number of pit bull bites for a given month (increase of 0.126 bites per additional month). Our final regression results describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls - from here there is a moderate expected mean increase in bites per month overall (2.03 bites). This estimate changes based on the borough, season, and breed.
+
+### Checking model assumptions
+
+Considering the assumptions for inference in our linear model, there is moderate deviance from normality in the upper tail of the Q-Q plot and a slight curvilinear trend in the residuals vs. fitted plot, but nothing too terrible. However, there are some outlying high count observations and the residuals vs. leverage plot (along with normality) are the most concerning barrier for inference.
+
+<img src="Final_report_files/figure-markdown_github/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" />
 
 Discussion
 ----------

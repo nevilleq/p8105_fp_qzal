@@ -161,17 +161,9 @@ lm.final %>%
   knitr::kable(digits = 3)
 ```
 
-Most notably, our results indicate that for pit bulls we see an expected mean *decrease* of 1.91 bites per month for each additional month of observation, making the increase in time almost negligible after adjusting for seasonal and borough effects. Additionaly, we observed a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls. From this baseline, we observed a moderate expected mean increase in bites per month overall (2.03, adj. breed, season, borough), and bites per month from the winter to the spring, summer, and fall respectively (6.89, 11.02, 5.49, adj. time, borough, breed). Compared to the Bronx, we also observed moderate expected bites per month increases in Brooklyn, Manhattan, Queens, and a decrease in Staten Island (5.95, 5.04, 9.39, -8.92, adj. time, season, breed). 
+After adjusting for season and borough, we see an almost negligible increase in the expected number of pit bull bites for a given month (increase of 0.126 bites per additional month). Our final regression results describe a baseline mean number of bites of 19.24 in the Bronx, in the winter, for non-pit bulls - from here there is a moderate expected mean increase in bites per month overall (2.03 bites). This estimate changes based on the borough, season, and breed. 
 
-## Discussion
 
-Ultimately, pit bull bites increased almost negligibly compared to other breeds (at the 10% significant level) in NYC from 2015-2018, adjusting for significant seasonal and borough level effects. Our initial intuitions that seasonal fluctuation and borough significantly affect the number of dog bites over time are also supported. Unfortunately, we cannot conclude whether media campaigns to destigmatize and rehabilitate pit bulls in recent years have directly caused the relative decline in pit bull aggression and citation which we observed. Still, we have identified a meaningful decreased trend in the amount of violent interactions with pit bulls in NYC, compared to other breeds.
+Ultimately, pit bull bites increased almost negligibly compared to other breeds (at the 10% significant level) in NYC from 2015-2018, adjusting for significant seasonal and borough level effects. Our initial intuitions that seasonal fluctuation and borough significantly affect the number of dog bites over time are also supported. Unfortunately, we cannot conclude whether media campaigns to destigmatize and rehabilitate pit bulls in recent years have directly caused the relative decline in pit bull aggression and citation which we observed. Still, we have identified a meaningful difference in pit bull bites over time compared to other breeds.
 
-## Appendix
 
-Considering the assumptions for inference in our linear model, there is moderate deviance from normality in the upper tail of the Q-Q plot and a slight curvilinear trend in the residuals vs. fitted plot, but nothing too terrible. However, there are some outlying high count observations and the residuals vs. leverage plot (along with normality) are the most concerning barrier for inference.  
-
-```{r echo = FALSE}
-par(mfrow = c(2,2))
-plot(lm.final)
-```
