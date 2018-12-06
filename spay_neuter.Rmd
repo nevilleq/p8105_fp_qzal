@@ -26,7 +26,7 @@ bite_figure <- dog_bite %>%
 #bite_figure
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.width=9}
 ggplotly(bite_figure)
 ```
 
