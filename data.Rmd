@@ -14,4 +14,4 @@ All dog owners residing in NYC are required by law to license their dogs. The da
 
 
 
-*All data was downloaded from [NYC Open Data](https://opendata.cityofnewyork.us).
+*All data was downloaded from [NYC Open Data](https://opendata.cityofnewyork.us). A Google Drive of the datasets can be found [here](https://drive.google.com/drive/folders/1wZfIbv9UWAoI-YO1mwRgoXmU-ucr0inX).
