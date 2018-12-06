@@ -36,7 +36,7 @@ We used data publicly available on [NYC Open Data](https://opendata.cityofnewyor
 
 ### Main results
 
-- Pit bulls don't bite more than all other breeds combined, but they make up for about a third of all bites - a significant number for a single breed. This number varies only slightly by borough, with a range of 264 biets (~90 pit bull) in Staten Island, and 664 bites (~230 pit bull) in Queens. 
+- Pit bulls don't bite more than all other breeds combined, but they make up for about a third of all bites - a significant number for a single breed. This number varies only slightly by borough, with a range of 264 bites (~90 pit bull) in Staten Island, and 664 bites (~230 pit bull) in Queens. 
 - Manhattan has the largest number of licensed dogs - unsurprising given its human population. The most licensed pit bulls live in Brooklyn. 
 - Pit bulls account for 5.5% of all registered dogs in NYC, but they account for over 30% of all dog bites. 
 - Males bite more often than females. Spayed/neutered dogs bite more, but this trend flips for pitbulls - non-spayed/neutered pit bulls bite more often.
@@ -49,7 +49,7 @@ Quantifying dog aggression with individual-reported dog bite data in NYC provide
 
 Still, we found that pit bull bites increased over time at a much lower rate - almost not at all- compared to bites from other breeds. If this is a facet of reporting, then it may be that efforts to change the stigma surrounding pit bulls is working, and people are reporting such bites less often. 
 
-The limitations of this dataset make inference difficult. The opt-in data collection makes for potentially biased data. Dog sex was largely unknown, calling into question the meaningfulness of our conclusions regarding the associations between dog bites and gender. Despite this, we think our findings are interesting, and at the very least prompt further investigation regarding pit bull behavior and stigma. 
+The limitations of this dataset make inference difficult. The opt-in data collection makes for potentially biased data. For example, dog sex was largely unknown, calling into question the meaningfulness of our conclusions regarding the associations between dog bites and gender. Despite this, we think our findings are interesting, and at the very least prompt further investigation regarding pit bull behavior and stigma. 
 
 
 
