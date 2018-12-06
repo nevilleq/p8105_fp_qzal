@@ -258,7 +258,7 @@ lic_bar + theme(legend.position = 'none',
 
 <img src="Final_report_files/figure-markdown_github/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
 
-Are pitbulls spayed/neutered more often than other breeds?
+**Are pitbulls spayed/neutered more often than other breeds?**
 
 ``` r
 dog_bite %>%
@@ -288,6 +288,8 @@ From a visual standpoint, it seems male pitbulls generally bite more often, more
 
 With that said, it is especially worth noting that we have a handful of dogs whose gender is unknown, which brings up the integrity of their spayed/neutered status since it seems almost all were coded to be not spayed/neutered. If we took the data as it is now, the phenomenon of non-spayed/neutered dogs biting less frequently would easily change to biting much more frequently if we were to impute a gender status for the unknowns. However, among the unknown gender dogs it is likely a lot of them are actually spayed or neutered which would likely change the associations we see.
 
+**Are time and location associated with dog bite incidents?**
+
 With respect to the temporal dynamics of pit bull bites versus non-pitbulls, from the beggining of 2015 through the end of 2017, we observed a moderate overall increase in the mean number of bites per month by non-pitbulls. However, for pit bulls, the trend in number of bites per month is more stable, portraying a slight decrease in the mean number of bites in time.
 
 ``` r
@@ -313,7 +315,7 @@ With respect to the temporal dynamics of pit bull bites versus non-pitbulls, fro
 time.overall.plot <- time.overall.df %>%
  ggplot(aes(x = date_numeric, y = num_bites, colour = pit_bull)) + 
   geom_point(alpha = 0.3, size = 2) + 
-  geom_line(size = 1) + 
+  geom_line(size = 1, alpha = 0.6) + 
   geom_smooth(aes(colour = pit_bull), size = 1.5, alpha = 0.5, se = F, method = "lm") + 
     theme(legend.position = "bottom",
         axis.text.y = element_text(color = "black", 
