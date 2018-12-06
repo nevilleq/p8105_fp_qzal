@@ -118,13 +118,11 @@ time.boro.plot <- time.boro.df %>%
   geom_line(size = 1, alpha = 0.6) + 
   geom_smooth(size = 1.5, alpha = 0.3, se = F, method = "lm") + 
   theme(axis.text.y = element_text(color = "black", 
-                                   size = 10,  hjust = 1), 
+                                   size = 10), 
         axis.text.x = element_text(angle = 45, 
                                    hjust = 1, size = 10)) +
   labs(
-    x = "Time",
-    y = "Number of Bites per Month",
-    title = "Number of Bites by Borough in Time"
+    title = "Number of Bites by Borough over Time"
   ) + 
   viridis::scale_colour_viridis(
     name = "Dog Breed", 
@@ -134,7 +132,7 @@ time.boro.plot <- time.boro.df %>%
   facet_grid(~borough)
 
 #time.boro.plot
-ggplotly(time.boro.plot)
+subplot(ggplotly(time.boro.plot)) %>% layout(xaxis3 = list(title = "Time"), yaxis = list(title = "Number of Bites per Month"))
 ```
 
 In Manhattan, we observed the largest mean difference in pit bull vs. non-pit bull bites per month but no significant change in the moderately increasing trend between the two over time. Similarly, in Staten Island a smaller mean difference was observed but with a nearly identical decreasing trend. Brooklyn and Queens, however, demonstrated a widening gap over time, with the pit bull bites decreasing and non-pit bull bites increasing significantly. Lastly, the Bronx evinced a differential increase in pit bull bites over time while non-pit bull bites decreased, converging to a similar mean.
@@ -179,7 +177,7 @@ Ultimately, our hypothesis that pit bull bites decreased in N.Y.C. from 2015-201
 
 ##Appendix
 
-Considering the assumptions for inference in our linear model, there is moderate deviance from normality in the upper tail of the Q-Q plot and a slight curvilinear trend in the residuals vs. fitted plot, but nothing too terrible. However, the residuals vs. leverage plot (along with normality) is the most concerning barrier for inference.  
+Considering the assumptions for inference in our linear model, there is moderate deviance from normality in the upper tail of the Q-Q plot and a slight curvilinear trend in the residuals vs. fitted plot, but nothing too terrible. However, there are some outlying high count observations and the residuals vs. leverage plot (along with normality) are the most concerning barrier for inference.  
 
 ```{r echo = FALSE}
 par(mfrow = c(2,2))
