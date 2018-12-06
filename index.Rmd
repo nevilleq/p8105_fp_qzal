@@ -2,6 +2,7 @@
 title: "I thought you said your dog did not bite!"
 ---
 
+<img src = "pitbullbaby.png" style = "padding-right:25px; padding-bottom:25px">
 
 ### Motivation
 

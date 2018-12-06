@@ -8,8 +8,9 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(patchwork)
 
-theme_set(theme_bw())
+theme_set(theme_bw()) # set theme
 
+# import dog bite data
 dog_bite = read_csv('./data/dog_bite_12.4.csv',
                     col_types = cols(unique_id = col_integer(),
                                      date_of_bite = col_date(format = ""),
@@ -28,7 +29,7 @@ dog_bite = read_csv('./data/dog_bite_12.4.csv',
 dg_2016 = dog_bite %>%
   filter(date_of_bite > '2016-01-01' & date_of_bite < '2016-12-31')
 
-
+# import license data
 license = read_csv('./data/cleaned_license_data.csv', 
                    col_types = cols(row_number = col_integer(),
                                     breed_name = col_character(),
